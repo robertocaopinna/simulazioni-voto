@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Solidità &amp; Scenari</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:13px;padding:13px 10px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:980px;margin:0 auto;padding:26px 20px 50px;}
+h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
+.tags-key{font-size:11.5px;color:var(--muted);margin:8px 0 22px;display:flex;gap:12px;flex-wrap:wrap;}
+h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:30px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+h3{font-size:15px;font-weight:600;margin:18px 0 6px;}
+.tag{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;vertical-align:middle;}
+.t-dato{background:#eaf5ee;color:#1f7a4d;} .t-stima{background:#eef3fa;color:#1b3a6b;} .t-ip{background:#fbf0e2;color:#b07b00;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0;}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;}
+.stat .k{font-size:12px;color:var(--muted);margin-bottom:5px;}
+.stat .v{font-size:24px;font-weight:700;font-family:Georgia,serif;}
+.stat .d{font-size:12px;font-weight:600;margin-top:2px;}
+.up{color:var(--green);} .down{color:var(--red);}
+.bar-row{display:flex;align-items:center;gap:9px;margin:6px 0;font-size:13px;}
+.bar-lab{width:60px;flex:none;color:var(--muted);font-weight:600;}
+.bar-track{flex:1;height:18px;background:var(--soft);border-radius:5px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:#fff;font-size:11px;font-weight:700;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+.prob{display:flex;align-items:center;gap:10px;margin:10px 0;}
+.prob-bar{flex:1;height:26px;border-radius:6px;overflow:hidden;display:flex;background:var(--soft);}
+.prob-seg{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;}
+.impl{background:#11243f;color:#e8eef6;border-radius:10px;padding:15px 17px;margin:12px 0;}
+.impl h3{color:#fff;margin:0 0 8px;}
+.impl ul{margin:6px 0;padding-left:20px;} .impl li{margin:6px 0;font-size:14px;}
+.src{font-size:11px;color:var(--hint);margin-top:6px;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
+a.inline{color:var(--navy);}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend &amp; Driver</a>
+  <a href="storico.html">Storico &amp; Eventi</a>
+  <a href="solidita.html" class="active">Solidità &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Solidità del consenso &amp; scenari</h1>
+  <div class="lede">Non quanti voti, ma quanto solidi — e cosa può succedere verso il 2027 · aggiornato al 31 maggio 2026</div>
+  <div class="tags-key">
+    <span><span class="tag t-dato">Dato</span> da fonte</span>
+    <span><span class="tag t-stima">Stima</span> ragionata</span>
+    <span><span class="tag t-ip">Ipotesi</span> interpretazione</span>
+  </div>
+
+  <h2>1 · Fedeltà degli elettorati</h2>
+  <p>Quanto è "incollato" l'elettorato di ciascun partito. Più è alta la fedeltà, meno voti sono in palio — ma più è difficile anche conquistarne di nuovi.</p>
+  <div class="bar-row"><span class="bar-lab">PD</span><span class="bar-track"><span class="bar-fill" style="width:90%;background:#d64541;">90%</span></span></div>
+  <div class="bar-row"><span class="bar-lab">FdI</span><span class="bar-track"><span class="bar-fill" style="width:89%;background:#1b3a6b;">89%</span></span></div>
+  <div class="bar-row"><span class="bar-lab">M5S</span><span class="bar-track"><span class="bar-fill" style="width:88%;background:#e0a216;">88%</span></span></div>
+  <p style="font-size:13px;"><span class="tag t-dato">Dato</span> Fedeltà delle prime tre forze, misurata sui flussi rispetto al voto europeo (Ipsos/Pagnoncelli). Nota strategica: l'elettorato FdI, quando "tradisce", si sposta su <b>partiti d'area</b> (Lega, FI) — i voti persi restano dentro il centrodestra, recuperabili. <span class="src" style="display:inline;">Ipsos/Pagnoncelli.</span></p>
+  <div class="card"><b>Lettura.</b> La fedeltà granitica (89%) è un'arma a doppio taglio: protegge lo zoccolo duro ma indica che la crescita non verrà dai convinti altrui, bensì dalla mobilitazione degli indecisi e dal recupero interno all'area (i voti scivolati verso FN o l'astensione).</div>
+
+  <h2>2 · Il bacino mobile: indecisi e astensione</h2>
+  <div class="grid">
+    <div class="stat"><div class="k">Indecisi + astensionisti dichiarati</div><div class="v">39,8%</div><div class="d down">▼ ~2 vs aprile <span class="tag t-dato">Dato</span></div></div>
+    <div class="stat"><div class="k">Italiani contrari al voto anticipato</div><div class="v">56,4%</div><div class="d"><span class="tag t-dato">Dato</span></div></div>
+  </div>
+  <p><span class="tag t-stima">Stima</span> Quasi <b>quattro elettori su dieci</b> non sono ancora dentro la scelta: è la massa che decide l'esito, più di qualsiasi spostamento tra partiti. Le amministrative ne hanno rimobilitato una parte (da ~42% a 39,8%), ma <b>non è una rimobilitazione stabile</b>. Con la nuova legge e il premio al 42%, chi porta più indecisi alle urne vince — la partita è di mobilitazione prima ancora che di persuasione. <span class="src" style="display:inline;">Pagnoncelli/Ipsos (25-28/5); Mannheimer (apr).</span></p>
+
+  <h2>3 · Mobilitazione e qualità del voto</h2>
+  <p>Lezione dal referendum di marzo: l'orientamento conta meno della capacità di portare la gente al seggio.</p>
+  <div class="card">
+    <p style="margin:4px 0;"><span class="tag t-dato">Dato</span> Al referendum giustizia, Ipsos aveva stimato che <b>con affluenza al 42% vinceva il No (52,4% vs 47,6%)</b>, ma con affluenza al 49% si ribaltava verso il Sì. La partecipazione, non l'opinione, ha deciso l'esito — e ha vinto il No (sconfitta per il governo).</p>
+    <p style="margin:4px 0;"><span class="tag t-ip">Ipotesi</span> Implicazione per il 2027: l'elettorato di centrodestra tende a una partecipazione più costante; quello M5S è il più "fedele ma fluttuante" nella mobilitazione. Un calo di affluenza generale tende a favorire chi ha lo zoccolo più disciplinato.</p>
+    <p class="src">Ipsos e SWG sul referendum (mar); analisi mobilitazione.</p>
+  </div>
+
+  <h2>4 · Momentum: la direzione percepita</h2>
+  <p>Un partito "che sale" attira voto utile a parità di numeri. Ecco la direzione delle ultime settimane.</p>
+  <table>
+    <tr><th>Forza</th><th>Momentum</th><th>Segnale</th></tr>
+    <tr><td>Futuro Nazionale</td><td class="n" style="color:#1f7a4d;">▲▲ forte</td><td>Ai massimi storici (4,0%), narrazione di crescita <span class="tag t-dato">Dato</span></td></tr>
+    <tr><td>Meloni (gradimento)</td><td class="n" style="color:#1f7a4d;">▲ recupero</td><td>Da 37,1% a 38,3% dopo settimane difficili <span class="tag t-dato">Dato</span></td></tr>
+    <tr><td>FdI (partito)</td><td class="n" style="color:#b07b00;">— stabile/lieve calo</td><td>Tiene la testa ma senza slancio <span class="tag t-dato">Dato</span></td></tr>
+    <tr><td>Lega</td><td class="n" style="color:#b23636;">▼ negativo</td><td>Minimi storici, débâcle amministrative <span class="tag t-dato">Dato</span></td></tr>
+    <tr><td>M5S</td><td class="n" style="color:#b07b00;">~ altalenante</td><td>Cresce nei sondaggi ma flop alle comunali <span class="tag t-stima">Stima</span></td></tr>
+  </table>
+  <p class="src">Termometro Politico (gradimento Meloni 16/5); YouTrend (FN); gaiaitalia (Lega).</p>
+
+  <h2>5 · Scenari di coalizione verso il 2027</h2>
+  <p>Le configurazioni possibili e — con le dovute cautele — la loro plausibilità politica. Le probabilità sono <span class="tag t-ip">giudizio analitico</span>, non calcolo statistico: indicano la lettura dell'attuale fase, non una previsione.</p>
+
+  <h3>Scenario A · Centrodestra federa Vannacci</h3>
+  <div class="prob"><div class="prob-bar"><div class="prob-seg" style="width:48%;background:#1b3a6b;">cdx+FN ~48,8%</div><div class="prob-seg" style="width:45%;background:#a32d2d;">campo largo</div></div></div>
+  <p style="font-size:13.5px;"><b>Esito:</b> cdx oltre la soglia del 42%, premio probabile. <b>Plausibilità:</b> media-bassa oggi — il centrodestra non sembra voler accogliere Vannacci, e FN ha convenienza a restare autonomo per pesare. <span class="tag t-ip">Ipotesi</span> <span class="src" style="display:inline;">Mannheimer; sbircialanotizia.</span></p>
+
+  <h3>Scenario B · Tutto resta frammentato (oggi)</h3>
+  <div class="prob"><div class="prob-bar"><div class="prob-seg" style="width:45%;background:#1b3a6b;">cdx 44,8%</div><div class="prob-seg" style="width:45%;background:#a32d2d;">CL 44,9%</div><div class="prob-seg" style="width:10%;background:#5f5e5a;">FN+</div></div></div>
+  <p style="font-size:13.5px;"><b>Esito:</b> nessuno raggiunge il 42% in modo netto → rischio proporzionale puro e Parlamento senza maggioranza. <b>Plausibilità:</b> alta, è la fotografia attuale. <span class="tag t-dato">Dato</span></p>
+
+  <h3>Scenario C · Campo largo si compatta (PD+M5S+AVS+IV+E)</h3>
+  <div class="prob"><div class="prob-bar"><div class="prob-seg" style="width:45%;background:#1b3a6b;">cdx 44,8%</div><div class="prob-seg" style="width:46%;background:#a32d2d;">CL 45,8%</div></div></div>
+  <p style="font-size:13.5px;"><b>Esito:</b> campo largo sopra il cdx e vicino alla soglia; partita aperta. <b>Plausibilità:</b> incerta — frenata da rivalità Conte/Schlein sulle primarie e dall'incompatibilità Calenda/Conte. <span class="tag t-dato">Dato</span> sui numeri, <span class="tag t-ip">ipotesi</span> sulla tenuta. <span class="src" style="display:inline;">YouTrend 28/5; baritalia 9/5.</span></p>
+
+  <div class="impl">
+    <h3>Cosa dicono gli scenari, in sintesi</h3>
+    <ul>
+      <li>Per FdI la <b>chiave non è il proprio 28%</b> (solido ma fermo): è il superamento della soglia del 42%, che dipende dalla coalizione.</li>
+      <li>La leva più potente è <b>Vannacci</b> (Scenario A), ma è quella su cui c'è più resistenza politica. La seconda è <b>mantenere diviso il campo largo</b> (impedire lo Scenario C).</li>
+      <li>Il vero campo di battaglia è il <b>39,8% di indecisi/astenuti</b>: con fedeltà al 90% su tutti, le elezioni si vincono lì, non rubando elettori all'avversario.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    <b>Avvertenza.</b> Le probabilità degli scenari sono giudizi analitici qualitativi, non output di un modello statistico: riflettono la lettura della fase attuale e cambiano col quadro. Fedeltà, indecisi, gradimento e momentum sono dati di rilevazioni pubbliche, datati in nota. Dati di solidità del consenso: Ipsos/Pagnoncelli (fedeltà 89/90/88%, ago-mag); Pagnoncelli (indecisi/astenuti 39,8%, 25-28/5); Termometro Politico (Meloni 38,3%, 16/5); Ipsos/SWG (referendum, mar); YouTrend/AGI (coalizioni, 28/5); baritalia/YouTrend (CL 42% e 45,8%, 9/5). Documento a uso analitico interno, 31 maggio 2026.
+  </div>
+</div>
+</body>
+</html>

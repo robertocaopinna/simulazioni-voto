@@ -3,130 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Confronto leggi elettorali · Rosatellum vs Bignami bis</title>
+<title>Osservatorio elettorale · Trend &amp; Driver</title>
 <style>
 :root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;}
-.wrap{max-width:980px;margin:0 auto;padding:26px 20px 40px;}
-h1{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:700;margin:0;letter-spacing:-.01em;}
-.head{border-bottom:2px solid var(--navy);padding-bottom:13px;margin-bottom:18px;}
-.sub{font-size:13px;color:var(--muted);margin-top:4px;}
-.sect{font-family:Georgia,serif;font-size:16px;font-weight:700;margin:20px 0 11px;}
-.sect span{font-weight:400;color:var(--muted);font-size:12px;}
-.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
-button:hover{background:#f3f1ea;}
-button.chip{font-weight:500;padding:5px 10px;border-radius:7px;}
-select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:3px 5px;background:#fff;color:var(--ink);font-size:11px;}
-input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--navy);cursor:pointer;}
-input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--navy);cursor:pointer;}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;}
-.lab{font-size:12px;color:var(--muted);}
-.col2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-@media(max-width:680px){.col2{grid-template-columns:1fr;}}
-.pill{display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600;}
-.toggle{display:flex;border:1px solid #d8d3c6;border-radius:8px;overflow:hidden;width:fit-content;}
-.toggle button{border:none;border-radius:0;margin:0;}
-.ctrlgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px 20px;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:13px;padding:13px 11px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:980px;margin:0 auto;padding:26px 20px 50px;}
+h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:6px;}
+.disc{font-size:12px;color:var(--amber);background:#fbf6ea;border:1px solid #f0e4c8;border-radius:8px;padding:9px 13px;margin:14px 0 8px;}
+.tags-key{font-size:11.5px;color:var(--muted);margin:8px 0 22px;display:flex;gap:12px;flex-wrap:wrap;}
+h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:30px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+h3{font-size:15px;font-weight:600;margin:18px 0 6px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0;}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;}
+.stat .k{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.stat .v{font-size:24px;font-weight:700;font-family:Georgia,serif;}
+.stat .d{font-size:12px;font-weight:600;margin-top:2px;}
+.up{color:var(--green);} .down{color:var(--red);} .flat{color:var(--hint);}
+.dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.tag{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;vertical-align:middle;}
+.t-dato{background:#eaf5ee;color:#1f7a4d;} .t-stima{background:#eef3fa;color:#1b3a6b;} .t-ip{background:#fbf0e2;color:#b07b00;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.flow{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:14px;flex-wrap:wrap;}
+.pill2{padding:3px 10px;border-radius:7px;font-weight:600;font-size:13px;color:#fff;}
+.arrow{color:var(--muted);font-weight:700;}
+.bar-wrap{margin:9px 0;}
+.bar-row{display:flex;align-items:center;gap:9px;margin:5px 0;font-size:13px;}
+.bar-lab{width:120px;flex:none;color:var(--muted);}
+.bar-track{flex:1;height:16px;background:var(--soft);border-radius:5px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;}
+.bar-val{width:42px;flex:none;text-align:right;font-weight:600;font-size:12.5px;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;}
+.impl{background:#11243f;color:#e8eef6;border-radius:10px;padding:15px 17px;margin:12px 0;}
+.impl h3{color:#fff;margin:0 0 8px;}
+.impl ul{margin:6px 0;padding-left:20px;} .impl li{margin:6px 0;font-size:14px;}
+.src{font-size:11px;color:var(--hint);margin-top:6px;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
+a.inline{color:var(--navy);}
+.upd{border-left:3px solid var(--navy);padding:4px 0 4px 12px;margin:8px 0;font-size:13.5px;}
+.upd .dt{font-size:11px;color:var(--hint);font-weight:600;}
 </style>
 </head>
 <body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html" class="active">Trend &amp; Driver</a>
+  <a href="storico.html">Storico &amp; Eventi</a>
+  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
 <div class="wrap">
-<div class="head"><h1>Confronto leggi elettorali · Camera</h1><div class="sub">Legge in vigore (Rosatellum) vs proposta «Bignami bis» · stessi voti, due sistemi · 400 seggi</div></div>
-
-<div class="sect">Parametri della riforma <span>(in discussione — regolabili)</span></div>
-<div class="card" style="padding:15px 17px;margin-bottom:18px;">
-  <div class="ctrlgrid">
-    <div><div class="lab">Soglia per il premio: <b id="sogliaOut">42</b>%</div><input type="range" id="soglia" min="38" max="48" step="0.5" value="42" style="width:100%;"></div>
-    <div><div class="lab">Dimensione premio: <b id="premioOut">70</b> seggi</div><input type="range" id="premio" min="40" max="90" step="1" value="70" style="width:100%;"></div>
-    <div><div class="lab">Tetto max vincitore: <b id="capOut">220</b> seggi</div><input type="range" id="cap" min="200" max="240" step="1" value="220" style="width:100%;"></div>
-    <div><div class="lab">Spinta uninominale Rosatellum: <b id="expOut">3.0</b></div><input type="range" id="exp" min="1" max="3.5" step="0.1" value="3" style="width:100%;"></div>
+  <h1>Come si muove l'opinione verso le elezioni</h1>
+  <div class="lede">Analisi dei movimenti del voto e dei fattori che li determinano · aggiornato al 31 maggio 2026</div>
+  <div class="disc"><b>Strumento di analisi a supporto delle decisioni di Fratelli d'Italia.</b> Ogni dato è etichettato per solidità, così le scelte poggiano su basi note. I segnali sfavorevoli sono inclusi deliberatamente: servono a calibrare, non a rassicurare.</div>
+  <div class="tags-key">
+    <span><span class="tag t-dato">Dato</span> documentato da fonte</span>
+    <span><span class="tag t-stima">Stima</span> ragionata, approssimata</span>
+    <span><span class="tag t-ip">Ipotesi</span> interpretazione</span>
   </div>
-  <div class="row" style="margin-top:14px;gap:16px;">
-    <div><div class="lab" style="margin-bottom:4px;">Esito Camera/Senato (per il premio Bignami)</div>
-      <div class="toggle" id="homogToggle"><button data-h="1">Omogeneo</button><button data-h="0">Difforme</button></div></div>
-    <button id="resetParams" style="margin-left:auto;">↺ Parametri del testo base</button>
+
+  <h2>1 · Il quadro in sintesi</h2>
+  <div class="grid">
+    <div class="stat"><div class="k"><span class="dot" style="background:#1b3a6b;"></span>FdI</div><div class="v">28,2%</div><div class="d down">▼ 0,2 (30 gg)</div></div>
+    <div class="stat"><div class="k"><span class="dot" style="background:#d64541;"></span>PD</div><div class="v">22,0%</div><div class="d up">▲ 0,3</div></div>
+    <div class="stat"><div class="k"><span class="dot" style="background:#e0a216;"></span>M5S</div><div class="v">12,8%</div><div class="d up">▲ 0,3</div></div>
+    <div class="stat"><div class="k"><span class="dot" style="background:#5a8f2a;"></span>Lega</div><div class="v">6,8%</div><div class="d down">▼ 0,8</div></div>
+    <div class="stat"><div class="k"><span class="dot" style="background:#c8602f;"></span>FN</div><div class="v">3,8%</div><div class="d up">▲ 0,6</div></div>
+  </div>
+  <p>Due blocchi appaiati poco sotto il 45%, con Futuro Nazionale ago della bilancia. <span class="tag t-dato">Dato</span> <span class="src" style="display:inline;">Media PolitPro 31/5; Supermedia YouTrend.</span></p>
+
+  <h2>2 · Flussi: chi si sposta verso chi</h2>
+  <p>È la domanda che orienta ogni mossa: non quanto cala un partito, ma <em>dove vanno</em> quei voti.</p>
+  <div class="card">
+    <div class="flow"><span class="pill2" style="background:#5a8f2a;">Lega</span><span class="arrow">→</span><span class="pill2" style="background:#c8602f;">Futuro Nazionale</span><span class="tag t-dato">Dato</span></div>
+    <p style="font-size:13.5px;margin:4px 0;">Il travaso principale: la crescita di FN avviene in larga parte a spese della Lega, scesa al 6%. <span class="src" style="display:inline;">economia-italia.com; YouTrend.</span></p>
+  </div>
+  <div class="card">
+    <div class="flow"><span class="pill2" style="background:#1b3a6b;">FdI</span><span class="arrow">→</span><span class="pill2" style="background:#c8602f;">Futuro Nazionale</span><span class="tag t-stima">Stima</span></div>
+    <p style="font-size:13.5px;margin:4px 0;">Punto critico spesso sottovalutato: secondo YouTrend, FN toglie <b>più voti a FdI che alla Lega</b>, pescando anche tra indecisi e astenuti. È il flusso da sorvegliare con più attenzione. <span class="src" style="display:inline;">YouTrend/Sky TG24.</span></p>
+  </div>
+  <div class="card">
+    <div class="flow"><span class="pill2" style="background:#1b3a6b;">FdI</span><span class="arrow">→</span><span class="pill2" style="background:var(--hint);">Astensione / indecisi</span><span class="tag t-ip">Ipotesi</span></div>
+    <p style="font-size:13.5px;margin:4px 0;">Parte del calo di FdI sembra dispersione verso il "non voto" di elettori delusi, più che verso altri partiti. Da verificare con dati di flusso dedicati. <span class="src" style="display:inline;">Money.it (lettura qualitativa).</span></p>
+  </div>
+
+  <h2>3 · Chi è in palio: indecisi e astenuti</h2>
+  <p>Il vero terreno della campagna non sono i convinti. È qui che si vince o si perde.</p>
+  <div class="grid">
+    <div class="stat"><div class="k">Indecisi / non si esprime</div><div class="v">~23-27%</div><div class="d"><span class="tag t-dato">Dato</span></div></div>
+    <div class="stat"><div class="k">Gradimento governo</div><div class="v">35%</div><div class="d down">▼ 2 (2 mesi) <span class="tag t-dato">Dato</span></div></div>
+  </div>
+  <p><span class="tag t-stima">Stima</span> Un bacino di oltre un elettore su quattro è mobile. Nota tecnica decisiva: il gradimento di governo conta più nel suo <b>peso tra chi è sicuro di votare</b> che nel valore assoluto — un 35% concentrato nell'elettorato attivo pesa più di quanto sembri. <span class="src" style="display:inline;">BiDiMedia (apr); SWG.</span></p>
+
+  <h2>4 · Mappa territoriale</h2>
+  <p>Il dato nazionale nasconde fratture operative: dicono <em>dove</em> investire. <span class="tag t-ip">Ipotesi</span> — i dati di dettaglio territoriale non sono pubblicati in modo completo; quanto segue è la direzione che emerge dalle analisi, non una tavola numerica certificata.</p>
+  <div class="card">
+    <p style="margin:4px 0;font-size:14px;">▸ <b>Nord:</b> è qui che si gioca la partita interna al centrodestra. FN di Vannacci sfonda nelle ex roccaforti leghiste (Lombardia, Veneto), erodendo Lega e in parte FdI.</p>
+    <p style="margin:4px 0;font-size:14px;">▸ <b>Sud:</b> area dove M5S resta più radicato e dove la débâcle delle comunali (Salvini sotto il 5%) pesa di più sulla Lega.</p>
+    <p style="margin:4px 0;font-size:14px;">▸ <b>Implicazione:</b> il fronte caldo per FdI è il Nord (contenere FN), il terreno di conquista è il Centro-Sud (dove la leadership di Meloni può valere più della sigla).</p>
+    <p class="src">Direzione desunta da: YouTrend/Sky TG24; gaiaitalia (débâcle Lega amministrative); ildifforme. I valori percentuali per macro-area non sono disponibili come dato pubblico verificabile.</p>
+  </div>
+
+  <h2>5 · Proprietà dei temi</h2>
+  <p>Non basta sapere quali temi contano: conta chi è ritenuto <em>credibile</em> su ciascuno.</p>
+  <table>
+    <tr><th>Tema</th><th>Trend di salienza</th><th>Note</th></tr>
+    <tr><td>Caro energia / bollette</td><td class="n">▲ in crescita</td><td><b>Non più scoperto:</b> il PD si è posizionato (Schlein, Civitavecchia 29/5, "agenda E") <span class="tag t-dato">Dato</span></td></tr>
+    <tr><td>Costo della vita / salari</td><td class="n">▲ in crescita</td><td>Tema su cui l'elettorato chiede risposte <span class="tag t-stima">Stima</span></td></tr>
+    <tr><td>Sicurezza / immigrazione</td><td class="n">▼ presa calante</td><td>Terreno storico cdx, ma non mobilita come prima <span class="tag t-ip">Ipotesi</span></td></tr>
+    <tr><td>Difesa / riarmo</td><td class="n">— impopolare</td><td>Meloni stessa lo definisce "impopolare"; costo politico <span class="tag t-dato">Dato</span></td></tr>
+  </table>
+  <p class="src">Fanpage su Termometro Politico; dichiarazioni Meloni (Mattino 5).</p>
+
+  <h2>6 · Leader vs partito</h2>
+  <p>Spesso il leader "tira" più del partito: è una leva da usare consapevolmente.</p>
+  <div class="grid">
+    <div class="stat"><div class="k">FdI (voto)</div><div class="v">28,2%</div><div class="d flat">primo partito <span class="tag t-dato">Dato</span></div></div>
+    <div class="stat"><div class="k">Gradimento governo</div><div class="v">35%</div><div class="d down">▼ 2 (2 mesi) <span class="tag t-dato">Dato</span></div></div>
+  </div>
+  <p><span class="tag t-stima">Stima</span> Meloni resta la leader con il gradimento più alto e FdI il primo partito con oltre cinque punti di margine sul PD. È un capitale di leadership spendibile, specie dove la sigla è più debole. Sul fronte avverso la guida è <b>contesa</b> (Conte vs Schlein), debolezza relativa per il campo largo. <span class="src" style="display:inline;">BiDiMedia (gradimento governo 35%, apr); YouTrend (margine FdI-PD, mag).</span></p>
+
+  <h2>7 · Rischio-soglia 42%</h2>
+  <div class="card" style="border-left:3px solid var(--navy);">
+    <p>Con la riforma Bignami, <b>vincere non basta</b>: il premio scatta solo oltre il 42% in entrambe le Camere. <span class="tag t-dato">Dato</span> Alla Supermedia YouTrend del 28 maggio i due blocchi sono appaiati e <b>sotto soglia</b>: Destre ~44,8%, Campo Largo ~44,9% — ma solo se quest'ultimo include M5S, AVS, IV e +E (col solo PD+M5S+AVS si ferma al 42%).</p>
+    <p style="margin-bottom:0;">Questo sposta il baricentro dalla competizione tra leader alla <b>costruzione della coalizione</b>: FN dentro porterebbe il centrodestra verso il 48,8%, oltre la soglia. Verifica gli scenari nel <a class="inline" href="confronto.html">Confronto leggi</a> e nell'<a class="inline" href="osservatorio.html">Osservatorio</a>. <span class="src" style="display:inline;">YouTrend/AGI 28/5; gaiaitalia.</span></p>
+  </div>
+
+  <h2>8 · Implicazioni strategiche</h2>
+  <div class="impl">
+    <h3>Il nodo Vannacci è la priorità</h3>
+    <ul>
+      <li>FN drena voti <b>anche da FdI</b>, non solo dalla Lega: trattarlo come problema altrui è un errore di lettura.</li>
+      <li>Scelta binaria: <b>competere</b> sul suo elettorato o <b>federarlo</b> (porterebbe l'area sopra la soglia del premio).</li>
+    </ul>
+  </div>
+  <div class="impl">
+    <h3>Energia: lo spazio si sta chiudendo — agire ora o inseguire</h3>
+    <ul>
+      <li><b>Novità (29/5):</b> il PD di Schlein ha occupato per primo il tema energia/costo della vita con una linea strutturata ("agenda E", da Civitavecchia). Lo spazio non è più vuoto.</li>
+      <li>Per FdI la finestra per presidiare il tema da posizione di forza si restringe: o si entra subito con una proposta propria e distinta (es. su nucleare, dove il PD ha chiuso), o si rischia di inseguire l'agenda altrui.</li>
+      <li>Vantaggio sfruttabile: la linea PD è "tutta rinnovabili e no nucleare" — FdI può differenziarsi sul mix energetico e sui tempi, intercettando chi vuole risposte pragmatiche sul costo subito.</li>
+    </ul>
+  </div>
+  <div class="impl">
+    <h3>Sfruttare l'asimmetria delle leadership</h3>
+    <ul>
+      <li>Meloni come leader vale più di FdI come sigla: leva da spendere dove il partito è debole (Centro-Sud).</li>
+      <li>L'opposizione è divisa sulla guida: ogni mese di stallo loro è tempo guadagnato.</li>
+    </ul>
+  </div>
+
+  <h2>Aggiornamenti recenti</h2>
+  <p style="font-size:13px;color:var(--muted);">Eventi chiave sincronizzati con lo <a class="inline" href="storico.html">Storico</a>, dove trovi la timeline completa.</p>
+  <div class="upd"><span class="dt">29 mag · opposizione</span><br><b>Schlein presidia l'energia</b> da Civitavecchia ("agenda E"): tetto UE al gas, rinnovabili, no nucleare. Il PD occupa per primo un tema finora scoperto — riduce un'opportunità per FdI.</div>
+  <div class="upd"><span class="dt">27 mag · esterno</span><br>Testo base riforma elettorale: premio al 42%, tetto 220. Apre il tema voto utile e coalizioni.</div>
+  <div class="upd"><span class="dt">24-25 mag · esterno</span><br>Amministrative: cdx vince a Venezia e Reggio Calabria; flop M5S (a Venezia metà dei suoi elettori vota cdx).</div>
+  <div class="upd"><span class="dt">apr · governo</span><br>Logoramento: dimissioni Delmastro, caso Santanchè, tensioni con Trump (Sigonella), caro benzina.</div>
+  <div class="upd"><span class="dt">22-23 mar · esterno</span><br>Referendum giustizia: vince il No. Sconfitta politica diretta per il governo.</div>
+  <div class="upd"><span class="dt">3 feb · centrodestra</span><br>Vannacci lascia la Lega e fonda Futuro Nazionale: nasce il competitor a destra.</div>
+
+  <div class="foot">
+    <b>Avvertenza.</b> I sondaggi non sono previsioni: hanno margine d'errore (1,5-3 punti). Flussi, dati territoriali e di leadership provengono da rilevazioni pubbliche che li riportano in modo parziale; per questo sono etichettati per solidità. L'attribuzione causale è intrinsecamente incerta. Documento a uso analitico interno, aggiornato al 1 giugno 2026.<br><br>
+<b>Fonti puntuali (con data).</b><br>
+&bull; Intenzioni di voto: Supermedia YouTrend/AGI del 28/5/2026 (FdI 28,2 · PD 22,2 · M5S 12,3-12,8 · FI 8,2-8,3 · Lega 6,8-7,1 · AVS 6,4-6,5 · FN 4,0); media PolitPro al 31/5.<br>
+&bull; Coalizioni: YouTrend/AGI 28-29/5 — Destre ~44,8%, Campo Largo ~44,9% (45,8% con IV e +E); PD+M5S+AVS ~42% (Baritalia/YouTrend 9/5).<br>
+&bull; Gradimento governo 35% (−2 in 2 mesi): BiDiMedia 22/4/2026.<br>
+&bull; Indecisi/non si esprime 23-27%: BiDiMedia (23%, apr) e SWG/TgLa7 (27%, mag).<br>
+&bull; Flusso Lega→FN e FN che erode anche FdI: YouTrend/Sky TG24; economia-italia.com (mag).<br>
+&bull; Referendum giustizia (No vincente), casi Delmastro/Santanchè, Sigonella: Money.it, Il Fatto, Today (mar-apr).<br>
+&bull; Débâcle Lega amministrative (Salvini sotto 5%): gaiaitalia 29/5.<br>
+&bull; PD presidia l'energia ("agenda E", tetto UE al gas, rinnovabili): ANSA, Il Messaggero, Il Foglio, Tusciaweb — Civitavecchia 29/5.<br>
+<i>Dove un valore puntuale non è pubblicato (es. ripartizione territoriale per macro-area), il dato è indicato come direzione/ipotesi e non come cifra certificata.</i>
   </div>
 </div>
-
-<div class="sect">Confronto dei risultati <span>(sugli stessi voti e blocchi)</span></div>
-<div class="col2" style="margin-bottom:10px;">
-  <div class="card" style="padding:15px 16px;">
-    <div style="font-family:Georgia,serif;font-size:15px;font-weight:700;">Legge in vigore</div>
-    <div class="lab" style="margin-bottom:10px;">Rosatellum · 253 prop. + 147 uninominali</div>
-    <div id="barA" style="display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:4px;"></div>
-    <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:#d64541;margin:0 auto;"></div><span style="font-size:9.5px;color:#d64541;">201</span></div></div>
-    <div id="cardsA"></div>
-  </div>
-  <div class="card" style="padding:15px 16px;">
-    <div style="font-family:Georgia,serif;font-size:15px;font-weight:700;">Proposta «Bignami bis»</div>
-    <div class="lab" style="margin-bottom:10px;">Proporzionale + premio condizionato</div>
-    <div id="barB" style="display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:4px;"></div>
-    <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:#d64541;margin:0 auto;"></div><span style="font-size:9.5px;color:#d64541;">201</span></div></div>
-    <div id="cardsB"></div>
-  </div>
-</div>
-<div id="verdict" style="font-size:13px;padding:11px 14px;border-radius:9px;background:var(--soft);margin-bottom:20px;"></div>
-
-<div class="sect">Voti e blocchi per lista <span>(default: opposizione divisa — ricomponi i blocchi con le tendine)</span></div>
-<div class="row" style="margin-bottom:8px;">
-  <button id="reset">↺ Aggregato attuale</button>
-  <span class="lab" style="margin-left:auto;">Totale liste: <b id="totOut">—</b></span>
-</div>
-<div id="sliders" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:7px 22px;margin-bottom:18px;"></div>
-
-<div class="sect">Scenari di coalizione</div>
-<div class="row" id="scenChips" style="margin-bottom:20px;"></div>
-
-<div style="font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px;">
-<b>Blocchi.</b> Di default l'opposizione è rappresentata <b>divisa</b>, com'è oggi: Centrosinistra (PD, AVS, +Europa), Movimento 5 Stelle a sé, e Altri (Azione, Italia Viva, Vannacci) non coalizzati. Il «campo largo unito» non è un'alleanza formata: lo puoi costruire spostando i blocchi con le tendine, o con lo scenario apposito. <b>Rosatellum (in vigore):</b> 253 prop. (soglia 3%) + 147 uninominali per blocco, stimati a livello nazionale con la regola del cubo (esponente regolabile). <b>«Bignami bis»:</b> proporzionale + premio (base 70) al blocco arrivato primo, solo se ≥ soglia (base 42%) e primo in entrambe le Camere; altrimenti proporzionale puro. Tetto base 220. Tutti i parametri sono regolabili (testo in discussione, Aula 26 giugno). Modello nazionale indicativo su 400 seggi. Aggregato sondaggi al 31 maggio 2026 (media PolitPro; ultimi: Ipsos, Term.Pol., Quorum 28/5, EMG 26/5).
-</div>
-</div>
-
-<script>
-(function(){
-  var PARTIES=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b"},{k:"PD",n:"Partito Democratico",c:"#d64541"},{k:"M5S",n:"Movimento 5 Stelle",c:"#e0a216"},{k:"FI",n:"Forza Italia",c:"#3a8dde"},{k:"Lega",n:"Lega",c:"#5a8f2a"},{k:"AVS",n:"Alleanza Verdi e Sinistra",c:"#1f9e74"},{k:"FN",n:"Futuro Nazionale (Vannacci)",c:"#c8602f"},{k:"Az",n:"Azione (Calenda)",c:"#7a6fd0"},{k:"IV",n:"Italia Viva",c:"#cf5380"},{k:"PiuE",n:"Più Europa",c:"#8a8a82"},{k:"NM",n:"Noi Moderati",c:"#a9a79e"}];
-  var BLOCS=["cdx","csx","m5s","alt"];
-  var BM={cdx:{name:"Centrodestra",c:"#1b3a6b"},csx:{name:"Centrosinistra",c:"#d64541"},m5s:{name:"M5S",c:"#e0a216"},alt:{name:"Altri / non coalizzati",c:"#5f5e5a"}};
-  var DEF={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",AVS:"csx",PiuE:"csx",M5S:"m5s",Az:"alt",IV:"alt",FN:"alt"};
-  var AGG={FdI:28.2,PD:22.0,M5S:12.8,FI:8.2,Lega:6.8,AVS:6.4,FN:3.8,Az:3.2,IV:2.5,PiuE:1.6,NM:1.3};
-  function cp(o){var r={};for(var k in o)r[k]=o[k];return r;}
-  function upd(o,d){var r=cp(o);for(var k in d)r[k]=d[k];return r;}
-  var SCEN=[{name:"Opposizione divisa (attuale)",map:cp(DEF)},{name:"Campo largo unito (PD+M5S+Az+IV)",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx"})},{name:"Vannacci (FN) → cdx",map:upd(DEF,{FN:"cdx"})},{name:"Campo largo + FN→cdx",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx",FN:"cdx"})}];
-  var SEATS=400,MAJ=201,THRESH=3.0;
-  var P={soglia:42,premio:70,cap:220,exp:3,homog:true};
-  var state={vals:cp(AGG),coal:cp(DEF)};
-  function $(id){return document.getElementById(id);}
-  function prop(vals,N){var q=PARTIES.filter(function(p){return (vals[p.k]||0)>=THRESH;});var tq=q.reduce(function(s,p){return s+vals[p.k];},0);var seats={};PARTIES.forEach(function(p){seats[p.k]=0;});if(tq<=0)return seats;var rem=[],u=0;q.forEach(function(p){var e=vals[p.k]/tq*N;seats[p.k]=Math.floor(e);u+=seats[p.k];rem.push({k:p.k,f:e-seats[p.k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<N&&rem.length){seats[rem[i%rem.length].k]++;u++;i++;}return seats;}
-  function cVotes(vals,coal){var o={};BLOCS.forEach(function(b){o[b]=0;});PARTIES.forEach(function(p){o[coal[p.k]]+=vals[p.k]||0;});return o;}
-  function rosatellum(){var PROP=253,UNI=147;var ps=prop(state.vals,PROP);var v=cVotes(state.vals,state.coal);var cpr={};BLOCS.forEach(function(b){cpr[b]=0;});PARTIES.forEach(function(p){cpr[state.coal[p.k]]+=ps[p.k];});var w={},tw=0;BLOCS.forEach(function(b){w[b]=Math.pow(Math.max(0,v[b]),P.exp);tw+=w[b];});var us={},rem=[],used=0;BLOCS.forEach(function(b){us[b]=0;var e=tw>0?w[b]/tw*UNI:0;us[b]=Math.floor(e);used+=us[b];rem.push({b:b,f:e-us[b]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<UNI){us[rem[i%BLOCS.length].b]++;used++;i++;}var ct={};BLOCS.forEach(function(b){ct[b]=cpr[b]+us[b];});return {ct:ct,v:v,premio:null};}
-  function bignami(){var v=cVotes(state.vals,state.coal);var win=BLOCS.reduce(function(a,b){return v[a]>=v[b]?a:b;});var sc=P.homog&&v[win]>=P.soglia;var ct={};BLOCS.forEach(function(b){ct[b]=0;});var capped=false;
-    if(!sc){var ps=prop(state.vals,SEATS);PARTIES.forEach(function(p){ct[state.coal[p.k]]+=ps[p.k];});return {ct:ct,v:v,win:win,premio:false,capped:false};}
-    var base=prop(state.vals,SEATS-P.premio);PARTIES.forEach(function(p){ct[state.coal[p.k]]+=base[p.k];});ct[win]+=P.premio;if(ct[win]>P.cap){var oth=BLOCS.filter(function(b){return b!==win&&v[b]>0;});var tw=oth.reduce(function(s,b){return s+v[b];},0);if(oth.length&&tw>0){capped=true;var ex=ct[win]-P.cap;ct[win]=P.cap;var d=0;oth.forEach(function(b,i){var a=i===oth.length-1?ex-d:Math.round(ex*v[b]/tw);ct[b]+=a;d+=a;});}}return {ct:ct,v:v,win:win,premio:true,capped:capped};}
-  function bar(el,ct){var ord=["cdx","alt","m5s","csx"];$(el).innerHTML=ord.map(function(b){var s=ct[b]||0;if(s<=0)return"";return '<div title="'+BM[b].name+': '+s+'" style="flex:'+s+' 0 0;background:'+BM[b].c+';display:flex;align-items:center;justify-content:center;min-width:0;"><span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+(s>=22?s:'')+'</span></div>';}).join('');}
-  function cards(el,r){$(el).innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">'+BLOCS.map(function(b){var s=r.ct[b]||0,maj=s>=MAJ,win=r.premio&&b===r.win;return '<div style="text-align:center;padding:6px 4px;border-radius:8px;background:'+(maj?"rgba(27,58,107,0.08)":"transparent")+';border:'+(maj?"1.5px solid #1b3a6b":"0.5px solid var(--line)")+';"><div style="display:flex;align-items:center;justify-content:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:'+BM[b].c+';"></span><span style="font-size:10px;color:var(--muted);">'+BM[b].name+'</span></div><div style="font-size:19px;font-weight:700;font-family:Georgia,serif;margin-top:1px;">'+s+'</div><div style="font-size:9.5px;color:var(--hint);">'+r.v[b].toFixed(1)+'%'+(win?' <span class="pill" style="background:#eef3fa;color:#1b3a6b;">+'+P.premio+'</span>':'')+(maj&&!win?' <span class="pill" style="background:#eaf5ee;color:#1f7a4d;">magg.</span>':'')+'</div></div>';}).join('')+'</div>';}
-  function render(){var tot=PARTIES.reduce(function(s,p){return s+(state.vals[p.k]||0);},0);$("totOut").textContent=tot.toFixed(1)+"%";$("totOut").style.color=Math.abs(tot-100)>2?"#b23636":"#2a2924";
-    var A=rosatellum(),B=bignami();bar("barA",A.ct);cards("cardsA",A);bar("barB",B.ct);cards("cardsB",B);
-    var mA=BLOCS.filter(function(b){return A.ct[b]>=MAJ;});var mB=BLOCS.filter(function(b){return B.ct[b]>=MAJ;});
-    var sA=mA.length?BM[mA[0]].name+" ha la maggioranza ("+A.ct[mA[0]]+")":"nessuna maggioranza";
-    var sB;if(B.premio){sB=mB.length?BM[mB[0]].name+" col premio raggiunge la maggioranza ("+B.ct[B.win]+(B.capped?", tetto":"")+")":BM[B.win].name+" col premio resta sotto 201";}else{var fp=BLOCS.reduce(function(a,b){return B.v[a]>=B.v[b]?a:b;});sB="premio non assegnato ("+(P.homog?BM[fp].name+" primo ma sotto il "+P.soglia+"%":"camere difformi")+") → proporzionale puro, nessuna maggioranza";}
-    var diff=(mA.join()!==mB.join())||(A.ct.cdx!==B.ct.cdx);
-    $("verdict").innerHTML='<b>Legge in vigore:</b> '+sA+'. &nbsp;<b>Bignami bis:</b> '+sB+'.'+(diff?' <span style="color:#b07b00;font-weight:600;">→ Le due leggi danno esiti diversi sugli stessi voti.</span>':' <span style="color:#6b6960;">→ Esito analogo.</span>');
-    PARTIES.forEach(function(p,i){var el=$("sl"+i);if(el){el.value=state.vals[p.k]||0;$("ov"+i).textContent=(state.vals[p.k]||0).toFixed(1)+"%";$("cs"+i).value=state.coal[p.k];}});}
-  function buildSliders(){var html='';PARTIES.forEach(function(p,i){html+='<div style="display:flex;align-items:center;gap:9px;"><span style="width:9px;height:9px;border-radius:2px;background:'+p.c+';flex:none;"></span><span style="width:36px;flex:none;font-size:12.5px;font-weight:600;">'+p.k+'</span><input type="range" min="0" max="42" step="0.1" id="sl'+i+'" style="flex:1;"><span id="ov'+i+'" style="width:42px;flex:none;text-align:right;font-size:12.5px;font-weight:600;"></span><select id="cs'+i+'"><option value="cdx">Cdx</option><option value="csx">Csx</option><option value="m5s">M5S</option><option value="alt">Altri</option></select></div>';});$("sliders").innerHTML=html;PARTIES.forEach(function(p,i){$("sl"+i).addEventListener("input",function(){state.vals[p.k]=parseFloat(this.value);render();});$("cs"+i).addEventListener("change",function(){state.coal[p.k]=this.value;render();});});}
-  function buildScen(){$("scenChips").innerHTML=SCEN.map(function(sc,i){return '<button class="chip" data-s="'+i+'">'+sc.name+'</button>';}).join('');Array.prototype.forEach.call($("scenChips").querySelectorAll("button"),function(b){b.addEventListener("click",function(){state.coal=cp(SCEN[+b.getAttribute("data-s")].map);render();});});}
-  function setHomog(v){P.homog=v;Array.prototype.forEach.call($("homogToggle").querySelectorAll("button"),function(x){var on=(x.getAttribute("data-h")==="1")===v;x.style.background=on?"#1b3a6b":"";x.style.color=on?"#fff":"";});}
-  $("soglia").addEventListener("input",function(){P.soglia=+this.value;$("sogliaOut").textContent=(this.value%1?(+this.value).toFixed(1):this.value);render();});
-  $("premio").addEventListener("input",function(){P.premio=+this.value;$("premioOut").textContent=this.value;render();});
-  $("cap").addEventListener("input",function(){P.cap=+this.value;$("capOut").textContent=this.value;render();});
-  $("exp").addEventListener("input",function(){P.exp=+this.value;$("expOut").textContent=(+this.value).toFixed(1);render();});
-  Array.prototype.forEach.call($("homogToggle").querySelectorAll("button"),function(b){b.addEventListener("click",function(){setHomog(b.getAttribute("data-h")==="1");render();});});
-  $("resetParams").addEventListener("click",function(){P={soglia:42,premio:70,cap:220,exp:3,homog:true};$("soglia").value=42;$("sogliaOut").textContent="42";$("premio").value=70;$("premioOut").textContent="70";$("cap").value=220;$("capOut").textContent="220";$("exp").value=3;$("expOut").textContent="3.0";setHomog(true);render();});
-  $("reset").addEventListener("click",function(){state.vals=cp(AGG);render();});
-  buildSliders();buildScen();setHomog(true);render();
-})();
-</script>
 </body>
 </html>

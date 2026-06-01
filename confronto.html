@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confronto leggi elettorali · Rosatellum vs Bignami bis</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;}
+.wrap{max-width:980px;margin:0 auto;padding:26px 20px 40px;}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:700;margin:0;letter-spacing:-.01em;}
+.head{border-bottom:2px solid var(--navy);padding-bottom:13px;margin-bottom:18px;}
+.sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.sect{font-family:Georgia,serif;font-size:16px;font-weight:700;margin:20px 0 11px;}
+.sect span{font-weight:400;color:var(--muted);font-size:12px;}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;}
+button.chip{font-weight:500;padding:5px 10px;border-radius:7px;}
+select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:3px 5px;background:#fff;color:var(--ink);font-size:11px;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--navy);cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--navy);cursor:pointer;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;}
+.lab{font-size:12px;color:var(--muted);}
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:680px){.col2{grid-template-columns:1fr;}}
+.pill{display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600;}
+.toggle{display:flex;border:1px solid #d8d3c6;border-radius:8px;overflow:hidden;width:fit-content;}
+.toggle button{border:none;border-radius:0;margin:0;}
+.ctrlgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px 20px;}
+
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e7e3d8;margin:-26px -20px 18px;}
+.nav-in{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:#1b3a6b;}
+.nav a{font-size:13px;padding:13px 12px;color:#6b6960;text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:#2a2924;}
+.nav a.active{color:#1b3a6b;border-bottom-color:#1b3a6b;font-weight:600;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend &amp; Driver</a>
+  <a href="storico.html">Storico &amp; Eventi</a>
+  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html" class="active">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+<div class="wrap">
+<div class="head"><h1>Confronto leggi elettorali · Camera</h1><div class="sub">Legge in vigore (Rosatellum) vs proposta «Bignami bis» · stessi voti, due sistemi · 400 seggi</div></div>
+
+<div class="sect">Parametri della riforma <span>(in discussione — regolabili)</span></div>
+<div class="card" style="padding:15px 17px;margin-bottom:18px;">
+  <div class="ctrlgrid">
+    <div><div class="lab">Soglia per il premio: <b id="sogliaOut">42</b>%</div><input type="range" id="soglia" min="38" max="48" step="0.5" value="42" style="width:100%;"></div>
+    <div><div class="lab">Dimensione premio: <b id="premioOut">70</b> seggi</div><input type="range" id="premio" min="40" max="90" step="1" value="70" style="width:100%;"></div>
+    <div><div class="lab">Tetto max vincitore: <b id="capOut">220</b> seggi</div><input type="range" id="cap" min="200" max="240" step="1" value="220" style="width:100%;"></div>
+    <div><div class="lab">Spinta uninominale Rosatellum: <b id="expOut">3.0</b></div><input type="range" id="exp" min="1" max="3.5" step="0.1" value="3" style="width:100%;"></div>
+  </div>
+  <div class="row" style="margin-top:14px;gap:16px;">
+    <div><div class="lab" style="margin-bottom:4px;">Esito Camera/Senato (per il premio Bignami)</div>
+      <div class="toggle" id="homogToggle"><button data-h="1">Omogeneo</button><button data-h="0">Difforme</button></div></div>
+    <button id="resetParams" style="margin-left:auto;">↺ Parametri del testo base</button>
+  </div>
+</div>
+
+<div class="sect">Confronto dei risultati <span>(sugli stessi voti e blocchi)</span></div>
+<div class="col2" style="margin-bottom:10px;">
+  <div class="card" style="padding:15px 16px;">
+    <div style="font-family:Georgia,serif;font-size:15px;font-weight:700;">Legge in vigore</div>
+    <div class="lab" style="margin-bottom:10px;">Rosatellum · 253 prop. + 147 uninominali</div>
+    <div id="barA" style="display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:4px;"></div>
+    <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:#d64541;margin:0 auto;"></div><span style="font-size:9.5px;color:#d64541;">201</span></div></div>
+    <div id="cardsA"></div>
+  </div>
+  <div class="card" style="padding:15px 16px;">
+    <div style="font-family:Georgia,serif;font-size:15px;font-weight:700;">Proposta «Bignami bis»</div>
+    <div class="lab" style="margin-bottom:10px;">Proporzionale + premio condizionato</div>
+    <div id="barB" style="display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:4px;"></div>
+    <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:#d64541;margin:0 auto;"></div><span style="font-size:9.5px;color:#d64541;">201</span></div></div>
+    <div id="cardsB"></div>
+  </div>
+</div>
+<div id="verdict" style="font-size:13px;padding:11px 14px;border-radius:9px;background:var(--soft);margin-bottom:20px;"></div>
+
+<div class="sect">Voti e blocchi per lista <span>(default: opposizione divisa — ricomponi i blocchi con le tendine)</span></div>
+<div class="row" style="margin-bottom:8px;">
+  <button id="reset">↺ Aggregato attuale</button>
+  <span class="lab" style="margin-left:auto;">Totale liste: <b id="totOut">—</b></span>
+</div>
+<div id="sliders" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:7px 22px;margin-bottom:18px;"></div>
+
+<div class="sect">Scenari di coalizione</div>
+<div class="row" id="scenChips" style="margin-bottom:20px;"></div>
+
+<div style="font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px;">
+<b>Blocchi.</b> Di default l'opposizione è rappresentata <b>divisa</b>, com'è oggi: Centrosinistra (PD, AVS, +Europa), Movimento 5 Stelle a sé, e Altri (Azione, Italia Viva, Vannacci) non coalizzati. Il «campo largo unito» non è un'alleanza formata: lo puoi costruire spostando i blocchi con le tendine, o con lo scenario apposito. <b>Rosatellum (in vigore):</b> 253 prop. (soglia 3%) + 147 uninominali per blocco, stimati a livello nazionale con la regola del cubo (esponente regolabile). <b>«Bignami bis»:</b> proporzionale + premio (base 70) al blocco arrivato primo, solo se ≥ soglia (base 42%) e primo in entrambe le Camere; altrimenti proporzionale puro. Tetto base 220. Tutti i parametri sono regolabili (testo in discussione, Aula 26 giugno). Modello nazionale indicativo su 400 seggi. Aggregato sondaggi al 31 maggio 2026 (media PolitPro; ultimi: Ipsos, Term.Pol., Quorum 28/5, EMG 26/5).
+</div>
+</div>
+
+<script>
+(function(){
+  var PARTIES=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b"},{k:"PD",n:"Partito Democratico",c:"#d64541"},{k:"M5S",n:"Movimento 5 Stelle",c:"#e0a216"},{k:"FI",n:"Forza Italia",c:"#3a8dde"},{k:"Lega",n:"Lega",c:"#5a8f2a"},{k:"AVS",n:"Alleanza Verdi e Sinistra",c:"#1f9e74"},{k:"FN",n:"Futuro Nazionale (Vannacci)",c:"#c8602f"},{k:"Az",n:"Azione (Calenda)",c:"#7a6fd0"},{k:"IV",n:"Italia Viva",c:"#cf5380"},{k:"PiuE",n:"Più Europa",c:"#8a8a82"},{k:"NM",n:"Noi Moderati",c:"#a9a79e"}];
+  var BLOCS=["cdx","csx","m5s","alt"];
+  var BM={cdx:{name:"Centrodestra",c:"#1b3a6b"},csx:{name:"Centrosinistra",c:"#d64541"},m5s:{name:"M5S",c:"#e0a216"},alt:{name:"Altri / non coalizzati",c:"#5f5e5a"}};
+  var DEF={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",AVS:"csx",PiuE:"csx",M5S:"m5s",Az:"alt",IV:"alt",FN:"alt"};
+  var AGG={FdI:28.2,PD:22.0,M5S:12.8,FI:8.2,Lega:6.8,AVS:6.4,FN:3.8,Az:3.2,IV:2.5,PiuE:1.6,NM:1.3};
+  function cp(o){var r={};for(var k in o)r[k]=o[k];return r;}
+  function upd(o,d){var r=cp(o);for(var k in d)r[k]=d[k];return r;}
+  var SCEN=[{name:"Opposizione divisa (attuale)",map:cp(DEF)},{name:"Campo largo unito (PD+M5S+Az+IV)",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx"})},{name:"Vannacci (FN) → cdx",map:upd(DEF,{FN:"cdx"})},{name:"Campo largo + FN→cdx",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx",FN:"cdx"})}];
+  var SEATS=400,MAJ=201,THRESH=3.0;
+  var P={soglia:42,premio:70,cap:220,exp:3,homog:true};
+  var state={vals:cp(AGG),coal:cp(DEF)};
+  function $(id){return document.getElementById(id);}
+  function prop(vals,N){var q=PARTIES.filter(function(p){return (vals[p.k]||0)>=THRESH;});var tq=q.reduce(function(s,p){return s+vals[p.k];},0);var seats={};PARTIES.forEach(function(p){seats[p.k]=0;});if(tq<=0)return seats;var rem=[],u=0;q.forEach(function(p){var e=vals[p.k]/tq*N;seats[p.k]=Math.floor(e);u+=seats[p.k];rem.push({k:p.k,f:e-seats[p.k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<N&&rem.length){seats[rem[i%rem.length].k]++;u++;i++;}return seats;}
+  function cVotes(vals,coal){var o={};BLOCS.forEach(function(b){o[b]=0;});PARTIES.forEach(function(p){o[coal[p.k]]+=vals[p.k]||0;});return o;}
+  function rosatellum(){var PROP=253,UNI=147;var ps=prop(state.vals,PROP);var v=cVotes(state.vals,state.coal);var cpr={};BLOCS.forEach(function(b){cpr[b]=0;});PARTIES.forEach(function(p){cpr[state.coal[p.k]]+=ps[p.k];});var w={},tw=0;BLOCS.forEach(function(b){w[b]=Math.pow(Math.max(0,v[b]),P.exp);tw+=w[b];});var us={},rem=[],used=0;BLOCS.forEach(function(b){us[b]=0;var e=tw>0?w[b]/tw*UNI:0;us[b]=Math.floor(e);used+=us[b];rem.push({b:b,f:e-us[b]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<UNI){us[rem[i%BLOCS.length].b]++;used++;i++;}var ct={};BLOCS.forEach(function(b){ct[b]=cpr[b]+us[b];});return {ct:ct,v:v,premio:null};}
+  function bignami(){var v=cVotes(state.vals,state.coal);var win=BLOCS.reduce(function(a,b){return v[a]>=v[b]?a:b;});var sc=P.homog&&v[win]>=P.soglia;var ct={};BLOCS.forEach(function(b){ct[b]=0;});var capped=false;
+    if(!sc){var ps=prop(state.vals,SEATS);PARTIES.forEach(function(p){ct[state.coal[p.k]]+=ps[p.k];});return {ct:ct,v:v,win:win,premio:false,capped:false};}
+    var base=prop(state.vals,SEATS-P.premio);PARTIES.forEach(function(p){ct[state.coal[p.k]]+=base[p.k];});ct[win]+=P.premio;if(ct[win]>P.cap){var oth=BLOCS.filter(function(b){return b!==win&&v[b]>0;});var tw=oth.reduce(function(s,b){return s+v[b];},0);if(oth.length&&tw>0){capped=true;var ex=ct[win]-P.cap;ct[win]=P.cap;var d=0;oth.forEach(function(b,i){var a=i===oth.length-1?ex-d:Math.round(ex*v[b]/tw);ct[b]+=a;d+=a;});}}return {ct:ct,v:v,win:win,premio:true,capped:capped};}
+  function bar(el,ct){var ord=["cdx","alt","m5s","csx"];$(el).innerHTML=ord.map(function(b){var s=ct[b]||0;if(s<=0)return"";return '<div title="'+BM[b].name+': '+s+'" style="flex:'+s+' 0 0;background:'+BM[b].c+';display:flex;align-items:center;justify-content:center;min-width:0;"><span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+(s>=22?s:'')+'</span></div>';}).join('');}
+  function cards(el,r){$(el).innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">'+BLOCS.map(function(b){var s=r.ct[b]||0,maj=s>=MAJ,win=r.premio&&b===r.win;return '<div style="text-align:center;padding:6px 4px;border-radius:8px;background:'+(maj?"rgba(27,58,107,0.08)":"transparent")+';border:'+(maj?"1.5px solid #1b3a6b":"0.5px solid var(--line)")+';"><div style="display:flex;align-items:center;justify-content:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:'+BM[b].c+';"></span><span style="font-size:10px;color:var(--muted);">'+BM[b].name+'</span></div><div style="font-size:19px;font-weight:700;font-family:Georgia,serif;margin-top:1px;">'+s+'</div><div style="font-size:9.5px;color:var(--hint);">'+r.v[b].toFixed(1)+'%'+(win?' <span class="pill" style="background:#eef3fa;color:#1b3a6b;">+'+P.premio+'</span>':'')+(maj&&!win?' <span class="pill" style="background:#eaf5ee;color:#1f7a4d;">magg.</span>':'')+'</div></div>';}).join('')+'</div>';}
+  function render(){var tot=PARTIES.reduce(function(s,p){return s+(state.vals[p.k]||0);},0);$("totOut").textContent=tot.toFixed(1)+"%";$("totOut").style.color=Math.abs(tot-100)>2?"#b23636":"#2a2924";
+    var A=rosatellum(),B=bignami();bar("barA",A.ct);cards("cardsA",A);bar("barB",B.ct);cards("cardsB",B);
+    var mA=BLOCS.filter(function(b){return A.ct[b]>=MAJ;});var mB=BLOCS.filter(function(b){return B.ct[b]>=MAJ;});
+    var sA=mA.length?BM[mA[0]].name+" ha la maggioranza ("+A.ct[mA[0]]+")":"nessuna maggioranza";
+    var sB;if(B.premio){sB=mB.length?BM[mB[0]].name+" col premio raggiunge la maggioranza ("+B.ct[B.win]+(B.capped?", tetto":"")+")":BM[B.win].name+" col premio resta sotto 201";}else{var fp=BLOCS.reduce(function(a,b){return B.v[a]>=B.v[b]?a:b;});sB="premio non assegnato ("+(P.homog?BM[fp].name+" primo ma sotto il "+P.soglia+"%":"camere difformi")+") → proporzionale puro, nessuna maggioranza";}
+    var diff=(mA.join()!==mB.join())||(A.ct.cdx!==B.ct.cdx);
+    $("verdict").innerHTML='<b>Legge in vigore:</b> '+sA+'. &nbsp;<b>Bignami bis:</b> '+sB+'.'+(diff?' <span style="color:#b07b00;font-weight:600;">→ Le due leggi danno esiti diversi sugli stessi voti.</span>':' <span style="color:#6b6960;">→ Esito analogo.</span>');
+    PARTIES.forEach(function(p,i){var el=$("sl"+i);if(el){el.value=state.vals[p.k]||0;$("ov"+i).textContent=(state.vals[p.k]||0).toFixed(1)+"%";$("cs"+i).value=state.coal[p.k];}});}
+  function buildSliders(){var html='';PARTIES.forEach(function(p,i){html+='<div style="display:flex;align-items:center;gap:9px;"><span style="width:9px;height:9px;border-radius:2px;background:'+p.c+';flex:none;"></span><span style="width:36px;flex:none;font-size:12.5px;font-weight:600;">'+p.k+'</span><input type="range" min="0" max="42" step="0.1" id="sl'+i+'" style="flex:1;"><span id="ov'+i+'" style="width:42px;flex:none;text-align:right;font-size:12.5px;font-weight:600;"></span><select id="cs'+i+'"><option value="cdx">Cdx</option><option value="csx">Csx</option><option value="m5s">M5S</option><option value="alt">Altri</option></select></div>';});$("sliders").innerHTML=html;PARTIES.forEach(function(p,i){$("sl"+i).addEventListener("input",function(){state.vals[p.k]=parseFloat(this.value);render();});$("cs"+i).addEventListener("change",function(){state.coal[p.k]=this.value;render();});});}
+  function buildScen(){$("scenChips").innerHTML=SCEN.map(function(sc,i){return '<button class="chip" data-s="'+i+'">'+sc.name+'</button>';}).join('');Array.prototype.forEach.call($("scenChips").querySelectorAll("button"),function(b){b.addEventListener("click",function(){state.coal=cp(SCEN[+b.getAttribute("data-s")].map);render();});});}
+  function setHomog(v){P.homog=v;Array.prototype.forEach.call($("homogToggle").querySelectorAll("button"),function(x){var on=(x.getAttribute("data-h")==="1")===v;x.style.background=on?"#1b3a6b":"";x.style.color=on?"#fff":"";});}
+  $("soglia").addEventListener("input",function(){P.soglia=+this.value;$("sogliaOut").textContent=(this.value%1?(+this.value).toFixed(1):this.value);render();});
+  $("premio").addEventListener("input",function(){P.premio=+this.value;$("premioOut").textContent=this.value;render();});
+  $("cap").addEventListener("input",function(){P.cap=+this.value;$("capOut").textContent=this.value;render();});
+  $("exp").addEventListener("input",function(){P.exp=+this.value;$("expOut").textContent=(+this.value).toFixed(1);render();});
+  Array.prototype.forEach.call($("homogToggle").querySelectorAll("button"),function(b){b.addEventListener("click",function(){setHomog(b.getAttribute("data-h")==="1");render();});});
+  $("resetParams").addEventListener("click",function(){P={soglia:42,premio:70,cap:220,exp:3,homog:true};$("soglia").value=42;$("sogliaOut").textContent="42";$("premio").value=70;$("premioOut").textContent="70";$("cap").value=220;$("capOut").textContent="220";$("exp").value=3;$("expOut").textContent="3.0";setHomog(true);render();});
+  $("reset").addEventListener("click",function(){state.vals=cp(AGG);render();});
+  buildSliders();buildScen();setHomog(true);render();
+})();
+</script>
+</body>
+</html>

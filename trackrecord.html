@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Track record</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:3px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:14px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:12.5px;padding:13px 9px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 18px 50px;}
+h1{font-family:Georgia,serif;font-size:25px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
+.disc{font-size:12px;color:var(--amber);background:#fbf6ea;border:1px solid #f0e4c8;border-radius:8px;padding:9px 13px;margin:12px 0 20px;}
+h2{font-family:Georgia,serif;font-size:18px;font-weight:700;margin:24px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+th,td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;}
+.ok{color:var(--green);font-weight:600;} .ko{color:var(--red);font-weight:600;} .part{color:var(--amber);font-weight:600;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;} button.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+input,select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:5px 7px;background:#fff;color:var(--ink);font-size:12.5px;}
+.stat{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 16px;margin:4px 6px 4px 0;}
+.stat .v{font-size:22px;font-weight:700;font-family:Georgia,serif;}
+.stat .k{font-size:11.5px;color:var(--muted);}
+.small{font-size:11.5px;color:var(--muted);}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:28px;}
+.addbox{background:var(--soft);border-radius:10px;padding:13px 15px;margin:14px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend</a>
+  <a href="storico.html">Storico</a>
+  <a href="solidita.html">Solidità</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html" class="active">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Track record delle previsioni</h1>
+  <div class="lede">Cosa lo strumento aveva previsto, confrontato con cosa è successo. È ciò che rende un'analisi verificabile — e quindi credibile.</div>
+  <div class="disc"><b>Perché esiste questa pagina.</b> Uno strumento di analisi vale solo se si fa giudicare. Qui ogni previsione viene annotata con la sua data e poi confrontata con l'esito reale: gli errori restano visibili quanto i successi. È il contrario dell'oroscopo, che dimentica ciò che sbaglia.</div>
+
+  <h2>Indicatori di accuratezza</h2>
+  <div id="stats"></div>
+  <div class="small">Calcolati sulle previsioni già verificabili. Crescono col tempo, man mano che gli eventi previsti si realizzano.</div>
+
+  <h2>Registro previsioni</h2>
+  <table id="tbl">
+    <thead><tr><th>Data previsione</th><th>Previsione</th><th>Confidenza dichiarata</th><th>Esito reale</th><th>Verdetto</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <div class="addbox">
+    <span style="font-weight:600;width:100%;">+ Registra una nuova previsione o aggiorna un esito</span>
+    <input type="date" id="tr_date" style="width:150px;">
+    <input type="text" id="tr_pred" placeholder="Previsione (es. 'FN supera il 4% entro giugno')" style="flex:1;min-width:200px;">
+    <select id="tr_conf"><option value="lo">bassa</option><option value="md">media</option><option value="hi">alta</option></select>
+    <button id="tr_add" class="primary">Aggiungi</button>
+  </div>
+  <div class="small">Le previsioni aggiunte qui restano salvate in questa pagina del tuo browser. Per renderle permanenti per tutti, vanno scritte nel file e ricaricate su GitHub.</div>
+
+  <h2>Come si compila, con rigore</h2>
+  <div class="card">
+    <p style="margin:4px 0;">▸ <b>Previsione falsificabile:</b> deve avere una soglia e una data ("FN ≥ 4% entro il 30/6"), non un'impressione ("FN andrà bene").</p>
+    <p style="margin:4px 0;">▸ <b>Confidenza dichiarata prima:</b> si annota quanto si era sicuri <em>al momento</em>, non dopo aver visto l'esito.</p>
+    <p style="margin:4px 0;">▸ <b>Gli errori si tengono:</b> una previsione sbagliata non si cancella, si marca come errata e si annota perché. È il dato più istruttivo.</p>
+  </div>
+
+  <div class="foot">
+    <b>Nota.</b> Le previsioni iniziali qui registrate sono lette retrospettivamente dai dati noti e marcate di conseguenza; il valore vero della pagina emerge in avanti, registrando previsioni <em>prima</em> che l'esito sia noto. Confidenza e verdetti sono dichiarazioni esplicite, non punteggi automatici. Aggiornato al 31 maggio 2026.
+  </div>
+</div>
+
+<script>
+(function(){
+  // Previsioni iniziali (alcune già verificabili dai dati, marcate onestamente)
+  var SEED=[
+    {date:"2026-02-05",pred:"La scissione di Vannacci farà calare la Lega sotto il 7%",conf:"md",outcome:"Lega scesa a ~6,8% a fine maggio",verdict:"ok"},
+    {date:"2026-02-05",pred:"Futuro Nazionale supererà il 3,5% entro la primavera",conf:"lo",outcome:"FN al 4,0% a fine maggio",verdict:"ok"},
+    {date:"2026-03-10",pred:"Il referendum sulla giustizia sarà vinto dal Sì",conf:"lo",outcome:"Ha vinto il No",verdict:"ko"},
+    {date:"2026-05-01",pred:"I due blocchi resteranno entro 2 punti l'uno dall'altro a fine maggio",conf:"md",outcome:"cdx 44,8% vs CL 44,9%: distanza 0,1",verdict:"ok"},
+    {date:"2026-05-10",pred:"FdI resterà sopra il 28% nonostante il logoramento",conf:"md",outcome:"FdI 28,2% al 31/5",verdict:"ok"},
+    {date:"2026-05-20",pred:"Nessun blocco raggiungerà da solo il 42% entro fine maggio",conf:"hi",outcome:"Confermato: nessuno sopra soglia senza alleati di confine",verdict:"ok"},
+    {date:"2026-05-25",pred:"Le amministrative rimobiliteranno stabilmente gli astenuti",conf:"lo",outcome:"Indecisi/astenuti scesi a 39,8% ma non stabilmente (Pagnoncelli)",verdict:"part"}
+  ];
+  var KEY="trackrecord_v1";
+  function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):SEED.slice();}catch(e){return SEED.slice();}}
+  function save(d){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
+  var data=load();
+  function $(id){return document.getElementById(id);}
+  var CONF={lo:"bassa",md:"media",hi:"alta"};
+  var VERD={ok:'<span class="ok">✓ corretta</span>',ko:'<span class="ko">✗ errata</span>',part:'<span class="part">~ parziale</span>',open:'<span class="small">in attesa</span>'};
+
+  function render(){
+    var rows="";data.forEach(function(r,i){
+      rows+='<tr><td class="small">'+r.date+'</td><td>'+r.pred+'</td><td class="small">'+CONF[r.conf]+'</td><td class="small">'+(r.outcome||'—')+'</td><td>'+(VERD[r.verdict]||VERD.open)+'</td></tr>';
+    });
+    $("rows").innerHTML=rows;
+    // stats
+    var judged=data.filter(function(r){return r.verdict==="ok"||r.verdict==="ko"||r.verdict==="part";});
+    var ok=data.filter(function(r){return r.verdict==="ok";}).length;
+    var ko=data.filter(function(r){return r.verdict==="ko";}).length;
+    var part=data.filter(function(r){return r.verdict==="part";}).length;
+    var rate=judged.length?Math.round((ok+0.5*part)/judged.length*100):0;
+    $("stats").innerHTML=
+      '<div class="stat"><div class="v">'+rate+'%</div><div class="k">indice di accuratezza ponderato</div></div>'+
+      '<div class="stat"><div class="v ok">'+ok+'</div><div class="k">corrette</div></div>'+
+      '<div class="stat"><div class="v part">'+part+'</div><div class="k">parziali</div></div>'+
+      '<div class="stat"><div class="v ko">'+ko+'</div><div class="k">errate</div></div>'+
+      '<div class="stat"><div class="v">'+judged.length+'</div><div class="k">verificate su '+data.length+'</div></div>';
+  }
+  $("tr_add").addEventListener("click",function(){
+    var d=$("tr_date").value,p=$("tr_pred").value.trim(),c=$("tr_conf").value;
+    if(!d||!p){alert("Inserisci data e previsione.");return;}
+    data.push({date:d,pred:p,conf:c,outcome:"",verdict:"open"});save(data);
+    $("tr_date").value="";$("tr_pred").value="";render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Metodo</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:13px;padding:13px 12px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:820px;margin:0 auto;padding:26px 20px 50px;}
+h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:24px;}
+h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:28px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+p{margin:8px 0;}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;}
+code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend &amp; Driver</a>
+  <a href="storico.html">Storico &amp; Eventi</a>
+  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html" class="active">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Metodo e fonti</h1>
+  <div class="lede">Come sono costruiti i modelli, cosa possono dire e cosa no.</div>
+
+  <h2>L'aggregato dei sondaggi</h2>
+  <p>Le percentuali di partenza non sono un singolo sondaggio, ma una <b>media ponderata</b> di più istituti. Ogni rilevazione pesa in funzione di due fattori: l'affidabilità storica dell'istituto e quanto è recente. Il peso segue la formula <code>(affidabilità/100) × 0,5^(giorni trascorsi / emivita)</code>: un sondaggio perde metà del suo peso ogni "emivita" di giorni (regolabile). Così le rilevazioni vecchie contano meno senza sparire del tutto.</p>
+
+  <h2>La conversione voti → seggi</h2>
+  <div class="box">
+    <p><b>Rosatellum (legge in vigore).</b> 253 seggi assegnati col proporzionale tra le liste sopra il 3%, più 147 in collegi uninominali. Poiché non disponiamo dei dati collegio per collegio, l'uninominale è stimato a livello nazionale con la "regola del cubo" (i seggi crescono più che proporzionalmente rispetto ai voti del blocco in testa). È un'approssimazione: amplifica il vincitore come fa il maggioritario reale, ma non riproduce le specificità territoriali.</p>
+  </div>
+  <div class="box">
+    <p><b>Bignami bis (proposta).</b> Impianto proporzionale con un premio (di base 70 seggi) al blocco arrivato primo, assegnato <b>solo se</b> supera la soglia (di base 42%) <b>e</b> arriva primo in entrambe le Camere. Altrimenti, riparto interamente proporzionale. Tetto di base 220 seggi alla vincente. Tutti questi parametri sono regolabili nello strumento, perché il testo è ancora in discussione.</p>
+  </div>
+
+  <h2>La simulazione Monte Carlo</h2>
+  <p>Per stimare le <b>probabilità</b> (e non un singolo esito), il modello genera migliaia di scenari perturbando ogni percentuale entro il margine d'errore demoscopico. La perturbazione combina un fattore comune di coalizione (i partiti di uno stesso blocco tendono a muoversi insieme — la "correlazione") e un rumore specifico di partito. Si conta poi in quanti scenari ciascun blocco raggiunge la maggioranza.</p>
+
+  <h2>Limiti da tenere presenti</h2>
+  <p>I sondaggi sono istantanee con margine d'errore, non previsioni. L'attribuzione dei blocchi alle coalizioni è un'ipotesi modificabile: il "campo largo" unito, in particolare, non è oggi un'alleanza formata. L'uninominale è stimato a livello nazionale. La condizione di omogeneità Camera/Senato è semplificata. Questi strumenti servono a esplorare scenari e capire le sensibilità del sistema, non a produrre proiezioni ufficiali di seggio.</p>
+
+  <div class="foot">
+    Fonti dei dati: medie e singole rilevazioni di PolitPro, YouTrend, SWG, Termometro Politico, Demos, Ipsos, Eumetra, Tecnè. Aggiornamento al 31 maggio 2026. I modelli di conversione seggi e Monte Carlo sono elaborazioni proprie a fini analitici.
+  </div>
+</div>
+</body>
+</html>

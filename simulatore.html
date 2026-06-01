@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Simulatore di mosse</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:3px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:14px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:12.5px;padding:13px 9px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 18px 50px;}
+h1{font-family:Georgia,serif;font-size:25px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
+.disc{font-size:12px;color:var(--amber);background:#fbf6ea;border:1px solid #f0e4c8;border-radius:8px;padding:9px 13px;margin:12px 0 20px;}
+h2{font-family:Georgia,serif;font-size:18px;font-weight:700;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.muted{color:var(--muted);font-size:13px;}
+button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;} button.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+button.danger{color:var(--red);border-color:#e3c0c0;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--navy);cursor:pointer;}
+input[type=text],input[type=number],select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:5px 7px;background:#fff;color:var(--ink);font-size:12.5px;}
+.move{border-left:3px solid var(--navy);padding:10px 0 10px 13px;margin:12px 0;}
+.move.off{border-left-color:var(--line);opacity:.55;}
+.move-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.move-name{font-weight:600;font-size:14px;}
+.sliders{margin:8px 0;}
+.srow{display:flex;align-items:center;gap:9px;margin:5px 0;font-size:12.5px;}
+.srow label{width:200px;flex:none;color:var(--muted);}
+.srow .val{width:54px;flex:none;text-align:right;font-weight:600;}
+.result{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0;}
+.rc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.rc .k{font-size:11.5px;color:var(--muted);margin-bottom:4px;}
+.rc .v{font-size:22px;font-weight:700;font-family:Georgia,serif;}
+.rc .d{font-size:12px;font-weight:600;margin-top:2px;}
+.up{color:var(--green);} .down{color:var(--red);} .flat{color:var(--hint);}
+.bar{display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin:6px 0;}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;min-width:0;}
+.conf{font-size:11.5px;padding:2px 9px;border-radius:20px;font-weight:600;}
+.conf-lo{background:#fdeaea;color:#b23636;} .conf-md{background:#fbf0e2;color:#b07b00;} .conf-hi{background:#eaf5ee;color:#1f7a4d;}
+.tag{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:20px;text-transform:uppercase;}
+.t-ip{background:#fbf0e2;color:#b07b00;}
+.addbox{background:var(--soft);border-radius:10px;padding:13px 15px;margin:14px 0;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:28px;}
+.small{font-size:11.5px;color:var(--muted);}
+.toggle{position:relative;width:38px;height:21px;flex:none;}
+.toggle input{display:none;}
+.toggle span{position:absolute;inset:0;background:#cfcabb;border-radius:20px;transition:.2s;cursor:pointer;}
+.toggle span::before{content:"";position:absolute;width:15px;height:15px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;}
+.toggle input:checked+span{background:var(--navy);}
+.toggle input:checked+span::before{transform:translateX(17px);}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend</a>
+  <a href="storico.html">Storico</a>
+  <a href="solidita.html">Solidità</a>
+  <a href="simulatore.html" class="active">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Simulatore di mosse strategiche</h1>
+  <div class="lede">"Cosa succede se faccio X?" — testa l'effetto stimato di scelte politiche su voti, coalizione e seggi.</div>
+  <div class="disc"><b>Natura del modello.</b> Gli effetti delle mosse sono <b>elasticità stimate</b>, non misurazioni: rispondono a "se questa mossa avesse questo effetto, ecco le conseguenze". Ogni leva è regolabile e ogni mossa può essere aggiunta o modificata dallo staff. Gli output sono scenari parametrici con livello di confidenza dichiarato — <b>non previsioni</b>.</div>
+
+  <h2>Punto di partenza</h2>
+  <div class="card">
+    <div class="muted" style="margin-bottom:6px;">Voti base (media sondaggi 31/5/2026). Modificabili.</div>
+    <div id="baseVals" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;"></div>
+  </div>
+
+  <h2>Mosse da testare</h2>
+  <div class="small" style="margin-bottom:6px;">Attiva le mosse e regola intensità ed elasticità. Puoi sommarne più d'una per simulare una strategia combinata.</div>
+  <div id="moves"></div>
+
+  <div class="addbox">
+    <div style="font-weight:600;margin-bottom:8px;">+ Aggiungi una mossa personalizzata <span class="small">(es. un tema nuovo, un caso emerso)</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <input type="text" id="nm_name" placeholder="Nome mossa (es. 'Campagna sul lavoro')" style="flex:1;min-width:180px;">
+      <select id="nm_from"><option value="">prende voti da…</option></select>
+      <select id="nm_to"><option value="">…e li dà a</option></select>
+      <input type="number" id="nm_pts" placeholder="punti %" step="0.1" min="0" max="10" style="width:80px;">
+      <button id="nm_add" class="primary">Aggiungi</button>
+    </div>
+    <div class="small" style="margin-top:6px;">La mossa sposterà fino a N punti percentuali dal primo al secondo soggetto, scalati dall'intensità che imposterai.</div>
+  </div>
+
+  <h2>Effetto stimato</h2>
+  <div id="result"></div>
+
+  <h2>Sintesi (executive brief)</h2>
+  <div class="card" id="brief"></div>
+  <button id="copyBrief">Copia il brief</button>
+
+  <div class="foot">
+    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati col modello del <a href="confronto.html" style="color:var(--navy);">Confronto leggi</a> (proporzionale + premio 42% o Rosatellum). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: media sondaggi al 31/5/2026. Strumento di esplorazione strategica, non predittivo.
+  </div>
+</div>
+
+<script>
+(function(){
+  var PARTIES=[
+    {k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b",bloc:"cdx"},{k:"FI",n:"Forza Italia",c:"#3a8dde",bloc:"cdx"},
+    {k:"Lega",n:"Lega",c:"#5a8f2a",bloc:"cdx"},{k:"NM",n:"Noi Moderati",c:"#a9a79e",bloc:"cdx"},
+    {k:"FN",n:"Futuro Nazionale",c:"#c8602f",bloc:"alt"},
+    {k:"PD",n:"PD",c:"#d64541",bloc:"csx"},{k:"AVS",n:"AVS",c:"#1f9e74",bloc:"csx"},{k:"PiuE",n:"+Europa",c:"#8a8a82",bloc:"csx"},
+    {k:"M5S",n:"M5S",c:"#e0a216",bloc:"m5s"},{k:"Az",n:"Azione",c:"#7a6fd0",bloc:"alt"},{k:"IV",n:"Italia Viva",c:"#cf5380",bloc:"alt"},
+    {k:"AST",n:"Indecisi/Astenuti",c:"#9a9890",bloc:"ast"}
+  ];
+  var PMAP={};PARTIES.forEach(function(p){PMAP[p.k]=p;});
+  var BASE={FdI:28.2,FI:8.2,Lega:6.8,NM:1.3,FN:3.8,PD:22.0,AVS:6.4,PiuE:1.6,M5S:12.8,Az:3.2,IV:2.5,AST:3.2};
+  // AST qui è solo la quota "altri/residuo" nel voto espresso; il vero bacino indecisi (39,8%) è fuori dal 100% dei votanti
+  var BLOCS={cdx:{n:"Centrodestra",c:"#1b3a6b"},csx:{n:"Centrosinistra",c:"#d64541"},m5s:{n:"M5S",c:"#e0a216"},alt:{n:"Altri",c:"#5f5e5a"},ast:{n:"—",c:"#9a9890"}};
+  var SEATS=400,MAJ=201,THRESH=3.0,PROP=253,UNI=147,PREMIO=70,CAP=220,SOGLIA=42.0;
+
+  // Coalizione di default per il calcolo seggi (modificabile concettualmente, qui assetto attuale)
+  var COAL={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",AVS:"csx",PiuE:"csx",M5S:"m5s",Az:"alt",IV:"alt",FN:"alt"};
+
+  // Mosse predefinite: ognuna sposta voti tra soggetti, con intensità (0-100%) ed elasticità regolabili
+  var MOVES=[
+    {id:"fed_fn",name:"Federare Vannacci (FN nel centrodestra)",on:false,intensity:100,conf:"md",
+     desc:"FN entra in coalizione. Trattiene gran parte dei suoi voti ma può perderne verso l'astensione (delusi dall'accordo).",
+     effects:[{from:"FN",to:"__coal_fn",pts:0}], special:"fed_fn", leak:15},
+    {id:"tema_energia",name:"Campagna su energia / costo della vita",on:false,intensity:60,conf:"lo",
+     desc:"Presidiare un tema oggi scoperto. Recupera indecisi e qualche voto da chi è insoddisfatto, senza scontro identitario.",
+     effects:[{from:"AST",to:"FdI",pts:1.2},{from:"M5S",to:"FdI",pts:0.4}]},
+    {id:"tema_sicurezza",name:"Rilanciare sicurezza / immigrazione",on:false,intensity:60,conf:"lo",
+     desc:"Doppia faccia: rinsalda l'elettorato identitario ma compete con FN sullo stesso terreno e rende meno del passato.",
+     effects:[{from:"FN",to:"FdI",pts:0.8},{from:"FdI",to:"AST",pts:0.3}]},
+    {id:"meloni_front",name:"Esporre Meloni in prima linea",on:false,intensity:70,conf:"md",
+     desc:"Sfruttare il gradimento personale (>partito) per trainare FdI, specie dove la sigla è debole.",
+     effects:[{from:"AST",to:"FdI",pts:0.8},{from:"FI",to:"FdI",pts:0.3}]},
+    {id:"split_cl",name:"Tenere diviso il campo largo",on:false,intensity:60,conf:"lo",
+     desc:"Azione di cuneo per impedire la coalizione PD-M5S. Non sposta voti diretti, ma riduce la probabilità che il CL si compatti (effetto su scenari).",
+     effects:[], special:"split"}
+  ];
+
+  function $(id){return document.getElementById(id);}
+  function clone(o){var r={};for(var k in o)r[k]=o[k];return r;}
+  var custom=[]; // mosse aggiunte dall'utente
+
+  function buildBase(){
+    var h="";PARTIES.forEach(function(p){if(p.k==="AST")return;
+      h+='<div style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:2px;background:'+p.c+';flex:none;"></span><span style="font-size:11.5px;width:34px;flex:none;">'+p.k+'</span><input type="number" id="b_'+p.k+'" value="'+BASE[p.k]+'" step="0.1" style="width:62px;"></div>';
+    });
+    $("baseVals").innerHTML=h;
+    PARTIES.forEach(function(p){if(p.k==="AST")return;var el=$("b_"+p.k);if(el)el.addEventListener("input",function(){BASE[p.k]=parseFloat(this.value)||0;render();});});
+    // popola i select della mossa custom
+    var opts='<option value="">…</option>';PARTIES.forEach(function(p){opts+='<option value="'+p.k+'">'+p.n+'</option>';});
+    $("nm_from").innerHTML='<option value="">prende voti da…</option>'+PARTIES.map(function(p){return '<option value="'+p.k+'">'+p.n+'</option>';}).join('');
+    $("nm_to").innerHTML='<option value="">…e li dà a</option>'+PARTIES.map(function(p){return '<option value="'+p.k+'">'+p.n+'</option>';}).join('');
+  }
+
+  function allMoves(){return MOVES.concat(custom);}
+
+  function buildMoves(){
+    var h="";allMoves().forEach(function(m){
+      var conf=m.conf==="hi"?'<span class="conf conf-hi">confidenza media-alta</span>':m.conf==="md"?'<span class="conf conf-md">confidenza media</span>':'<span class="conf conf-lo">confidenza bassa</span>';
+      h+='<div class="move '+(m.on?'':'off')+'" id="mv_'+m.id+'"><div class="move-head"><label class="toggle"><input type="checkbox" id="on_'+m.id+'" '+(m.on?'checked':'')+'><span></span></label><span class="move-name">'+m.name+'</span>'+conf+(m.custom?'<button class="danger" data-del="'+m.id+'" style="margin-left:auto;font-size:11px;padding:3px 8px;">rimuovi</button>':'')+'</div>';
+      h+='<div class="small" style="margin:4px 0 6px;">'+(m.desc||'Sposta voti tra i soggetti indicati.')+'</div>';
+      h+='<div class="sliders"><div class="srow"><label>Intensità della mossa</label><input type="range" min="0" max="100" step="5" id="int_'+m.id+'" value="'+m.intensity+'" style="flex:1;"><span class="val" id="intv_'+m.id+'">'+m.intensity+'%</span></div>';
+      if(m.special==="fed_fn"){h+='<div class="srow"><label>Dispersione FN→astensione</label><input type="range" min="0" max="50" step="5" id="leak_'+m.id+'" value="'+m.leak+'" style="flex:1;"><span class="val" id="leakv_'+m.id+'">'+m.leak+'%</span></div>';}
+      m.effects.forEach(function(e,i){if(e.to==="__coal_fn")return;
+        h+='<div class="srow"><label>'+(PMAP[e.from]?PMAP[e.from].n:e.from)+' → '+(PMAP[e.to]?PMAP[e.to].n:e.to)+'</label><input type="range" min="0" max="5" step="0.1" id="eff_'+m.id+'_'+i+'" value="'+e.pts+'" style="flex:1;"><span class="val" id="effv_'+m.id+'_'+i+'">'+e.pts.toFixed(1)+'</span></div>';
+      });
+      h+='</div></div>';
+    });
+    $("moves").innerHTML=h;
+    allMoves().forEach(function(m){
+      $("on_"+m.id).addEventListener("change",function(){m.on=this.checked;$("mv_"+m.id).className="move "+(m.on?"":"off");render();});
+      $("int_"+m.id).addEventListener("input",function(){m.intensity=+this.value;$("intv_"+m.id).textContent=this.value+"%";render();});
+      if(m.special==="fed_fn"){$("leak_"+m.id).addEventListener("input",function(){m.leak=+this.value;$("leakv_"+m.id).textContent=this.value+"%";render();});}
+      m.effects.forEach(function(e,i){if(e.to==="__coal_fn")return;var el=$("eff_"+m.id+"_"+i);if(el)el.addEventListener("input",function(){e.pts=parseFloat(this.value);$("effv_"+m.id+"_"+i).textContent=e.pts.toFixed(1);render();});});
+    });
+    Array.prototype.forEach.call($("moves").querySelectorAll("[data-del]"),function(b){b.addEventListener("click",function(){var id=b.getAttribute("data-del");custom=custom.filter(function(x){return x.id!==id;});buildMoves();render();});});
+  }
+
+  function prop(vals,N){var ks=Object.keys(vals).filter(function(k){return k!=="AST";});var q=ks.filter(function(k){return (vals[k]||0)>=THRESH;});var tq=q.reduce(function(s,k){return s+vals[k];},0);var seats={};ks.forEach(function(k){seats[k]=0;});if(tq<=0)return seats;var rem=[],u=0;q.forEach(function(k){var e=vals[k]/tq*N;seats[k]=Math.floor(e);u+=seats[k];rem.push({k:k,f:e-seats[k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<N&&rem.length){seats[rem[i%rem.length].k]++;u++;i++;}return seats;}
+  function blocVotes(vals,coal){var o={cdx:0,csx:0,m5s:0,alt:0};for(var k in vals){if(k==="AST")continue;o[coal[k]]+=vals[k]||0;}return o;}
+
+  function applyMoves(){
+    var v=clone(BASE);
+    allMoves().forEach(function(m){
+      if(!m.on)return;var scale=m.intensity/100;
+      if(m.special==="fed_fn"){
+        // FN entra nel cdx: trattiene i voti ma una quota 'leak' va in astensione
+        var fn=v.FN||0;var lost=fn*(m.leak/100)*scale;
+        v.FN=fn-lost*0+0; // FN resta come lista ma confluisce; per semplicità lo teniamo e cambiamo coalizione a runtime
+        v.AST=(v.AST||0)+lost; v.FN=fn-lost;
+        m._coalFN=true;
+      }
+      m.effects.forEach(function(e){if(e.to==="__coal_fn")return;var move=Math.min(v[e.from]||0,e.pts*scale);v[e.from]-=move;v[e.to]=(v[e.to]||0)+move;});
+    });
+    return v;
+  }
+
+  function seatsFor(vals,fedFN){
+    var coal=clone(COAL);if(fedFN)coal.FN="cdx";
+    var ps=prop(vals,PROP);var bv=blocVotes(vals,coal);var cpr={cdx:0,csx:0,m5s:0,alt:0};for(var k in ps){if(k==="AST")continue;cpr[coal[k]]+=ps[k];}
+    // uninominale regola del cubo
+    var ks=["cdx","csx","m5s","alt"],w={},tw=0;ks.forEach(function(c){w[c]=Math.pow(Math.max(0,bv[c]),3);tw+=w[c];});var us={},rem=[],u=0;ks.forEach(function(c){var e=tw>0?w[c]/tw*UNI:0;us[c]=Math.floor(e);u+=us[c];rem.push({c:c,f:e-us[c]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<UNI){us[rem[i%4].c]++;u++;i++;}
+    var ros={};ks.forEach(function(c){ros[c]=cpr[c]+us[c];});
+    // bignami
+    var win=ks.reduce(function(a,b){return bv[a]>=bv[b]?a:b;});var big={cdx:0,csx:0,m5s:0,alt:0};
+    if(bv[win]>=SOGLIA){var base=prop(vals,SEATS-PREMIO);for(var k2 in base){if(k2==="AST")continue;big[coal[k2]]+=base[k2];}big[win]+=PREMIO;if(big[win]>CAP){var ex=big[win]-CAP;big[win]=CAP;var oth=ks.filter(function(c){return c!==win&&bv[c]>0;});var t2=oth.reduce(function(s,c){return s+bv[c];},0);var d=0;oth.forEach(function(c,idx){var a=idx===oth.length-1?ex-d:Math.round(ex*bv[c]/t2);big[c]+=a;d+=a;});}}
+    else{var pp=prop(vals,SEATS);for(var k3 in pp){if(k3==="AST")continue;big[coal[k3]]+=pp[k3];}}
+    return {ros:ros,big:big,bv:bv,win:win,premio:bv[win]>=SOGLIA};
+  }
+
+  function render(){
+    var fedFN=allMoves().some(function(m){return m.on&&m.special==="fed_fn";});
+    var base0=seatsFor(BASE,false);
+    var v=applyMoves();var after=seatsFor(v,fedFN);
+    // confronto blocco cdx
+    var cdxV0=base0.bv.cdx, cdxV1=after.bv.cdx;
+    var cdxBig0=base0.big.cdx, cdxBig1=after.big.cdx;
+    var anyOn=allMoves().some(function(m){return m.on;});
+
+    var dv=(cdxV1-cdxV0);
+    var html='';
+    html+='<div class="result">';
+    html+='<div class="rc"><div class="k">Voti centrodestra</div><div class="v">'+cdxV1.toFixed(1)+'%</div><div class="d '+(dv>0.05?'up':dv<-0.05?'down':'flat')+'">'+(Math.abs(dv)<0.05?'invariato':(dv>0?'▲ +':'▼ ')+dv.toFixed(1))+'</div></div>';
+    html+='<div class="rc"><div class="k">Soglia 42% premio</div><div class="v">'+(after.bv.cdx>=42?'<span style="color:#1f7a4d;">sì</span>':'<span style="color:#b23636;">no</span>')+'</div><div class="d flat">cdx '+after.bv.cdx.toFixed(1)+'%</div></div>';
+    html+='<div class="rc"><div class="k">Seggi cdx (Bignami)</div><div class="v">'+cdxBig1+'</div><div class="d '+((cdxBig1-cdxBig0)>0?'up':(cdxBig1-cdxBig0)<0?'down':'flat')+'">'+((cdxBig1-cdxBig0)===0?'=':(cdxBig1-cdxBig0)>0?'▲ +'+(cdxBig1-cdxBig0):'▼ '+(cdxBig1-cdxBig0))+' vs base</div></div>';
+    html+='<div class="rc"><div class="k">Maggioranza (201)</div><div class="v">'+(cdxBig1>=MAJ?'<span style="color:#1f7a4d;">sì</span>':'<span style="color:#b23636;">no</span>')+'</div><div class="d flat">Bignami bis</div></div>';
+    html+='</div>';
+    // barra seggi after (bignami)
+    html+='<div class="small" style="margin-top:6px;">Ripartizione seggi (Bignami bis, '+(after.premio?'premio attivo':'proporzionale')+'):</div><div class="bar">';
+    ["cdx","alt","m5s","csx"].forEach(function(c){var s=after.big[c]||0;if(s<=0)return;html+='<div class="seg" style="flex:'+s+' 0 0;background:'+BLOCS[c].c+';">'+(s>=24?BLOCS[c].n+' '+s:s)+'</div>';});
+    html+='</div>';
+    if(!anyOn)html+='<div class="small">Nessuna mossa attiva: stai vedendo lo scenario base.</div>';
+    $("result").innerHTML=html;
+    buildBrief(base0,after,fedFN,anyOn);
+  }
+
+  function buildBrief(base0,after,fedFN,anyOn){
+    var active=allMoves().filter(function(m){return m.on;}).map(function(m){return m.name+" ("+m.intensity+"%)";});
+    var dCdx=(after.bv.cdx-base0.bv.cdx);
+    var dSeats=after.big.cdx-base0.big.cdx;
+    var soglia=after.bv.cdx>=42;
+    var magg=after.big.cdx>=MAJ;
+    var conf=allMoves().filter(function(m){return m.on;}).every(function(m){return m.conf!=="lo";})&&anyOn?"media":"bassa";
+    var t="";
+    t+="EXECUTIVE BRIEF — Simulazione strategica (dati 31/5/2026)\n";
+    t+="=========================================\n\n";
+    t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Bignami), sotto la soglia del 42%. Nessuna maggioranza.\n\n";
+    if(!anyOn){t+="Nessuna mossa selezionata. Attiva una o più mosse per vedere l'effetto stimato.\n";}
+    else{
+      t+="MOSSE TESTATE: "+active.join("; ")+"\n\n";
+      t+="EFFETTO STIMATO:\n";
+      t+="• Voti cdx: "+base0.bv.cdx.toFixed(1)+"% → "+after.bv.cdx.toFixed(1)+"% ("+(dCdx>=0?"+":"")+dCdx.toFixed(1)+")\n";
+      t+="• Soglia 42%: "+(soglia?"RAGGIUNTA → premio attivo":"non raggiunta")+"\n";
+      t+="• Seggi cdx (Bignami): "+base0.big.cdx+" → "+after.big.cdx+" ("+(dSeats>=0?"+":"")+dSeats+")\n";
+      t+="• Maggioranza assoluta (201): "+(magg?"SÌ":"NO")+"\n\n";
+      t+="RACCOMANDAZIONE: "+(magg?"La combinazione testata porta alla maggioranza. Valutare costi politici e tenuta della coalizione.":soglia?"Si supera la soglia ma non la maggioranza piena: serve rafforzare ancora o federare alleati.":"La combinazione non basta a superare la soglia: da sola insufficiente.")+"\n";
+      t+="\nLIVELLO DI CONFIDENZA: "+conf.toUpperCase()+". Gli effetti sono elasticità ipotetiche, non misure. Da validare con dati proprietari prima di qualsiasi decisione.\n";
+    }
+    $("brief").innerHTML='<pre style="white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:12px;margin:0;line-height:1.5;">'+t.replace(/</g,"&lt;")+'</pre>';
+    $("brief").dataset.txt=t;
+  }
+
+  $("nm_add").addEventListener("click",function(){
+    var name=$("nm_name").value.trim(),from=$("nm_from").value,to=$("nm_to").value,pts=parseFloat($("nm_pts").value);
+    if(!name||!from||!to||!(pts>0)){alert("Compila nome, da, a e punti %.");return;}
+    custom.push({id:"cust_"+Date.now(),name:name,on:true,intensity:100,conf:"lo",custom:true,desc:"Mossa personalizzata: sposta voti da "+(PMAP[from]?PMAP[from].n:from)+" a "+(PMAP[to]?PMAP[to].n:to)+".",effects:[{from:from,to:to,pts:pts}]});
+    $("nm_name").value="";$("nm_pts").value="";$("nm_from").value="";$("nm_to").value="";
+    buildMoves();render();
+  });
+  $("copyBrief").addEventListener("click",function(){var t=$("brief").dataset.txt||"";navigator.clipboard&&navigator.clipboard.writeText(t);this.textContent="Copiato ✓";var b=this;setTimeout(function(){b.textContent="Copia il brief";},1500);});
+
+  buildBase();buildMoves();render();
+})();
+</script>
+</body>
+</html>

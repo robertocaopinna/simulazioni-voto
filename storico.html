@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Storico &amp; Eventi</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:13px;padding:13px 11px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:1000px;margin:0 auto;padding:26px 20px 50px;}
+h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:18px;}
+h2{font-family:Georgia,serif;font-size:18px;font-weight:700;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;}
+.legend{display:flex;flex-wrap:wrap;gap:13px 16px;align-items:center;font-size:12px;color:var(--muted);margin:10px 0;}
+.legend .it{display:inline-flex;align-items:center;gap:5px;}
+.legend .ln{width:16px;height:3px;border-radius:2px;}
+.legend .ev{width:11px;height:11px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+.chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.c-gov{background:#eef3fa;color:#1b3a6b;} .c-opp{background:#fdeaea;color:#b23636;} .c-ext{background:#fbf0e2;color:#b07b00;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:28px;}
+.note{font-size:12px;color:var(--muted);background:var(--soft);border-radius:8px;padding:9px 13px;margin:10px 0;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend &amp; Driver</a>
+  <a href="storico.html" class="active">Storico &amp; Eventi</a>
+  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Storico &amp; Eventi</h1>
+  <div class="lede">L'evoluzione delle intenzioni di voto dal gennaio 2026, letta in relazione agli eventi politici — di governo, di opposizione ed esterni — che possono averla influenzata.</div>
+
+  <div class="legend">
+    <span class="it"><span class="ln" style="background:#1b3a6b;"></span>FdI</span>
+    <span class="it"><span class="ln" style="background:#d64541;"></span>PD</span>
+    <span class="it"><span class="ln" style="background:#e0a216;"></span>M5S</span>
+    <span class="it"><span class="ln" style="background:#5a8f2a;"></span>Lega</span>
+    <span class="it"><span class="ln" style="background:#c8602f;"></span>FN</span>
+    <span style="margin-left:6px;"></span>
+    <span class="it"><span class="ev" style="background:#1b3a6b;"></span>Governo / centrodestra</span>
+    <span class="it"><span class="ev" style="background:#b23636;"></span>Opposizione</span>
+    <span class="it"><span class="ev" style="background:#b07b00;"></span>Esterni / istituzionali</span>
+  </div>
+
+  <div class="card"><div id="chart"></div></div>
+  <div class="note">Passa sopra i pallini in alto per leggere l'evento. Le linee verticali tratteggiate ne segnano la data; il colore distingue la natura dell'evento.</div>
+
+  <h2>Cronologia ragionata</h2>
+  <table>
+    <tr><th>Data</th><th>Tipo</th><th>Evento</th><th>Possibile effetto</th></tr>
+    <tr><td>24 gen</td><td><span class="chip c-gov">Centrodestra</span></td><td>Vannacci registra il simbolo "Futuro Nazionale"</td><td>Prima crepa nella Lega</td></tr>
+    <tr><td>3 feb</td><td><span class="chip c-gov">Centrodestra</span></td><td>Vannacci lascia la Lega e fonda FN</td><td>Nasce un competitor a destra; la Lega avvia il declino e FN inizia a crescere</td></tr>
+    <tr><td>22-23 mar</td><td><span class="chip c-ext">Esterno</span></td><td><b>Referendum giustizia: vince il No</b></td><td>Sconfitta politica diretta per il governo, che aveva voluto la riforma</td></tr>
+    <tr><td>fine mar</td><td><span class="chip c-opp">Opposizione</span></td><td>Grillo riapre la causa su nome e simbolo del M5S</td><td>Indebolisce Conte proprio mentre punta alla leadership della coalizione</td></tr>
+    <tr><td>inizio apr</td><td><span class="chip c-gov">Centrodestra</span></td><td>Dimissioni di Delmastro e Bartolozzi; caso Santanchè</td><td>Logoramento e immagine di governo "sotto assedio"</td></tr>
+    <tr><td>apr</td><td><span class="chip c-ext">Esterno</span></td><td>Tensioni con Trump (caso Sigonella); caro benzina</td><td>Costo politico su estero ed energia; erosione dell'immagine di buon governo</td></tr>
+    <tr><td>mar-mag</td><td><span class="chip c-opp">Opposizione</span></td><td>Stallo sulle primarie del campo largo (Conte vs Schlein)</td><td>Coalizione progressista divisa sulla leadership</td></tr>
+    <tr><td>24-25 mag</td><td><span class="chip c-ext">Esterno</span></td><td>Amministrative: cdx vince a Venezia e Reggio Calabria; flop M5S</td><td>Spinta a FdI (per alcuni istituti); a Venezia metà elettori M5S votano il cdx</td></tr>
+    <tr><td>27 mag</td><td><span class="chip c-ext">Esterno</span></td><td>Testo base riforma elettorale (premio 42%, tetto 220)</td><td>Apre il tema del "voto utile" e delle coalizioni</td></tr>
+    <tr><td>29 mag</td><td><span class="chip c-opp">Opposizione</span></td><td>Schlein presidia l'energia ("agenda E", Civitavecchia)</td><td>Il PD occupa per primo un tema finora scoperto; prova a darsi una linea identificabile</td></tr>
+    <tr><td>26 giu</td><td><span class="chip c-ext">Esterno</span></td><td>Riforma attesa in Aula <em>(previsto)</em></td><td>Da monitorare</td></tr>
+  </table>
+
+  <h2>Letture d'insieme</h2>
+  <p><b>Il calo del centrodestra è multifattoriale, non solo "colpa di Vannacci".</b> La scissione di febbraio ha aperto il fronte a destra (Lega giù, FN su), ma nello stesso semestre si sono accumulati la sconfitta al referendum di marzo, il logoramento dei casi Delmastro e Santanchè, e il costo della politica estera ed energetica. FdI ha tenuto la leadership proprio perché il danno si è distribuito sugli alleati e sull'immagine complessiva, più che sul partito di maggioranza relativa.</p>
+  <p><b>L'opposizione non ha capitalizzato — ma inizia a muoversi.</b> Per mesi PD e M5S sono cresciuti solo di zero-virgola: stallo sulle primarie, causa di Grillo sul simbolo, flop alle comunali. Segnale nuovo a fine maggio: dopo Venezia, Schlein prova a darsi una linea riconoscibile presidiando l'energia ("agenda E", 29/5). È il primo tentativo strutturato dell'opposizione di passare dalla difesa a una proposta identificabile — da monitorare se si tradurrà in consensi.</p>
+
+  <div class="note"><b>Come si aggiorna.</b> A ogni aggiornamento si aggiungono il nuovo punto-dati alla serie e gli eventi del periodo — comprese le mosse di FdI da tracciare — così lo strumento misura nel tempo se e come le azioni incidono sui consensi.</div>
+
+  <div class="foot">
+    Eventi verificati su fonti giornalistiche (YouTrend, Sky TG24, Il Fatto, Today, Il Tempo, Il Foglio, Fanpage, Ansa). Serie ricostruita dalle medie ponderate dei principali istituti: i valori sono approssimazioni della media di periodo, non singole rilevazioni. L'associazione evento -> movimento e' <b>suggerita, non dimostrata</b>: i sondaggi hanno margine d'errore e le cause sono molteplici e interagenti. Documento a uso analitico, aggiornato al 31 maggio 2026.
+  </div>
+</div>
+
+<script>
+(function(){
+  var SERIES=[
+    {d:"2026-01-20",FdI:29.7,PD:21.2,M5S:11.6,Lega:8.4,FN:3.0},
+    {d:"2026-02-01",FdI:29.6,PD:21.3,M5S:11.8,Lega:8.2,FN:3.2},
+    {d:"2026-02-15",FdI:29.4,PD:21.4,M5S:12.0,Lega:7.9,FN:3.5},
+    {d:"2026-03-15",FdI:29.4,PD:21.6,M5S:12.1,Lega:7.6,FN:3.4},
+    {d:"2026-03-25",FdI:29.2,PD:21.7,M5S:12.2,Lega:7.5,FN:3.4},
+    {d:"2026-04-05",FdI:29.0,PD:21.6,M5S:12.3,Lega:7.3,FN:3.5},
+    {d:"2026-04-20",FdI:29.0,PD:21.7,M5S:12.4,Lega:7.1,FN:3.5},
+    {d:"2026-05-04",FdI:28.8,PD:21.8,M5S:12.4,Lega:6.6,FN:3.6},
+    {d:"2026-05-18",FdI:28.5,PD:22.2,M5S:12.5,Lega:6.3,FN:3.8},
+    {d:"2026-05-25",FdI:28.2,PD:22.4,M5S:12.7,Lega:6.1,FN:4.1},
+    {d:"2026-05-31",FdI:28.2,PD:22.0,M5S:12.8,Lega:6.8,FN:3.8}
+  ];
+  var EVENTS=[
+    {d:"2026-01-24",cat:"gov",label:"Vannacci registra il simbolo Futuro Nazionale"},
+    {d:"2026-02-03",cat:"gov",label:"Vannacci lascia la Lega e fonda FN"},
+    {d:"2026-03-23",cat:"ext",label:"Referendum giustizia: vince il No (sconfitta governo)"},
+    {d:"2026-03-28",cat:"opp",label:"Grillo riapre la causa sul simbolo M5S"},
+    {d:"2026-04-04",cat:"gov",label:"Dimissioni Delmastro/Bartolozzi; caso Santanche"},
+    {d:"2026-04-17",cat:"ext",label:"Tensioni con Trump (Sigonella); caro benzina"},
+    {d:"2026-05-25",cat:"ext",label:"Amministrative: cdx vince, flop M5S"},
+    {d:"2026-05-27",cat:"ext",label:"Testo base riforma elettorale (premio 42%)"},
+    {d:"2026-05-29",cat:"opp",label:"Schlein presidia l'energia (agenda E, Civitavecchia)"}
+  ];
+  var CATC={gov:"#1b3a6b",opp:"#b23636",ext:"#b07b00"};
+  var LINES=[{k:"FdI",c:"#1b3a6b"},{k:"PD",c:"#d64541"},{k:"M5S",c:"#e0a216"},{k:"Lega",c:"#5a8f2a"},{k:"FN",c:"#c8602f"}];
+  var W=940,H=360,padL=34,padR=22,padT=40,padB=46;
+  var t0=new Date("2026-01-15").getTime(),t1=new Date("2026-06-08").getTime();
+  function x(d){return padL+((new Date(d).getTime()-t0)/(t1-t0))*(W-padL-padR);}
+  function y(v){return padT+(1-v/32)*(H-padT-padB);}
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block;overflow:visible;">';
+  [0,10,20,30].forEach(function(g){svg+='<line x1="'+padL+'" y1="'+y(g)+'" x2="'+(W-padR)+'" y2="'+y(g)+'" stroke="#eee7d8"/>';svg+='<text x="'+(padL-5)+'" y="'+(y(g)+3)+'" text-anchor="end" font-size="10" fill="#9a9890">'+g+'</text>';});
+  [["2026-02-01","feb"],["2026-03-01","mar"],["2026-04-01","apr"],["2026-05-01","mag"],["2026-06-01","giu"]].forEach(function(m){svg+='<text x="'+x(m[0])+'" y="'+(H-26)+'" text-anchor="middle" font-size="10" fill="#9a9890">'+m[1]+'</text>';});
+  EVENTS.forEach(function(e,i){var col=CATC[e.cat];var yy=padT-22+((i%2)*12);
+    svg+='<line x1="'+x(e.d)+'" y1="'+padT+'" x2="'+x(e.d)+'" y2="'+(H-padB)+'" stroke="'+col+'" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>';
+    svg+='<circle cx="'+x(e.d)+'" cy="'+yy+'" r="5.5" fill="'+col+'" stroke="#fff" stroke-width="2" style="cursor:pointer;"><title>'+e.d.slice(5)+' - '+e.label+'</title></circle>';
+  });
+  LINES.forEach(function(L){var pts=SERIES.map(function(s){return [x(s.d),y(s[L.k])];});var dd="M"+pts[0][0]+" "+pts[0][1];for(var i=1;i<pts.length;i++)dd+=" L"+pts[i][0]+" "+pts[i][1];svg+='<path d="'+dd+'" fill="none" stroke="'+L.c+'" stroke-width="2.2"/>';pts.forEach(function(p,i){svg+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="2.6" fill="'+L.c+'"><title>'+SERIES[i].d.slice(5)+' - '+L.k+' '+SERIES[i][L.k]+'%</title></circle>';});var last=pts[pts.length-1];svg+='<text x="'+(last[0]+4)+'" y="'+(last[1]+3)+'" font-size="10" font-weight="600" fill="'+L.c+'">'+L.k+'</text>';});
+  svg+='</svg>';
+  document.getElementById("chart").innerHTML=svg;
+})();
+</script>
+</body>
+</html>

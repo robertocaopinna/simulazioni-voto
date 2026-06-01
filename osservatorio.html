@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio intenzioni di voto · Italia</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;}
+.wrap{max-width:920px;margin:0 auto;padding:26px 20px 40px;}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:24px;font-weight:700;margin:0;letter-spacing:-.01em;}
+.head{border-bottom:2px solid var(--navy);padding-bottom:13px;margin-bottom:20px;}
+.sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.sect{font-family:Georgia,serif;font-size:16px;font-weight:700;margin:18px 0 11px;}
+.sect span{font-weight:400;color:var(--muted);font-size:12px;}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+button{font-family:inherit;font-size:12.5px;padding:7px 13px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;}
+button.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+button.chip{font-weight:500;padding:5px 10px;border-radius:7px;}
+select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:4px 6px;background:#fff;color:var(--ink);font-size:12px;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--navy);cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--navy);cursor:pointer;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{color:var(--muted);font-weight:600;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+sup{font-size:.7em;}
+.lab{font-size:12px;color:var(--muted);}
+
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e7e3d8;margin:-26px -20px 18px;}
+.nav-in{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:15px;margin-right:auto;padding:13px 0;color:#1b3a6b;}
+.nav a{font-size:13px;padding:13px 12px;color:#6b6960;text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:#2a2924;}
+.nav a.active{color:#1b3a6b;border-bottom-color:#1b3a6b;font-weight:600;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend &amp; Driver</a>
+  <a href="storico.html">Storico &amp; Eventi</a>
+  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
+  <a href="simulatore.html">Simulatore mosse</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html" class="active">Osservatorio</a>
+  <a href="confronto.html">Confronto leggi</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+<div class="wrap">
+<h2 class="sr">Osservatorio interattivo: aggregazione sondaggi, sistema misto Rosatellum e Monte Carlo correlato.</h2>
+<div class="head"><h1>Osservatorio intenzioni di voto · Italia</h1><div class="sub">Media ponderata multi-istituto · sistema misto Rosatellum (253 prop. + 147 unin.) · Monte Carlo correlato · dati al <span id="refd"></span></div></div>
+
+<div class="row" style="margin-bottom:8px;">
+  <span class="lab">Peso recency (emivita): <b id="hlOut">14</b> giorni</span>
+  <input type="range" id="hl" min="3" max="45" step="1" value="14" style="flex:1;min-width:160px;">
+</div>
+
+<div class="sect">Aggregato corrente <span>(Δ vs 30 giorni prima)</span></div>
+<div id="aggCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:9px;"></div>
+
+<div class="sect">Andamento nel tempo <span>(primi 6 partiti)</span></div>
+<div class="card" style="padding:12px;margin-bottom:8px;"><div id="trend"></div></div>
+<div id="trendLeg" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;"></div>
+
+<div class="sect">Simulatore seggi — sistema misto <span>(soglia 3% · indicativo)</span></div>
+<div class="row" style="margin-bottom:12px;">
+  <button id="realign">↺ Riallinea all'aggregato</button>
+  <span class="lab" style="margin-left:auto;">Spinta maggioritaria (uninominale): <b id="expOut">3.0</b></span>
+  <input type="range" id="exp" min="1" max="3.5" step="0.1" value="3" style="width:120px;">
+</div>
+<div class="lab" style="margin-bottom:4px;">Quota proporzionale — 253 seggi (per partito)</div>
+<div id="propBar" style="display:flex;width:100%;height:28px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:10px;"></div>
+<div class="lab" style="margin-bottom:4px;">Quota uninominale — 147 seggi (per coalizione)</div>
+<div id="uniBar" style="display:flex;width:100%;height:28px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:14px;"></div>
+<div id="coalCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;margin-bottom:8px;"></div>
+<div style="position:relative;height:16px;margin-bottom:18px;"><div style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;"><span style="font-size:10.5px;color:var(--muted);">soglia maggioranza assoluta: 201 seggi su 400</span></div></div>
+<div class="row" style="margin-bottom:6px;"><span class="lab" style="margin-left:auto;">Totale liste: <b id="totOut">—</b></span></div>
+<div id="sliders" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:7px 22px;"></div>
+
+<div class="sect">Probabilità di maggioranza <span>(Monte Carlo correlato)</span></div>
+<div class="row" style="margin-bottom:10px;">
+  <button id="runMC" class="primary">▶ Esegui simulazione</button>
+  <span id="staleMsg" style="font-size:11.5px;color:var(--amber);display:none;">parametri cambiati — riesegui</span>
+</div>
+<div class="row" style="margin-bottom:10px;font-size:12px;">
+  <span class="lab">Incertezza ±<b id="sigOut">2.4</b></span><input type="range" id="sig" min="0.5" max="3" step="0.1" value="1.2" style="width:84px;">
+  <span class="lab">Correlazione flussi <b id="rhoOut">0.6</b></span><input type="range" id="rho" min="0" max="0.9" step="0.05" value="0.6" style="width:84px;">
+  <select id="nsim" style="margin-left:auto;"><option value="2000">2.000</option><option value="10000" selected>10.000</option><option value="50000">50.000</option></select>
+</div>
+<div class="row" style="margin-bottom:14px;">
+  <span class="lab">Scenari coalizione:</span><span id="scenChips" style="display:flex;flex-wrap:wrap;gap:6px;"></span>
+</div>
+<div id="mcCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px;"></div>
+<div id="hung" style="font-size:12.5px;color:var(--muted);margin-bottom:8px;padding:9px 13px;border-radius:8px;background:var(--soft);"></div>
+
+<div class="sect">Aggiorna i sondaggi <span>(salvati nel tuo browser)</span></div>
+<div class="card" style="padding:14px;margin-bottom:14px;">
+  <div class="row" style="gap:8px;margin-bottom:10px;">
+    <input id="f_inst" placeholder="Istituto" style="font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:6px 8px;font-size:12.5px;flex:1;min-width:120px;">
+    <input id="f_date" type="date" style="font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:5px 8px;font-size:12.5px;">
+    <span class="lab">Affidab.</span><input id="f_rel" type="number" min="50" max="85" value="68" style="font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:6px 6px;font-size:12.5px;width:60px;">
+  </div>
+  <div id="f_vals" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(82px,1fr));gap:6px;margin-bottom:10px;"></div>
+  <div class="row" style="gap:8px;">
+    <button id="f_add" class="primary">+ Aggiungi sondaggio</button>
+    <button id="f_reset">↺ Ripristina dataset curato</button>
+    <span id="f_msg" class="lab" style="margin-left:auto;"></span>
+  </div>
+</div>
+<div class="sect">Fonti nel dataset <span>(<span id="nPolls"></span> rilevazioni)</span></div>
+<div style="overflow-x:auto;margin-bottom:10px;"><table id="ptab"></table></div>
+
+<div style="font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px;">
+<b>Metodo.</b> Aggregato: peso = (affidabilità/100) × 0,5<sup>(giorni/emivita)</sup>. <b>Sistema misto Rosatellum:</b> 253 seggi proporzionali (riparto per partito tra le liste sopra il 3%, quota Hare; include per semplicità gli 8 seggi estero) + 147 seggi uninominali assegnati per coalizione con regola di amplificazione tipo «cubo» (seggi ∝ voti<sup>esponente</sup>; esponente 1 = proporzionale, ~3 = forte effetto maggioritario). Resta un modello indicativo: senza dati di collegio l'uninominale è stimato a livello nazionale. <b>Monte Carlo:</b> ogni quota è perturbata con un fattore comune di coalizione (correlazione: 0 = errori indipendenti, valori alti = flussi che si muovono insieme tra loro e in opposizione tra i blocchi) più rumore idiosincratico di partito; si contano gli scenari in cui una coalizione raggiunge 201 seggi. Dataset curato da rilevazioni pubblicate mar–mag 2026 (SWG, Ipsos, Eumetra, Tecnè, Termometro Politico).
+</div>
+</div>
+
+<script>
+(function(){
+  var PARTIES=[
+    {k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b"},{k:"PD",n:"Partito Democratico",c:"#d64541"},
+    {k:"M5S",n:"Movimento 5 Stelle",c:"#e0a216"},{k:"FI",n:"Forza Italia",c:"#3a8dde"},
+    {k:"Lega",n:"Lega",c:"#5a8f2a"},{k:"AVS",n:"Alleanza Verdi e Sinistra",c:"#1f9e74"},
+    {k:"FN",n:"Futuro Nazionale (Vannacci)",c:"#c8602f"},{k:"Az",n:"Azione (Calenda)",c:"#7a6fd0"},
+    {k:"IV",n:"Italia Viva",c:"#cf5380"},{k:"PiuE",n:"Più Europa",c:"#8a8a82"},{k:"NM",n:"Noi Moderati",c:"#a9a79e"}
+  ];
+  var PMAP={};PARTIES.forEach(function(p){PMAP[p.k]=p;});
+  var TOP6=["FdI","PD","M5S","FI","Lega","AVS"];
+  var DEF={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"clx",M5S:"clx",AVS:"clx",IV:"clx",PiuE:"clx",FN:"alt",Az:"alt"};
+  var CM={cdx:{name:"Centrodestra (governo)",c:"#1b3a6b"},clx:{name:"Campo largo (opp.)",c:"#a32d2d"},alt:{name:"Altri / non coalizzati",c:"#5f5e5a"}};
+  function cp(o){var r={};for(var k in o)r[k]=o[k];return r;}
+  function upd(o,d){var r=cp(o);for(var k in d)r[k]=d[k];return r;}
+  var SCEN=[{name:"Assetto attuale",map:cp(DEF)},{name:"Azione → campo largo",map:upd(DEF,{Az:"clx"})},{name:"Vannacci (FN) → cdx",map:upd(DEF,{FN:"cdx"})},{name:"FN→cdx / Az→sx",map:upd(DEF,{FN:"cdx",Az:"clx"})}];
+  var SEED=[
+    {inst:"SWG",date:"2026-03-23",rel:75,v:{FdI:29.4,PD:21.8,M5S:12.0,FN:3.4,Az:3.3,IV:2.4,PiuE:1.5,NM:1.0}},
+    {inst:"SWG",date:"2026-04-20",rel:75,v:{FdI:29.3,PD:21.6,M5S:12.4,FI:7.8,Lega:6.5,AVS:6.7,FN:3.4,Az:3.3,IV:2.4,PiuE:1.5,NM:1.1}},
+    {inst:"Ipsos",date:"2026-04-22",rel:72,v:{FdI:26.2,Lega:5.8}},
+    {inst:"SWG",date:"2026-05-04",rel:75,v:{FdI:28.8,PD:21.8,M5S:12.4,FI:7.5,Lega:6.1,AVS:6.9,FN:3.6,Az:3.5,IV:2.5,PiuE:1.6}},
+    {inst:"Eumetra",date:"2026-05-06",rel:70,v:{FdI:28.2,PD:22.2,M5S:12.5,FI:8.3,Lega:6.8,AVS:6.7,FN:3.6,Az:3.1,IV:2.5}},
+    {inst:"Term.Pol.",date:"2026-05-21",rel:65,v:{FdI:28.1,PD:22.2,M5S:12.5,FI:7.8,Lega:6.8,AVS:6.2,FN:4.1,Az:3.1}},
+    {inst:"Tecnè",date:"2026-05-22",rel:69,v:{FdI:29.2,PD:22.0,M5S:12.7,FI:8.8,Lega:6.9,AVS:6.2,FN:3.3,Az:2.9,IV:2.5,PiuE:1.5,NM:1.0}},
+    {inst:"SWG",date:"2026-05-25",rel:75,v:{FdI:28.1,PD:22.5,M5S:12.7,FI:7.4,Lega:6.0,AVS:6.6,FN:4.3,Az:3.5,IV:2.5,PiuE:1.4,NM:1.3}},
+    {inst:"Ipsos",date:"2026-05-28",rel:72,v:{FdI:28.4,PD:21.3}},
+    {inst:"Only Numbers",date:"2026-05-28",rel:67,v:{FdI:28.7,PD:22.8,FI:8.7,Lega:7.6,FN:4.2,NM:1.0}}
+  ];
+  function loadSaved(){try{var raw=localStorage.getItem("osv_polls_v2");if(raw){var a=JSON.parse(raw);if(Array.isArray(a)&&a.length)return a;}}catch(e){}return SEED.map(function(p){return {inst:p.inst,date:p.date,rel:p.rel,v:p.v,src:"seed"};});}
+  function savePolls(){try{localStorage.setItem("osv_polls_v2",JSON.stringify(POLLS));}catch(e){}}
+  var POLLS=loadSaved();
+  var PROP=253,UNI=147,SEATS=400,MAJ=201,THRESH=3.0;
+  function days(a,b){return (new Date(b)-new Date(a))/86400000;}
+  function aggregate(polls,ref,hl){var acc={},ws={};PARTIES.forEach(function(p){acc[p.k]=0;ws[p.k]=0;});polls.forEach(function(poll){var age=Math.max(0,days(poll.date,ref));var w=(poll.rel/100)*Math.pow(0.5,age/hl);PARTIES.forEach(function(p){var val=poll.v[p.k];if(typeof val==="number"){acc[p.k]+=val*w;ws[p.k]+=w;}});});var out={};PARTIES.forEach(function(p){out[p.k]=ws[p.k]>0?acc[p.k]/ws[p.k]:0;});return out;}
+  function allocProp(vals){var qual=PARTIES.filter(function(p){return (vals[p.k]||0)>=THRESH;});var tq=qual.reduce(function(s,p){return s+vals[p.k];},0);var seats={};PARTIES.forEach(function(p){seats[p.k]=0;});if(tq<=0)return seats;var rem=[],used=0;qual.forEach(function(p){var ex=vals[p.k]/tq*PROP;seats[p.k]=Math.floor(ex);used+=seats[p.k];rem.push({k:p.k,f:ex-seats[p.k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<PROP&&rem.length){seats[rem[i%rem.length].k]++;used++;i++;}return seats;}
+  function allocUni(cs,exp){var ks=["cdx","clx","alt"],w={},tw=0;ks.forEach(function(c){w[c]=Math.pow(Math.max(0,cs[c]),exp);tw+=w[c];});var seats={cdx:0,clx:0,alt:0};if(tw<=0)return seats;var rem=[],used=0;ks.forEach(function(c){var ex=w[c]/tw*UNI;seats[c]=Math.floor(ex);used+=seats[c];rem.push({c:c,f:ex-seats[c]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<UNI){seats[rem[i%3].c]++;used++;i++;}return seats;}
+  function coalTotals(vals,coal,exp){var ps=allocProp(vals);var cv={cdx:0,clx:0,alt:0},cpr={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cv[coal[p.k]]+=vals[p.k]||0;cpr[coal[p.k]]+=ps[p.k]||0;});var us=allocUni(cv,exp);var t={};["cdx","clx","alt"].forEach(function(c){t[c]={prop:cpr[c],uni:us[c],seats:cpr[c]+us[c],votes:cv[c]};});return {t:t,ps:ps,us:us};}
+  function gauss(){var u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  function runMC(vals,coal,sigma,rho,exp,N){var sc=sigma*Math.sqrt(rho),si=sigma*Math.sqrt(1-rho);var arr={cdx:[],clx:[],alt:[]},maj={cdx:0,clx:0,alt:0},hung=0;
+    for(var r=0;r<N;r++){var cz={cdx:gauss(),clx:gauss(),alt:gauss()};var m=(cz.cdx+cz.clx+cz.alt)/3;cz.cdx-=m;cz.clx-=m;cz.alt-=m;
+      var pert={};PARTIES.forEach(function(p){pert[p.k]=Math.max(0,(vals[p.k]||0)+sc*cz[coal[p.k]]+si*gauss());});
+      var ct=coalTotals(pert,coal,exp).t;var any=false;["cdx","clx","alt"].forEach(function(c){arr[c].push(ct[c].seats);if(ct[c].seats>=MAJ){maj[c]++;any=true;}});if(!any)hung++;}
+    var pc=function(a,q){a=a.slice().sort(function(x,y){return x-y;});return a[Math.round(q/100*(a.length-1))];};
+    var stats={};["cdx","clx","alt"].forEach(function(c){stats[c]={pMaj:maj[c]/N,p5:pc(arr[c],5),p50:pc(arr[c],50),p95:pc(arr[c],95)};});
+    return {N:N,stats:stats,hung:hung/N};}
+
+  function computeRef(){var l="2000-01-01";POLLS.forEach(function(p){if(p.date>l)l=p.date;});var t=new Date().toISOString().slice(0,10);return t>l?t:l;}
+  var REF=computeRef();
+  var state={hl:14,sigma:1.2,rho:0.6,exp:3,nsim:10000,coal:cp(DEF),seatVals:null,sim:null};
+  function $(id){return document.getElementById(id);}
+  $("refd").textContent=REF;$("nPolls").textContent=POLLS.length;
+
+  function buildTrend(){var W=620,H=190,padL=30,padB=22,padT=8,padR=8;var dates=POLLS.map(function(p){return p.date;}).sort();var x=function(d){return padL+(dates.indexOf(d)/(dates.length-1))*(W-padL-padR);};var ymax=32,y=function(v){return padT+(1-v/ymax)*(H-padT-padB);};var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block;">';[0,10,20,30].forEach(function(g){svg+='<line x1="'+padL+'" y1="'+y(g)+'" x2="'+(W-padR)+'" y2="'+y(g)+'" stroke="#e7e3d8"/>';svg+='<text x="'+(padL-5)+'" y="'+(y(g)+3)+'" text-anchor="end" font-size="10" fill="#9a9890">'+g+'</text>';});dates.forEach(function(d){svg+='<text x="'+x(d)+'" y="'+(H-6)+'" text-anchor="middle" font-size="9.5" fill="#9a9890">'+d.slice(5)+'</text>';});TOP6.forEach(function(k){var pts=[];POLLS.slice().sort(function(a,b){return a.date.localeCompare(b.date);}).forEach(function(p){if(typeof p.v[k]==="number")pts.push([x(p.date),y(p.v[k])]);});if(pts.length>1){var d="M"+pts[0][0]+" "+pts[0][1];for(var i=1;i<pts.length;i++)d+=" L"+pts[i][0]+" "+pts[i][1];svg+='<path d="'+d+'" fill="none" stroke="'+PMAP[k].c+'" stroke-width="2"/>';}pts.forEach(function(pt){svg+='<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="2.4" fill="'+PMAP[k].c+'"/>';});});svg+='</svg>';$("trend").innerHTML=svg;$("trendLeg").innerHTML=TOP6.map(function(k){return '<span style="font-size:11px;color:#6b6960;display:inline-flex;align-items:center;gap:4px;"><span style="width:12px;height:3px;background:'+PMAP[k].c+';border-radius:2px;"></span>'+k+'</span>';}).join('');}
+
+  function buildTable(){var h='<thead><tr style="text-align:right;"><th style="text-align:left;padding:6px 8px;">Istituto</th><th style="text-align:left;padding:6px 8px;">Data</th>';PARTIES.forEach(function(p){h+='<th style="padding:6px 5px;">'+p.k+'</th>';});h+='<th style="padding:6px 8px;">Aff.</th></tr></thead><tbody>';POLLS.slice().sort(function(a,b){return b.date.localeCompare(a.date);}).forEach(function(poll){var badge=poll.src&&poll.src!=="seed"?' <span style="font-size:9px;color:#b07b00;background:#fbf0d6;padding:1px 5px;border-radius:4px;">agg.</span>':"";h+='<tr style="border-top:1px solid #eee7d8;"><td style="padding:6px 8px;white-space:nowrap;">'+poll.inst+badge+'</td><td style="padding:6px 8px;color:#6b6960;white-space:nowrap;">'+poll.date+'</td>';PARTIES.forEach(function(p){var val=poll.v[p.k];h+='<td style="padding:6px 5px;text-align:right;color:'+(typeof val==="number"?"#2a2924":"#cfcabb")+';">'+(typeof val==="number"?val.toFixed(1):"–")+'</td>';});h+='<td style="padding:6px 8px;text-align:right;color:#6b6960;">'+poll.rel+'</td></tr>';});h+='</tbody>';$("ptab").innerHTML=h;}
+
+  function buildSliders(){var html='';PARTIES.forEach(function(p,i){html+='<div style="display:flex;align-items:center;gap:9px;"><span style="width:9px;height:9px;border-radius:2px;background:'+p.c+';flex:none;"></span><span style="width:36px;flex:none;font-size:12.5px;font-weight:600;">'+p.k+'</span><input type="range" min="0" max="40" step="0.1" id="sl'+i+'" style="flex:1;"><span id="ov'+i+'" style="width:42px;flex:none;text-align:right;font-size:12.5px;font-weight:600;"></span><select id="cs'+i+'"><option value="cdx">Cdx</option><option value="clx">Clx</option><option value="alt">Altri</option></select></div>';});$("sliders").innerHTML=html;PARTIES.forEach(function(p,i){$("sl"+i).addEventListener("input",function(){state.seatVals[p.k]=parseFloat(this.value);markStale();renderComputed();});$("cs"+i).addEventListener("change",function(){state.coal[p.k]=this.value;renderComputed();doRun();});});}
+  function buildScen(){$("scenChips").innerHTML=SCEN.map(function(sc,i){return '<button class="chip" data-s="'+i+'">'+sc.name+'</button>';}).join('');Array.prototype.forEach.call($("scenChips").querySelectorAll("button"),function(b){b.addEventListener("click",function(){state.coal=cp(SCEN[+b.getAttribute("data-s")].map);syncSelects();renderComputed();doRun();});});}
+  function syncSelects(){PARTIES.forEach(function(p,i){$("cs"+i).value=state.coal[p.k];});}
+  function markStale(){if(state.sim){$("staleMsg").style.display="inline";}}
+  function rangeBar(p5,p50,p95,color){var pct=function(v){return Math.max(0,Math.min(100,v/SEATS*100));};return '<div style="position:relative;height:18px;background:#ece7da;border-radius:5px;margin:8px 0 6px;"><div style="position:absolute;left:'+pct(p5)+'%;width:'+(pct(p95)-pct(p5))+'%;top:3px;bottom:3px;background:'+color+';opacity:0.32;border-radius:4px;"></div><div style="position:absolute;left:'+pct(p50)+'%;top:1px;bottom:1px;width:2px;background:'+color+';transform:translateX(-1px);"></div><div style="position:absolute;left:'+pct(MAJ)+'%;top:-2px;bottom:-2px;width:1px;background:#d64541;"></div></div>';}
+
+  function renderComputed(){var agg=aggregate(POLLS,REF,state.hl);var prevDate=new Date(new Date(REF)-30*86400000).toISOString().slice(0,10);var subset=POLLS.filter(function(p){return p.date<=prevDate;});var aggPrev=aggregate(subset.length?subset:POLLS,prevDate,state.hl);if(!state.seatVals)state.seatVals=cp(agg);var sv=state.seatVals;
+    $("aggCards").innerHTML=PARTIES.map(function(p){var d=agg[p.k]-aggPrev[p.k],da=Math.abs(d);var dl=da<0.05?'<span style="color:#9a9890;font-size:12px;">±0.0</span>':'<span style="color:'+(d>0?"#1f7a4d":"#b23636")+';font-size:12px;font-weight:600;">'+(d>0?"▲":"▼")+' '+da.toFixed(1)+'</span>';return '<div class="card" style="padding:10px 12px;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="width:9px;height:9px;border-radius:2px;background:'+p.c+';"></span><span style="font-size:11.5px;color:#6b6960;font-weight:600;">'+p.k+'</span></div><div style="font-size:21px;font-weight:700;font-family:Georgia,serif;">'+agg[p.k].toFixed(1)+'<span style="font-size:11px;color:#6b6960;">%</span></div><div style="margin-top:2px;">'+dl+'</div></div>';}).join('');
+    var R=coalTotals(sv,state.coal,state.exp);var ps=R.ps,us=R.us,t=R.t;
+    var tot=PARTIES.reduce(function(s,p){return s+(sv[p.k]||0);},0);$("totOut").textContent=tot.toFixed(1)+"%";$("totOut").style.color=Math.abs(tot-100)>2?"#b23636":"#2a2924";
+    var ord=PARTIES.slice().sort(function(a,b){var oc={cdx:0,alt:1,clx:2};return (oc[state.coal[a.k]]-oc[state.coal[b.k]])||((sv[b.k]||0)-(sv[a.k]||0));});
+    $("propBar").innerHTML=ord.map(function(p){var s=ps[p.k]||0;if(s<=0)return"";return '<div title="'+p.k+': '+s+' seggi prop." style="flex:'+s+' 0 0;background:'+p.c+';display:flex;align-items:center;justify-content:center;min-width:0;">'+(s>=11?'<span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+p.k+' '+s+'</span>':'')+'</div>';}).join('');
+    $("uniBar").innerHTML=["cdx","clx","alt"].map(function(c){var s=us[c]||0;if(s<=0)return"";return '<div title="'+CM[c].name+': '+s+' uninominali" style="flex:'+s+' 0 0;background:'+CM[c].c+';display:flex;align-items:center;justify-content:center;min-width:0;">'+(s>=10?'<span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+s+'</span>':'')+'</div>';}).join('');
+    $("coalCards").innerHTML=["cdx","clx","alt"].map(function(c){var maj=t[c].seats>=MAJ;return '<div class="card" style="padding:12px 14px;border:'+(maj?"2px solid #1b3a6b":"1px solid #e7e3d8")+';"><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><span style="width:9px;height:9px;border-radius:2px;background:'+CM[c].c+';"></span><span style="font-size:12px;color:#6b6960;">'+CM[c].name+'</span></div><div style="font-size:24px;font-weight:700;font-family:Georgia,serif;">'+t[c].seats+'<span style="font-size:12px;color:#6b6960;font-weight:400;"> seggi</span></div><div style="font-size:11.5px;color:#9a9890;margin-top:2px;">'+t[c].prop+' prop. + '+t[c].uni+' unin. · '+t[c].votes.toFixed(1)+'%'+(maj?' · <span style="color:#1b3a6b;font-weight:700;">maggioranza</span>':'')+'</div></div>';}).join('');
+    PARTIES.forEach(function(p,i){var el=$("sl"+i);if(el){el.value=sv[p.k]||0;$("ov"+i).textContent=(sv[p.k]||0).toFixed(1)+"%";}});renderMC();}
+
+  function renderMC(){if(!state.sim){$("mcCards").innerHTML='<div style="font-size:12px;color:#6b6960;">Premi «Esegui simulazione» per stimare le probabilità.</div>';$("hung").textContent="";return;}var s=state.sim;
+    $("mcCards").innerHTML=["cdx","clx","alt"].map(function(c){var st=s.stats[c];return '<div class="card" style="padding:12px 14px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span style="width:9px;height:9px;border-radius:2px;background:'+CM[c].c+';"></span><span style="font-size:12px;color:#6b6960;">'+CM[c].name+'</span></div><div style="font-size:25px;font-weight:700;font-family:Georgia,serif;color:'+CM[c].c+';">'+(st.pMaj*100).toFixed(1)+'<span style="font-size:13px;">%</span></div><div style="font-size:11.5px;color:#6b6960;">probabilità di maggioranza</div>'+rangeBar(st.p5,st.p50,st.p95,CM[c].c)+'<div style="font-size:11px;color:#6b6960;">seggi: <b style="color:#2a2924;">'+st.p5+'–'+st.p95+'</b> · mediana '+st.p50+'</div></div>';}).join('');
+    $("hung").innerHTML='Parlamento senza maggioranza (governo da negoziare): <b style="color:#2a2924;">'+(s.hung*100).toFixed(1)+'%</b> degli scenari · base '+s.N.toLocaleString("it")+' simulazioni';}
+
+  function doRun(){$("runMC").textContent="Calcolo…";setTimeout(function(){state.sim=runMC(state.seatVals,state.coal,state.sigma,state.rho,state.exp,state.nsim);$("staleMsg").style.display="none";$("runMC").textContent="▶ Esegui simulazione";renderMC();},20);}
+
+  $("hl").addEventListener("input",function(){state.hl=+this.value;$("hlOut").textContent=this.value;renderComputed();});
+  $("exp").addEventListener("input",function(){state.exp=+this.value;$("expOut").textContent=(+this.value).toFixed(1);renderComputed();markStale();});
+  $("sig").addEventListener("input",function(){state.sigma=+this.value;$("sigOut").textContent=(this.value*1.96).toFixed(1);markStale();});
+  $("rho").addEventListener("input",function(){state.rho=+this.value;$("rhoOut").textContent=(+this.value).toFixed(2);markStale();});
+  $("nsim").addEventListener("change",function(){state.nsim=+this.value;markStale();});
+  $("realign").addEventListener("click",function(){state.seatVals=cp(aggregate(POLLS,REF,state.hl));markStale();renderComputed();});
+  $("runMC").addEventListener("click",doRun);
+  $("f_add").addEventListener("click",addPoll);
+  $("f_reset").addEventListener("click",resetData);
+
+
+  function buildAddForm(){var h="";PARTIES.forEach(function(p){h+='<div style="display:flex;align-items:center;gap:4px;"><span style="font-size:11px;color:#6b6960;width:34px;">'+p.k+'</span><input id="fv_'+p.k+'" type="number" min="0" max="50" step="0.1" placeholder="–" style="font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:4px 5px;font-size:12px;width:100%;"></div>';});$("f_vals").innerHTML=h;}
+  function refreshAll(){REF=computeRef();buildTrend();buildTable();$("nPolls").textContent=POLLS.length;renderComputed();doRun();}
+  function addPoll(){var inst=$("f_inst").value.trim()||"Manuale";var date=$("f_date").value;if(!date){$("f_msg").textContent="Inserisci la data.";$("f_msg").style.color="#b23636";return;}var rel=Math.max(40,Math.min(90,parseInt($("f_rel").value)||68));var v={},any=false;PARTIES.forEach(function(p){var raw=$("fv_"+p.k).value;if(raw!==""&&!isNaN(parseFloat(raw))){v[p.k]=parseFloat(raw);any=true;}});if(!any){$("f_msg").textContent="Inserisci almeno una percentuale.";$("f_msg").style.color="#b23636";return;}POLLS.push({inst:inst,date:date,rel:rel,v:v,src:"manuale"});savePolls();PARTIES.forEach(function(p){$("fv_"+p.k).value="";});$("f_inst").value="";$("f_msg").textContent="Aggiunto: "+inst+" ("+date+"). Salvato.";$("f_msg").style.color="#1f7a4d";refreshAll();}
+  function resetData(){POLLS=SEED.map(function(p){return {inst:p.inst,date:p.date,rel:p.rel,v:p.v,src:"seed"};});savePolls();state.seatVals=cp(aggregate(POLLS,computeRef(),state.hl));$("f_msg").textContent="Dataset riportato alla base curata.";$("f_msg").style.color="#6b6960";refreshAll();}
+  buildAddForm();
+  buildTrend();buildTable();buildSliders();buildScen();state.seatVals=cp(aggregate(POLLS,REF,state.hl));syncSelects();renderComputed();
+  state.sim=runMC(state.seatVals,state.coal,state.sigma,state.rho,state.exp,state.nsim);renderMC();
+})();
+</script>
+</body>
+</html>
