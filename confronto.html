@@ -100,7 +100,7 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-ra
 <div class="row" id="scenChips" style="margin-bottom:20px;"></div>
 
 <div style="font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px;">
-<b>Blocchi.</b> Di default l'opposizione è rappresentata <b>divisa</b>, com'è oggi: Centrosinistra (PD, AVS, +Europa), Movimento 5 Stelle a sé, e Altri (Azione, Italia Viva, Vannacci) non coalizzati. Il «campo largo unito» non è un'alleanza formata: lo puoi costruire spostando i blocchi con le tendine, o con lo scenario apposito. <b>Rosatellum (in vigore):</b> 253 prop. (soglia 3%) + 147 uninominali per blocco, stimati a livello nazionale con la regola del cubo (esponente regolabile). <b>«Bignami bis»:</b> proporzionale + premio (base 70) al blocco arrivato primo, solo se ≥ soglia (base 42%) e primo in entrambe le Camere; altrimenti proporzionale puro. Tetto base 220. Tutti i parametri sono regolabili (testo in discussione, Aula 26 giugno). Modello nazionale indicativo su 400 seggi. Aggregato sondaggi al 31 maggio 2026 (media PolitPro 3/6; SWG 1/6, Ipsos 28/5).
+<b>Blocchi.</b> Di default l'opposizione è rappresentata <b>divisa</b>, com'è oggi: Centrosinistra (PD, AVS, +Europa), Movimento 5 Stelle a sé, e Altri (Azione, Italia Viva, Vannacci) non coalizzati. Il «campo largo unito» non è un'alleanza formata: lo puoi costruire spostando i blocchi con le tendine, o con lo scenario apposito. <b>Rosatellum (in vigore):</b> 253 prop. (soglia 3%) + 147 uninominali per blocco, stimati a livello nazionale con la regola del cubo (esponente regolabile). <b>«Bignami bis»:</b> proporzionale + premio (base 70) al blocco arrivato primo, solo se ≥ soglia (base 42%) e primo in entrambe le Camere; altrimenti proporzionale puro. Tetto base 220. Tutti i parametri sono regolabili (testo in discussione, Aula 26 giugno). Modello nazionale indicativo su 400 seggi. Aggregato sondaggi al 31 maggio 2026 (media PolitPro 15/6; Demopolis 10/6, EMG 9/6).
 </div>
 </div>
 
@@ -110,7 +110,7 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-ra
   var BLOCS=["cdx","csx","m5s","alt"];
   var BM={cdx:{name:"Centrodestra",c:"#1b3a6b"},csx:{name:"Centrosinistra",c:"#d64541"},m5s:{name:"M5S",c:"#e0a216"},alt:{name:"Altri / non coalizzati",c:"#5f5e5a"}};
   var DEF={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",AVS:"csx",PiuE:"csx",M5S:"m5s",Az:"alt",IV:"alt",FN:"alt"};
-  var AGG={FdI:28.2,PD:22.0,M5S:12.8,FI:8.1,Lega:6.8,AVS:6.4,FN:3.8,Az:3.2,IV:2.4,PiuE:1.6,NM:1.2};
+  var AGG={FdI:28.2,PD:21.9,M5S:12.8,FI:8.0,Lega:6.8,AVS:6.4,FN:4.1,Az:3.1,IV:2.4,PiuE:1.6,NM:1.2};
   function cp(o){var r={};for(var k in o)r[k]=o[k];return r;}
   function upd(o,d){var r=cp(o);for(var k in d)r[k]=d[k];return r;}
   var SCEN=[{name:"Opposizione divisa (attuale)",map:cp(DEF)},{name:"Campo largo unito (PD+M5S+Az+IV)",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx"})},{name:"Vannacci (FN) → cdx",map:upd(DEF,{FN:"cdx"})},{name:"Campo largo + FN→cdx",map:upd(DEF,{M5S:"csx",Az:"csx",IV:"csx",FN:"cdx"})}];

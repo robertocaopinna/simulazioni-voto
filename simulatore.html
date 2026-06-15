@@ -122,7 +122,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     {k:"AST",n:"Indecisi/Astenuti",c:"#9a9890",bloc:"ast"}
   ];
   var PMAP={};PARTIES.forEach(function(p){PMAP[p.k]=p;});
-  var BASE={FdI:28.2,FI:8.1,Lega:6.8,NM:1.2,FN:3.8,PD:22.0,AVS:6.4,PiuE:1.6,M5S:12.8,Az:3.2,IV:2.4,AST:3.5};
+  var BASE={FdI:28.2,FI:8.0,Lega:6.8,NM:1.2,FN:4.1,PD:21.9,AVS:6.4,PiuE:1.6,M5S:12.8,Az:3.1,IV:2.4,AST:3.6};
   // AST qui è solo la quota "altri/residuo" nel voto espresso; il vero bacino indecisi (39,8%) è fuori dal 100% dei votanti
   var BLOCS={cdx:{n:"Centrodestra",c:"#1b3a6b"},csx:{n:"Centrosinistra",c:"#d64541"},m5s:{n:"M5S",c:"#e0a216"},alt:{n:"Altri",c:"#5f5e5a"},ast:{n:"—",c:"#9a9890"}};
   var SEATS=400,MAJ=201,THRESH=3.0,PROP=253,UNI=147,PREMIO=70,CAP=220,SOGLIA=42.0;
@@ -255,7 +255,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     var magg=after.big.cdx>=MAJ;
     var conf=allMoves().filter(function(m){return m.on;}).every(function(m){return m.conf!=="lo";})&&anyOn?"media":"bassa";
     var t="";
-    t+="EXECUTIVE BRIEF — Simulazione strategica (dati 31/5/2026)\n";
+    t+="EXECUTIVE BRIEF — Simulazione strategica (dati 15/6/2026)\n";
     t+="=========================================\n\n";
     t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Bignami), sotto la soglia del 42%. Nessuna maggioranza.\n\n";
     if(!anyOn){t+="Nessuna mossa selezionata. Attiva una o più mosse per vedere l'effetto stimato.\n";}
