@@ -19,36 +19,38 @@ h1{font-family:Georgia,serif;font-size:25px;font-weight:700;margin:0 0 4px;}
 .lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
 .disc{font-size:12px;color:var(--amber);background:#fbf6ea;border:1px solid #f0e4c8;border-radius:8px;padding:9px 13px;margin:12px 0 18px;}
 h2{font-family:Georgia,serif;font-size:18px;font-weight:700;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
-.bar{display:flex;width:100%;height:30px;border-radius:7px;overflow:hidden;background:var(--soft);margin:6px 0;}
+.bar{display:flex;width:100%;height:32px;border-radius:7px;overflow:hidden;background:var(--soft);margin:6px 0;}
 .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11.5px;font-weight:600;min-width:0;}
 .banner{border-radius:10px;padding:13px 15px;margin-bottom:14px;font-size:13.5px;}
 .verdict{border-radius:10px;padding:15px 17px;margin:8px 0 20px;font-size:14px;}
 .blocgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:11px;}
-.bloccard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+.bloccard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;transition:border-color .15s,background .15s;}
+.bloccard.target{border-color:var(--navy);background:rgba(27,58,107,0.04);}
+.bloccard.droppable{border-style:dashed;cursor:pointer;}
 .bloccard h3{margin:0 0 3px;font-size:13.5px;display:flex;align-items:center;gap:7px;}
 .bloctot{margin-left:auto;font-family:Georgia,serif;font-size:17px;font-weight:700;}
 .blocpct{font-size:11px;color:var(--muted);margin-bottom:5px;}
 .grp{border-top:1px solid var(--soft);padding:6px 0;}
-.grp-head{display:flex;align-items:center;gap:7px;cursor:pointer;}
+.grp.leva{background:linear-gradient(90deg,rgba(176,123,0,0.07),transparent);border-left:3px solid var(--amber);padding-left:8px;margin:4px 0;border-radius:0 6px 6px 0;}
+.grp-head{display:flex;align-items:center;gap:7px;}
 .grp-name{font-size:12px;font-weight:600;}
+.leva-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:20px;background:#fbf0e2;color:#b07b00;text-transform:uppercase;letter-spacing:.03em;}
 .grp-seats{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;font-size:12.5px;}
-.expand{display:none;margin:7px 0 3px;padding:8px 10px;background:var(--soft);border-radius:8px;}
-.expand.open{display:block;}
-.expand .row{display:flex;align-items:center;gap:7px;font-size:11.5px;flex-wrap:wrap;}
-.expand input[type=range]{flex:1;min-width:80px;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
-.expand input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--navy);cursor:pointer;}
-.expand select{font-size:11px;border:1px solid #e0dccf;border-radius:6px;padding:2px 4px;background:#fff;}
-.caret{font-size:10px;color:var(--hint);display:inline-block;}
-.deftag{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:20px;background:#fbecec;color:#b23636;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 2px;}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:3px 8px;border-radius:20px;background:#fff;border:1px solid var(--line);cursor:grab;user-select:none;}
+.chip:hover{border-color:var(--navy);}
+.chip.sel{background:var(--navy);color:#fff;border-color:var(--navy);}
+.chip.ind{border-style:dashed;opacity:.85;}
+.chip .pd{width:7px;height:7px;border-radius:50%;flex:none;}
+.chip-num{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:3px 9px;background:var(--soft);}
+.coalsel{font-size:10.5px;border:1px solid #e0dccf;border-radius:6px;padding:2px 3px;background:#fff;}
+.dot{width:9px;height:9px;border-radius:2px;flex:none;}
+.small{font-size:11.5px;color:var(--muted);}
+.helprow{font-size:12px;color:var(--navy);background:rgba(27,58,107,0.05);border-radius:8px;padding:8px 12px;margin:8px 0;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:26px;}
+.chamber-tot{font-size:12px;color:var(--muted);font-weight:600;}
 button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
 button:hover{background:#f3f1ea;}
-.dot{width:9px;height:9px;border-radius:2px;flex:none;}
-select.coalsel{font-size:10.5px;border:1px solid #e0dccf;border-radius:6px;padding:2px 3px;background:#fff;}
-.small{font-size:11.5px;color:var(--muted);}
-.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:26px;}
-.deflist{font-size:11.5px;color:var(--muted);margin:6px 0;}
-.deflist b{color:var(--ink);}
-.chamber-tot{font-size:12px;color:var(--muted);font-weight:600;}
 </style>
 </head>
 <body>
@@ -67,29 +69,28 @@ select.coalsel{font-size:10.5px;border:1px solid #e0dccf;border-radius:6px;paddi
 
 <div class="wrap">
   <h1>Aula attuale · Camera e Senato</h1>
-  <div class="lede">Il Parlamento <b>reale di oggi</b>. Sposta interi gruppi o quote di parlamentari e vedi chi controlla ciascuna Camera — e se qualcuno governa entrambe.</div>
-  <div class="disc"><b>Dati reali, inizio giugno 2026.</b> Camera 400 deputati, Senato 205 (200 elettivi + 5 a vita), composizione ufficiale dei gruppi. Per governare serve la maggioranza in <b>entrambe</b> le Camere: è il "verdetto combinato" in fondo. In questa legislatura oltre 200 deputati e 140 senatori hanno già cambiato gruppo — i "cambi" che simuli qui sono fenomeni reali.</div>
+  <div class="lede">Il Parlamento <b>reale di oggi</b>. Per i gruppi piccoli puoi spostare i <b>singoli parlamentari per nome</b>; per i grandi, quote numeriche.</div>
+  <div class="disc"><b>Affidabilità dei nomi.</b> I nomi di <b>Futuro Nazionale</b> (8) sono verificati e aggiornati al 6 giugno 2026. I nomi degli altri piccoli gruppi (Azione, Italia Viva) sono <b>indicativi</b> (tratteggiati): le composizioni cambiano di continuo e gli elenchi pubblici non sono sempre aggiornati — vanno verificati. Dove non ho nomi certi compaiono segnaposto. I grandi gruppi restano in forma numerica. Senato: forma numerica (nomi non verificati). Per governare serve la maggioranza in entrambe le Camere: vedi il verdetto sotto.</div>
 
   <div class="verdict" id="verdict"></div>
+  <div class="helprow">Per spostare un parlamentare: <b>trascina</b> il suo nome su uno schieramento, oppure <b>clicca il nome</b> e poi clicca lo schieramento di destinazione.</div>
 
   <h2>Camera dei Deputati <span class="chamber-tot">· 400 seggi · maggioranza 201</span></h2>
   <div class="banner" id="banner_C"></div>
   <div class="bar" id="bar_C"></div>
   <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:var(--red);margin:0 auto;"></div><span style="font-size:9.5px;color:var(--red);">201</span></div></div>
-  <div id="def_C" class="deflist"></div>
   <div class="blocgrid" id="blocs_C"></div>
 
   <h2 style="margin-top:30px;">Senato della Repubblica <span class="chamber-tot">· 205 seggi · maggioranza 103</span></h2>
   <div class="banner" id="banner_S"></div>
   <div class="bar" id="bar_S"></div>
   <div style="position:relative;height:14px;margin-bottom:10px;"><div style="position:absolute;left:50.25%;transform:translateX(-50%);text-align:center;"><div style="width:1px;height:7px;background:var(--red);margin:0 auto;"></div><span style="font-size:9.5px;color:var(--red);">103</span></div></div>
-  <div id="def_S" class="deflist"></div>
   <div class="blocgrid" id="blocs_S"></div>
 
   <div style="margin-top:18px;"><button id="reset">↺ Composizione reale (entrambe)</button></div>
 
   <div class="foot">
-    <b>Fonti.</b> Composizione gruppi Camera e Senato, XIX legislatura, inizio giugno 2026 (camera.it, senato.it; aggregazione Wikipedia/OpenPolis). <b>Camera (400):</b> FdI 117, Lega 60, FI 54, NM-MAIE 8, PD 69, M5S 48, AVS 10, Azione 10, IV 7, Misto 17. <b>Senato (205):</b> FdI 63, Lega 29, FI 20, NM-Civici 8, PD 36, M5S 26, IV 8, Per le Autonomie 7, Misto 8. La maggioranza del Senato è calcolata su 205 membri (inclusi 5 senatori a vita). Le quote spostate sono numeri di parlamentari, non singole persone. Gli schieramenti di partenza riflettono l'allineamento attuale; sono modificabili.
+    <b>Fonti.</b> Composizione gruppi Camera e Senato, XIX legislatura, giugno 2026 (camera.it, senato.it; aggregazione Wikipedia/OpenPolis/Pagella Politica). Nomi di Futuro Nazionale verificati (Sole 24 Ore, Espresso, Libero, 6/6/2026): Bergamini, Bof, Furgiuele, Pierro, Pozzolo, Ravetto, Sasso, Ziello. Nomi di Azione e Italia Viva: indicativi, da verificare (composizioni soggette a frequenti cambi di gruppo). <b>Camera (400):</b> FdI 117, Lega 60, FI 54, NM-MAIE 8, PD 69, M5S 48, AVS 10, Azione 10, IV 7, Futuro Nazionale 8 (componente Misto), Misto-altri 9. <b>Senato (205):</b> FdI 63, Lega 29, FI 20, NM-Civici 8, PD 36, M5S 26, IV 8, Per le Autonomie 7, Misto 8.
   </div>
 </div>
 
@@ -97,45 +98,86 @@ select.coalsel{font-size:10.5px;border:1px solid #e0dccf;border-radius:6px;paddi
 (function(){
   var BLOCS=["cdx","csx","m5s","alt"];
   var BM={cdx:{n:"Maggioranza (cdx)",c:"#1b3a6b"},csx:{n:"Centrosinistra",c:"#d64541"},m5s:{n:"M5S",c:"#e0a216"},alt:{n:"Centro / Altri",c:"#5f5e5a"}};
-  var COL={FdI:"#1b3a6b",Lega:"#5a8f2a",FI:"#3a8dde",NM:"#a9a79e",PD:"#d64541",AVS:"#1f9e74",M5S:"#e0a216",Az:"#7a6fd0",IV:"#cf5380",Aut:"#7a9e6f",Misto:"#9a9890"};
-  var NAME={FdI:"Fratelli d'Italia",Lega:"Lega",FI:"Forza Italia",NM:"Noi Moderati-MAIE",PD:"Partito Democratico",AVS:"AVS",M5S:"Movimento 5 Stelle",Az:"Azione (Calenda)",IV:"Italia Viva (Renzi)",Aut:"Per le Autonomie",Misto:"Misto"};
-  function ch(groups,total,maj){return {groups:groups,total:total,maj:maj,coal:(function(){var o={};groups.forEach(function(g){o[g.k]=g.b;});return o;})(),def:{},open:null};}
-  var C=ch([{k:"FdI",s:117,b:"cdx"},{k:"Lega",s:60,b:"cdx"},{k:"FI",s:54,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:69,b:"csx"},{k:"AVS",s:10,b:"csx"},{k:"M5S",s:48,b:"m5s"},{k:"Az",s:10,b:"alt"},{k:"IV",s:7,b:"alt"},{k:"Misto",s:17,b:"alt"}],400,201);
-  var S=ch([{k:"FdI",s:63,b:"cdx"},{k:"Lega",s:29,b:"cdx"},{k:"FI",s:20,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:36,b:"csx"},{k:"M5S",s:26,b:"m5s"},{k:"IV",s:8,b:"alt"},{k:"Aut",s:7,b:"alt"},{k:"Misto",s:8,b:"alt"}],205,103);
+  var COL={FdI:"#1b3a6b",Lega:"#5a8f2a",FI:"#3a8dde",NM:"#a9a79e",PD:"#d64541",AVS:"#1f9e74",M5S:"#e0a216",FN:"#c8602f",Az:"#7a6fd0",IV:"#cf5380",Aut:"#7a9e6f",Misto:"#9a9890"};
+  var NAME={FdI:"Fratelli d'Italia",Lega:"Lega",FI:"Forza Italia",NM:"Noi Moderati-MAIE",PD:"Partito Democratico",AVS:"AVS",M5S:"Movimento 5 Stelle",FN:"Futuro Nazionale (Vannacci)",Az:"Azione (Calenda)",IV:"Italia Viva (Renzi)",Aut:"Per le Autonomie",Misto:"Misto"};
+  // rosters nominali (solo Camera). verified:true => nomi certi. altrimenti indicativi.
+  var ROSTER={
+    FN:{verified:true,names:["Bergamini","Bof","Furgiuele","Pierro","Pozzolo","Ravetto","Sasso","Ziello"]},
+    Az:{verified:false,names:["Richetti","Pastorella","Gelmini","Ruffino","Sottanelli","D'Alessio","Bonetti?","Del Barba?"],fill:2},
+    IV:{verified:false,names:["Boschi","Rosato","Marattin","Gadda","Giachetti","Faraone","Bonifazi"]}
+  };
+  function ch(groups,total,maj,withNames){return {groups:groups,total:total,maj:maj,withNames:!!withNames,coal:(function(){var o={};groups.forEach(function(g){o[g.k]=g.b;});return o;})(),def:{},members:{},open:null};}
+  var C=ch([{k:"FdI",s:117,b:"cdx"},{k:"Lega",s:60,b:"cdx"},{k:"FI",s:54,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:69,b:"csx"},{k:"AVS",s:10,b:"csx"},{k:"M5S",s:48,b:"m5s"},{k:"FN",s:8,b:"alt"},{k:"Az",s:10,b:"alt"},{k:"IV",s:7,b:"alt"},{k:"Misto",s:9,b:"alt"}],400,201,true);
+  var S=ch([{k:"FdI",s:63,b:"cdx"},{k:"Lega",s:29,b:"cdx"},{k:"FI",s:20,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:36,b:"csx"},{k:"M5S",s:26,b:"m5s"},{k:"IV",s:8,b:"alt"},{k:"Aut",s:7,b:"alt"},{k:"Misto",s:8,b:"alt"}],205,103,false);
+  // costruisco i membri nominali per la Camera
+  function buildMembers(ST){ST.groups.forEach(function(g){if(!ST.withNames)return;var r=ROSTER[g.k];if(!r)return;var list=[];var names=r.names.slice(0,g.s);names.forEach(function(nm,i){list.push({id:g.k+i,name:nm,party:g.k,bloc:g.b,ind:!r.verified});});
+    // riempi con segnaposto fino a g.s
+    for(var j=names.length;j<g.s;j++){list.push({id:g.k+j,name:"(da verificare)",party:g.k,bloc:g.b,ind:true,ph:true});}
+    ST.members[g.k]=list;});}
+  buildMembers(C);
+  var SEL=null; // {ch, id}
   function $(id){return document.getElementById(id);}
-  function finalBlocs(ST){var bf={cdx:0,csx:0,m5s:0,alt:0};ST.groups.forEach(function(g){var d=ST.def[g.k];var moved=d?Math.min(d.n,g.s):0;bf[ST.coal[g.k]]+=(g.s-moved);if(d&&moved>0)bf[d.to]+=moved;});return bf;}
+  function namedGroup(ST,g){return ST.withNames&&ST.members[g.k];}
+
+  function finalBlocs(ST){var bf={cdx:0,csx:0,m5s:0,alt:0};
+    ST.groups.forEach(function(g){
+      if(namedGroup(ST,g)){ST.members[g.k].forEach(function(m){bf[m.bloc]++;});}
+      else{var d=ST.def[g.k];var moved=d?Math.min(d.n,g.s):0;bf[ST.coal[g.k]]+=(g.s-moved);if(d&&moved>0)bf[d.to]+=moved;}
+    });return bf;}
   function winnerOf(ST){var bf=finalBlocs(ST);var w=BLOCS.filter(function(b){return bf[b]>=ST.maj;});return w.length?w[0]:null;}
 
-  function renderChamber(ST,sfx){var bf=finalBlocs(ST);var hasDef=Object.keys(ST.def).some(function(k){return ST.def[k]&&ST.def[k].n>0;});
-    var win=winnerOf(ST);
-    if(win){$("banner_"+sfx).style.background="rgba(31,122,77,0.08)";$("banner_"+sfx).innerHTML='<b style="color:#1f7a4d;">'+BM[win].n+' ha la maggioranza</b>: '+bf[win]+' seggi ('+(bf[win]/ST.total*100).toFixed(1)+'%)'+(hasDef?' dopo i cambi':'')+'.';}
-    else{var top=BLOCS.reduce(function(a,b){return bf[a]>=bf[b]?a:b;});$("banner_"+sfx).style.background="rgba(178,54,54,0.07)";$("banner_"+sfx).innerHTML='<b style="color:#b23636;">Nessuna maggioranza.</b> Primo: '+BM[top].n+' '+bf[top]+' ('+(bf[top]/ST.total*100).toFixed(1)+'%)'+(hasDef?', dopo i cambi':'')+'.';}
+  function renderChamber(ST,sfx){var bf=finalBlocs(ST);var win=winnerOf(ST);
+    if(win){$("banner_"+sfx).style.background="rgba(31,122,77,0.08)";$("banner_"+sfx).innerHTML='<b style="color:#1f7a4d;">'+BM[win].n+' ha la maggioranza</b>: '+bf[win]+' seggi ('+(bf[win]/ST.total*100).toFixed(1)+'%).';}
+    else{var top=BLOCS.reduce(function(a,b){return bf[a]>=bf[b]?a:b;});$("banner_"+sfx).style.background="rgba(178,54,54,0.07)";$("banner_"+sfx).innerHTML='<b style="color:#b23636;">Nessuna maggioranza.</b> Primo: '+BM[top].n+' '+bf[top]+' ('+(bf[top]/ST.total*100).toFixed(1)+'%).';}
     var ord=["cdx","alt","m5s","csx"];$("bar_"+sfx).innerHTML=ord.map(function(b){var s=bf[b]||0;if(s<=0)return"";return '<div class="seg" title="'+BM[b].n+': '+s+'" style="flex:'+s+' 0 0;background:'+BM[b].c+';">'+(s>=(ST.total*0.07)?BM[b].n.split(' ')[0]+' '+s:s)+'</div>';}).join('');
-    if(hasDef){var parts=[];ST.groups.forEach(function(g){var d=ST.def[g.k];if(d&&d.n>0)parts.push('<b>'+d.n+'</b> da '+g.k+' → '+BM[d.to].n);});$("def_"+sfx).innerHTML='Cambi: '+parts.join(' · ');}else{$("def_"+sfx).innerHTML='';}
-    var html="";BLOCS.forEach(function(b){var members=ST.groups.filter(function(g){return ST.coal[g.k]===b;});
-      html+='<div class="bloccard"><h3><span class="dot" style="background:'+BM[b].c+';"></span>'+BM[b].n+'<span class="bloctot" style="color:'+BM[b].c+';">'+bf[b]+'</span></h3><div class="blocpct">'+(bf[b]/ST.total*100).toFixed(1)+'%</div>';
-      if(members.length===0)html+='<div class="small">vuoto</div>';
-      members.forEach(function(g){var d=ST.def[g.k];var open=ST.open===g.k;
-        html+='<div class="grp"><div class="grp-head" data-ch="'+sfx+'" data-toggle="'+g.k+'"><span class="caret">'+(open?'▾':'▸')+'</span><span class="dot" style="width:8px;height:8px;background:'+COL[g.k]+';"></span><span class="grp-name">'+NAME[g.k]+'</span><select class="coalsel" data-ch="'+sfx+'" data-coal="'+g.k+'">'+BLOCS.map(function(bb){return '<option value="'+bb+'" '+(ST.coal[g.k]===bb?'selected':'')+'>'+BM[bb].n.split(' ')[0]+'</option>';}).join('')+'</select><span class="grp-seats">'+g.s+'</span>'+(d&&d.n>0?' <span class="deftag">-'+d.n+'</span>':'')+'</div>';
-        html+='<div class="expand '+(open?'open':'')+'"><div class="small" style="margin-bottom:4px;">Sposta una quota dei '+g.s+' di '+NAME[g.k]+':</div><div class="row"><input type="range" min="0" max="'+g.s+'" step="1" data-ch="'+sfx+'" data-defn="'+g.k+'" value="'+(d?d.n:0)+'"><span style="width:48px;text-align:right;font-weight:600;" data-defv="'+sfx+'_'+g.k+'">'+(d?d.n:0)+'</span></div><div class="row" style="margin-top:5px;"><span class="small">verso:</span><select data-ch="'+sfx+'" data-defto="'+g.k+'">'+BLOCS.filter(function(bb){return bb!==ST.coal[g.k];}).map(function(bb){return '<option value="'+bb+'" '+(d&&d.to===bb?'selected':'')+'>'+BM[bb].n+'</option>';}).join('')+'</select></div></div>';
-        html+='</div>';});
-      html+='</div>';});
+    var html="";BLOCS.forEach(function(b){
+      var groupsHere=ST.groups.filter(function(g){return !namedGroup(ST,g)&&ST.coal[g.k]===b;});
+      html+='<div class="bloccard droppable" data-ch="'+sfx+'" data-bloc="'+b+'"><h3><span class="dot" style="background:'+BM[b].c+';"></span>'+BM[b].n+'<span class="bloctot" style="color:'+BM[b].c+';">'+bf[b]+'</span></h3><div class="blocpct">'+(bf[b]/ST.total*100).toFixed(1)+'%</div>';
+      // gruppi numerici in questo bloc
+      groupsHere.forEach(function(g){var isLeva=g.s<15&&!namedGroup(ST,g);
+        html+='<div class="grp'+(isLeva?' leva':'')+'"><div class="grp-head"><span class="dot" style="width:8px;height:8px;background:'+COL[g.k]+';"></span><span class="grp-name">'+NAME[g.k]+'</span>'+(isLeva?' <span class="leva-badge">leva</span>':'')+'<select class="coalsel" data-ch="'+sfx+'" data-coal="'+g.k+'">'+BLOCS.map(function(bb){return '<option value="'+bb+'" '+(ST.coal[g.k]===bb?'selected':'')+'>'+BM[bb].n.split(' ')[0]+'</option>';}).join('')+'</select><span class="grp-seats">'+g.s+'</span></div></div>';
+      });
+      // membri nominali assegnati a questo bloc (solo Camera)
+      if(ST.withNames){
+        var here=[];ST.groups.forEach(function(g){if(namedGroup(ST,g)){ST.members[g.k].forEach(function(m){if(m.bloc===b)here.push(m);});}});
+        if(here.length){
+          // raggruppo per partito d'origine
+          var byParty={};here.forEach(function(m){(byParty[m.party]=byParty[m.party]||[]).push(m);});
+          Object.keys(byParty).forEach(function(pk){
+            html+='<div class="grp leva" style="margin-top:5px;"><div class="grp-head"><span class="dot" style="width:8px;height:8px;background:'+COL[pk]+';"></span><span class="grp-name">'+NAME[pk]+'</span> <span class="leva-badge">nomi</span><span class="grp-seats">'+byParty[pk].length+'</span></div><div class="chips">';
+            byParty[pk].forEach(function(m){var sel=SEL&&SEL.ch===sfx&&SEL.id===m.id;html+='<span class="chip'+(m.ind?' ind':'')+(sel?' sel':'')+'" draggable="true" data-ch="'+sfx+'" data-mid="'+m.id+'"><span class="pd" style="background:'+COL[pk]+';"></span>'+m.name+'</span>';});
+            html+='</div></div>';
+          });
+        }
+      }
+      html+='</div>';
+    });
     $("blocs_"+sfx).innerHTML=html;
   }
   function renderVerdict(){var wC=winnerOf(C),wS=winnerOf(S);var el=$("verdict");
-    if(wC&&wC===wS){el.style.background="rgba(31,122,77,0.10)";el.innerHTML='<b style="color:#1f7a4d;font-size:15px;">'+BM[wC].n+' governa</b> — ha la maggioranza in <b>entrambe</b> le Camere (Camera e Senato). È la condizione per sostenere un governo.';}
-    else if(wC&&wS&&wC!==wS){el.style.background="rgba(176,123,0,0.10)";el.innerHTML='<b style="color:#b07b00;font-size:15px;">Maggioranze difformi</b> — alla Camera prevale '+BM[wC].n+', al Senato '+BM[wS].n+'. Nessuno controlla entrambe: senza un\'intesa non si forma un governo. <span class="small">(È esattamente il rischio che la riforma Bignami vuole evitare col vincolo di omogeneità.)</span>';}
-    else{el.style.background="rgba(178,54,54,0.09)";var det=[];det.push("Camera: "+(wC?BM[wC].n:"nessuna maggioranza"));det.push("Senato: "+(wS?BM[wS].n:"nessuna maggioranza"));el.innerHTML='<b style="color:#b23636;font-size:15px;">Nessun governo possibile senza intese</b> — '+det.join(" · ")+'. Servono alleanze o un nuovo assetto.';}
+    if(wC&&wC===wS){el.style.background="rgba(31,122,77,0.10)";el.innerHTML='<b style="color:#1f7a4d;font-size:15px;">'+BM[wC].n+' governa</b> — maggioranza in <b>entrambe</b> le Camere.';}
+    else if(wC&&wS&&wC!==wS){el.style.background="rgba(176,123,0,0.10)";el.innerHTML='<b style="color:#b07b00;font-size:15px;">Maggioranze difformi</b> — Camera: '+BM[wC].n+', Senato: '+BM[wS].n+'. Nessuno controlla entrambe.';}
+    else{el.style.background="rgba(178,54,54,0.09)";el.innerHTML='<b style="color:#b23636;font-size:15px;">Nessun governo senza intese</b> — Camera: '+(wC?BM[wC].n:"nessuna maggioranza")+' · Senato: '+(wS?BM[wS].n:"nessuna maggioranza")+'.';}
   }
   function renderAll(){renderChamber(C,"C");renderChamber(S,"S");renderVerdict();attach();}
   function stOf(sfx){return sfx==="C"?C:S;}
+  function moveMember(sfx,mid,toBloc){var ST=stOf(sfx);for(var gk in ST.members){var arr=ST.members[gk];for(var i=0;i<arr.length;i++){if(arr[i].id===mid){arr[i].bloc=toBloc;return;}}}}
   function attach(){
-    Array.prototype.forEach.call(document.querySelectorAll("[data-toggle]"),function(el){el.addEventListener("click",function(e){if(e.target.tagName==="SELECT")return;var ST=stOf(el.getAttribute("data-ch"));var k=el.getAttribute("data-toggle");ST.open=ST.open===k?null:k;renderAll();});});
-    Array.prototype.forEach.call(document.querySelectorAll("[data-coal]"),function(el){el.addEventListener("change",function(e){e.stopPropagation();var ST=stOf(el.getAttribute("data-ch"));var k=el.getAttribute("data-coal");ST.coal[k]=el.value;if(ST.def[k]&&ST.def[k].to===el.value)delete ST.def[k];renderAll();});});
-    Array.prototype.forEach.call(document.querySelectorAll("[data-defn]"),function(el){el.addEventListener("input",function(){var sfx=el.getAttribute("data-ch");var ST=stOf(sfx);var k=el.getAttribute("data-defn");var n=+el.value;var sel=document.querySelector('[data-ch="'+sfx+'"][data-defto="'+k+'"]');var to=sel?sel.value:BLOCS.filter(function(b){return b!==ST.coal[k];})[0];if(n>0)ST.def[k]={to:to,n:n};else delete ST.def[k];ST.open=k;renderAll();});});
-    Array.prototype.forEach.call(document.querySelectorAll("[data-defto]"),function(el){el.addEventListener("change",function(){var ST=stOf(el.getAttribute("data-ch"));var k=el.getAttribute("data-defto");if(ST.def[k])ST.def[k].to=el.value;ST.open=k;renderAll();});});
+    Array.prototype.forEach.call(document.querySelectorAll("[data-coal]"),function(el){el.addEventListener("change",function(e){e.stopPropagation();var ST=stOf(el.getAttribute("data-ch"));ST.coal[el.getAttribute("data-coal")]=el.value;renderAll();});});
+    // chip: click-to-select
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"),function(el){
+      el.addEventListener("click",function(e){e.stopPropagation();var sfx=el.getAttribute("data-ch");var mid=el.getAttribute("data-mid");if(SEL&&SEL.ch===sfx&&SEL.id===mid){SEL=null;}else{SEL={ch:sfx,id:mid};}renderAll();});
+      el.addEventListener("dragstart",function(e){SEL={ch:el.getAttribute("data-ch"),id:el.getAttribute("data-mid")};try{e.dataTransfer.setData("text/plain",el.getAttribute("data-mid"));}catch(x){}});
+    });
+    // bloc card: click destination (se c'è selezione) + drop target
+    Array.prototype.forEach.call(document.querySelectorAll(".bloccard"),function(el){
+      el.addEventListener("click",function(){if(SEL){var sfx=el.getAttribute("data-ch");if(sfx===SEL.ch){moveMember(sfx,SEL.id,el.getAttribute("data-bloc"));SEL=null;renderAll();}}});
+      el.addEventListener("dragover",function(e){e.preventDefault();el.classList.add("target");});
+      el.addEventListener("dragleave",function(){el.classList.remove("target");});
+      el.addEventListener("drop",function(e){e.preventDefault();el.classList.remove("target");if(SEL){var sfx=el.getAttribute("data-ch");if(sfx===SEL.ch){moveMember(sfx,SEL.id,el.getAttribute("data-bloc"));SEL=null;renderAll();}}});
+    });
   }
-  $("reset").addEventListener("click",function(){[C,S].forEach(function(ST){ST.groups.forEach(function(g){ST.coal[g.k]=g.b;});ST.def={};ST.open=null;});renderAll();});
+  $("reset").addEventListener("click",function(){[C,S].forEach(function(ST){ST.groups.forEach(function(g){ST.coal[g.k]=g.b;});ST.def={};});buildMembers(C);SEL=null;renderAll();});
   renderAll();
 })();
 </script>
