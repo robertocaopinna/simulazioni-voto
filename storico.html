@@ -135,12 +135,12 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
   var CATC={gov:"#1b3a6b",opp:"#b23636",ext:"#b07b00"};
   var LINES=[{k:"FdI",c:"#1b3a6b"},{k:"PD",c:"#d64541"},{k:"M5S",c:"#e0a216"},{k:"Lega",c:"#5a8f2a"},{k:"FN",c:"#c8602f"}];
   var W=940,H=360,padL=34,padR=22,padT=40,padB=46;
-  var t0=new Date("2026-01-15").getTime(),t1=new Date("2026-06-08").getTime();
+  var t0=new Date("2026-01-15").getTime(),t1=new Date("2026-09-30").getTime();
   function x(d){return padL+((new Date(d).getTime()-t0)/(t1-t0))*(W-padL-padR);}
   function y(v){return padT+(1-v/32)*(H-padT-padB);}
   var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block;overflow:visible;">';
   [0,10,20,30].forEach(function(g){svg+='<line x1="'+padL+'" y1="'+y(g)+'" x2="'+(W-padR)+'" y2="'+y(g)+'" stroke="#eee7d8"/>';svg+='<text x="'+(padL-5)+'" y="'+(y(g)+3)+'" text-anchor="end" font-size="10" fill="#9a9890">'+g+'</text>';});
-  [["2026-02-01","feb"],["2026-03-01","mar"],["2026-04-01","apr"],["2026-05-01","mag"],["2026-06-01","giu"]].forEach(function(m){svg+='<text x="'+x(m[0])+'" y="'+(H-26)+'" text-anchor="middle" font-size="10" fill="#9a9890">'+m[1]+'</text>';});
+  [["2026-02-01","feb"],["2026-03-01","mar"],["2026-04-01","apr"],["2026-05-01","mag"],["2026-06-01","giu"],["2026-07-01","lug"],["2026-08-01","ago"],["2026-09-01","set"]].forEach(function(m){svg+='<text x="'+x(m[0])+'" y="'+(H-26)+'" text-anchor="middle" font-size="10" fill="#9a9890">'+m[1]+'</text>';});
   EVENTS.forEach(function(e,i){var col=CATC[e.cat];var yy=padT-22+((i%2)*12);
     svg+='<line x1="'+x(e.d)+'" y1="'+padT+'" x2="'+x(e.d)+'" y2="'+(H-padB)+'" stroke="'+col+'" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>';
     svg+='<circle cx="'+x(e.d)+'" cy="'+yy+'" r="5.5" fill="'+col+'" stroke="#fff" stroke-width="2" style="cursor:pointer;"><title>'+e.d.slice(5)+' - '+e.label+'</title></circle>';
