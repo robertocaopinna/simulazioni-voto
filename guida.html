@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Guida rapida</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:2px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:13.5px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:11.5px;padding:13px 7px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:820px;margin:0 auto;padding:26px 20px 50px;}
+h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14.5px;color:var(--muted);margin-bottom:20px;}
+h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:30px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+p{margin:8px 0;}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;}
+.step{flex:1 1 140px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;}
+.step b{display:block;font-family:Georgia,serif;font-size:14px;color:var(--navy);margin-bottom:2px;}
+.step .w{font-size:11.5px;color:var(--muted);}
+.dec{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:12px 16px;margin:10px 0;}
+.dec h3{margin:0 0 4px;font-size:15px;}
+.dec .q{font-style:italic;color:var(--muted);font-size:13.5px;}
+.dec .where{font-size:12.5px;margin-top:6px;}
+.dec .where a{color:var(--navy);font-weight:600;}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;padding:1px 6px;border-radius:4px;vertical-align:middle;text-transform:uppercase;}
+.tag.dato{background:#e3efe8;color:#1f7a4d;} .tag.stima{background:#fbf1d9;color:#8a6200;} .tag.ipotesi{background:#f3e6e6;color:#9a3030;}
+ul{margin:6px 0 6px 20px;padding:0;} li{margin:4px 0;}
+.num{font-family:Georgia,serif;font-weight:700;color:var(--navy);}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
+@media print{.nav{display:none;} body{background:#fff;} .wrap{padding-top:0;}}
+</style>
+<style id="navcss">
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e7e3d8;}
+.nav-in{max-width:1100px;margin:0 auto;padding:4px 14px 3px;display:flex;align-items:center;gap:0 18px;flex-wrap:wrap;}
+.nav .nav-title{font-family:Georgia,serif;font-weight:700;font-size:12.5px;color:#1b3a6b;text-decoration:none;padding:4px 0 0;border:0;white-space:nowrap;flex-basis:100%;letter-spacing:.02em;}
+.nav .grp{display:flex;align-items:center;padding:2px 0;flex-wrap:wrap;white-space:nowrap;}
+.nav .gl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9a9890;font-weight:700;margin-right:5px;}
+.nav .grp a{font-size:11.5px;padding:6px 5px;color:#6b6960;text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav .grp a:hover{color:#2a2924;}
+.nav .grp a.active{color:#1b3a6b;border-bottom-color:#1b3a6b;font-weight:600;}
+@media (max-width:760px){.nav-in{gap:4px 10px;}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="nav-title" href="index.html">Osservatorio elettorale</a>
+  <div class="grp"><span class="gl">Capire</span><a href="index.html">Trend</a><a href="storico.html">Storico</a><a href="osservatorio.html">Osservatorio</a><a href="trackrecord.html">Track record</a></div>
+  <div class="grp"><span class="gl">Decidere</span><a href="elettorati.html">Persuadibili</a><a href="simulatore.html">Simulatore</a><a href="liste.html">Liste &amp; collegi</a><a href="aula.html">Aula attuale</a></div>
+  <div class="grp"><span class="gl">Riferimento</span><a href="confronto.html">Confronto</a><a href="metodo.html">Metodo</a><a href="guida.html" class="active">Guida</a></div>
+</div></nav>
+
+<div class="wrap">
+  <h1>Guida rapida</h1>
+  <div class="lede">Come è costruito lo strumento e dove stanno le decisioni. Cinque minuti, per chi i seggi li conosce già.</div>
+
+  <h2>La catena, in una riga</h2>
+  <p style="font-size:13.5px;"><b>Il menù è in tre gruppi</b>, che sono i tre momenti d'uso: <b>Capire</b> cosa succede (Trend, Storico, Osservatorio, Track record), <b>Decidere</b> cosa fare (Elettorati &amp; persuadibili, Simulatore, Liste &amp; collegi, Aula attuale), <b>Riferimento</b> per come e perché (Confronto leggi, Metodo, Guida).</p>
+  <div class="chain">
+    <div class="step"><b>1 · Voti</b>Supermedia YouTrend/AGI, aggiornata ogni giovedì.<div class="w">Chi ha quanto.</div></div>
+    <div class="step"><b>2 · Soglie</b>3% le liste, 10% le coalizioni, un ripescaggio per coalizione.<div class="w">Chi entra nel riparto.</div></div>
+    <div class="step"><b>3 · Premio</b>70 deputati e 35 senatori a chi è primo <u>e</u> sopra il 42% in entrambe le Camere.<div class="w">Chi governa.</div></div>
+    <div class="step"><b>4 · Seggi nazionali</b>Proporzionale tra le liste, premio in più alla coalizione vincente.<div class="w">Quanti per lista.</div></div>
+    <div class="step"><b>5 · Collegi</b>48 collegi Camera, da 2 a 13 seggi ciascuno, già noti.<div class="w">Dove.</div></div>
+    <div class="step"><b>6 · Persone</b>Capolista bloccato + eletti con le preferenze.<div class="w">Chi.</div></div>
+  </div>
+  <p>Il sistema è proporzionale fino al passo 4, ma il passo 3 lo rende <b>a scalino</b>: un punto in più o in meno intorno al 42% vale decine di seggi, non uno. Tutto lo strumento serve a ragionare su quello scalino e su chi lo attraversa.</p>
+
+  <h2>I quattro punti decisionali</h2>
+
+  <div class="dec">
+    <h3>1 · Il perimetro della coalizione</h3>
+    <div class="q">Chi sta dentro? Federare Futuro Nazionale o no. Tenere diviso il campo largo o no.</div>
+    <p>È la decisione che pesa più di tutte: oggi il centrodestra è al 40,7% e il campo largo al 43,9%, quindi <b>il premio andrebbe agli avversari</b>. Con FN dentro, il centrodestra sale sopra il 48% e prende lui il premio (fino al tetto di 220 deputati). Nessuna campagna sposta 7 punti; un accordo sì.</p>
+    <div class="where">Dove: <a href="osservatorio.html">Osservatorio</a> (scenari di coalizione + probabilità) · <a href="confronto.html">Confronto</a> (stessi voti, cosa cambia) · <a href="elettorati.html">Persuadibili</a> (quanto sono solidi i nostri).</div>
+  </div>
+
+  <div class="dec">
+    <h3>2 · La distanza dal 42%</h3>
+    <div class="q">Quanto manca, quanto è probabile arrivarci, quanto rischio c'è che ci arrivino gli altri.</div>
+    <p>Il Monte Carlo risponde in probabilità, non in un numero secco: con l'assetto attuale il campo largo ha circa il 60% di probabilità di maggioranza, il centrodestra il 25%; con FN federato le cifre si invertono. È il termometro da guardare ogni settimana.</p>
+    <div class="where">Dove: <a href="osservatorio.html">Osservatorio</a> (Monte Carlo) · <a href="index.html">Trend</a>, sezione 7.</div>
+  </div>
+
+  <div class="dec">
+    <h3>2 bis · I persuadibili</h3>
+    <div class="q">Chi si può spostare davvero, con quale leva, e quanto vale in seggi.</div>
+    <p>"Gli indecisi" sono quattro bacini con leve opposte: i delusi di area (si mobilitano con la posta in gioco), gli attratti da Vannacci (si trattengono con l'aritmetica del premio), i moderati oscillanti (si conquistano con la credibilità e con la domanda "chi governa dall'altra parte"), gli astenuti strutturali (solo mobilitazione territoriale). La pagina traduce ogni quota recuperata in seggi e tiene il registro delle ipotesi da testare.</p>
+    <div class="where">Dove: <a href="elettorati.html">Persuadibili</a>.</div>
+  </div>
+
+  <div class="dec">
+    <h3>3 · Le mosse</h3>
+    <div class="q">Se faccio X, cosa succede ai voti e ai seggi?</div>
+    <p>Ogni mossa (federare FN, un tema, esporre la leader) sposta voti tra soggetti secondo elasticità dichiarate e regolabili. L'output è un brief di una pagina, copiabile, con il livello di confidenza. Serve a confrontare opzioni, non a prevedere.</p>
+    <div class="where">Dove: <a href="simulatore.html">Simulatore</a>.</div>
+  </div>
+
+  <div class="dec">
+    <h3>4 · Le candidature</h3>
+    <div class="q">Chi mettere dove, e quali posti sono davvero nostri.</div>
+    <p>Con FdI intorno al 26-27%, alla Camera circa <span class="num">89</span> eletti senza premio: <span class="num">47</span> capilista bloccati (posti che il gruppo dirigente decide) e <span class="num">42</span> eletti con le preferenze (posti che si conquistano sul territorio). Quasi metà degli eletti passa dalle preferenze: la scelta dei sei candidati "liberi" per collegio non è un dettaglio. La mappa segna i collegi <b>da aggredire</b> (seggio in più a portata) e <b>a rischio</b> (seggio che si perde con un piccolo calo): è lì che vanno i nomi forti, non nei collegi già vinti.</p>
+    <div class="where">Dove: <a href="liste.html">Liste &amp; collegi</a> (mappa, dettaglio collegio, aritmetica delle candidature).</div>
+  </div>
+
+  <h2>Come leggere i numeri</h2>
+  <ul>
+    <li><span class="tag dato">dato</span> viene da una fonte primaria (Supermedia, testo di legge, decreto sui seggi). Non lo tocchiamo.</li>
+    <li><span class="tag stima">stima</span> è un calcolo nostro con metodo dichiarato. Nei collegi l'errore atteso è di ±1 seggio.</li>
+    <li><span class="tag ipotesi">ipotesi</span> è un'assunzione da discutere: la forza locale per collegio (i sondaggi per collegio non esistono), le elasticità, la composizione delle coalizioni.</li>
+  </ul>
+  <p>Ipotesi di fondo, dichiarata ovunque: lo Stabilicum come approvato dal Senato il 15/9 è trattato come legge in vigore. Se la fiducia alla Camera non passa, il sito ha già il Rosatellum pronto come alternativa.</p>
+
+  <h2>Il ritmo di lavoro</h2>
+  <ul>
+    <li><b>Ogni mattina</b> arriva un brief automatico: nuovi sondaggi verificati, scostamenti dal sito, iter della legge, alert se scatta una soglia (FdI ±0,5, centrodestra sotto 40 o sopra 42, passaggi di gruppo, voti sulla legge).</li>
+    <li><b>Ogni giovedì</b> esce la Supermedia: si aggiornano i numeri base e si rilegge la distanza dal 42%.</li>
+    <li><b>A ogni evento politico</b> (accordo, rottura, passaggio di gruppo) si rifà lo scenario in Osservatorio e Simulatore, e si ricontrolla la mappa dei collegi.</li>
+    <li><b>Dopo il voto finale sulla legge</b> si verificano i parametri e, se cambiano, si aggiornano Metodo, Confronto e Liste &amp; collegi.</li>
+  </ul>
+
+  <h2>Cosa risponde in cinque minuti</h2>
+  <ul>
+    <li>Con questi numeri, chi prende il premio? E con Vannacci dentro?</li>
+    <li>Quanti seggi valgono un punto in più di FdI, oggi e sopra il 42%?</li>
+    <li>In quali collegi un candidato forte fa vincere un seggio, e in quali è sprecato?</li>
+    <li>Quanti posti sono di nomina (capilista) e quanti li decidono le preferenze?</li>
+    <li>Quale delle mosse sul tavolo sposta davvero l'esito, e con quale confidenza?</li>
+  </ul>
+
+  <div class="foot">
+    Dati: Supermedia YouTrend/AGI 17/9/2026. Legge: testo approvato dal Senato il 15/9/2026 (A.S. 1971), terza lettura alla Camera dal 28/9; stato verificato il 23/9/2026. Collegi: D.Lgs. 177/2020 e D.P.R. 21/7/2022. Dettagli e limiti nella pagina <a href="metodo.html" style="color:var(--navy);">Metodo</a>.
+  </div>
+</div>
+</body>
+</html>

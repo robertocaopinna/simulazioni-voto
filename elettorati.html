@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Elettorati &amp; persuadibili</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 18px 50px;}
+h1{font-family:Georgia,serif;font-size:25px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
+h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:30px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+h3{font-size:15px;font-weight:700;margin:16px 0 6px;}
+p{margin:8px 0;}
+.part{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--hint);font-weight:700;margin:34px 0 -6px;}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;padding:1px 6px;border-radius:4px;vertical-align:middle;text-transform:uppercase;}
+.tag.dato{background:#e3efe8;color:#1f7a4d;} .tag.stima{background:#fbf1d9;color:#8a6200;} .tag.ipotesi{background:#f3e6e6;color:#9a3030;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.small{font-size:11.5px;color:var(--muted);}
+.src{font-size:11px;color:var(--hint);margin-top:6px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;}
+.stat .k{font-size:12px;color:var(--muted);margin-bottom:5px;} .stat .v{font-size:24px;font-weight:700;font-family:Georgia,serif;} .stat .d{font-size:12px;font-weight:600;margin-top:2px;}
+.bar-row{display:flex;align-items:center;gap:9px;margin:6px 0;font-size:13px;}
+.bar-lab{width:60px;flex:none;color:var(--muted);font-weight:600;}
+.bar-track{flex:1;height:18px;background:var(--soft);border-radius:5px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:#fff;font-size:11px;font-weight:700;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;} td.n{font-weight:600;}
+.bac{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;border-left:5px solid var(--navy);}
+.bac.b2{border-left-color:#c8602f;} .bac.b3{border-left-color:#3a8dde;} .bac.b4{border-left-color:#9a9890;}
+.bac h3{margin:0 0 2px;font-family:Georgia,serif;font-size:16px;}
+.bac .size{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.bac .size b{color:var(--ink);font-size:15px;}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;font-size:13.5px;margin:6px 0;}
+.kv .k{color:var(--muted);font-weight:600;font-size:12px;padding-top:2px;}
+.kv .leva{color:var(--green);} .kv .contro{color:var(--red);}
+.rec{display:flex;align-items:center;gap:10px;margin:8px 0 2px;font-size:13px;flex-wrap:wrap;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--navy);cursor:pointer;}
+input[type=number],input[type=text],input[type=date],select,textarea{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:5px 7px;background:#fff;color:var(--ink);font-size:12.5px;}
+button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;} button.primary{background:var(--navy);color:#fff;border-color:var(--navy);} button.mini{font-size:11px;padding:3px 8px;}
+.posbox{background:#11243f;color:#e8eef6;border-radius:10px;padding:15px 17px;margin:12px 0;}
+.posbox b{color:#fff;} .posbox .big{font-size:28px;font-weight:700;font-family:Georgia,serif;color:#fff;}
+.kpi{background:var(--soft);border-radius:8px;padding:10px 12px;} .kpi .v{font-family:Georgia,serif;font-size:22px;font-weight:700;} .kpi .l{font-size:11.5px;color:var(--muted);}
+.impl{background:#11243f;color:#e8eef6;border-radius:10px;padding:15px 17px;margin:12px 0;}
+.impl h3{color:#fff;margin:0 0 8px;} .impl ul{margin:6px 0;padding-left:20px;} .impl li{margin:6px 0;font-size:14px;}
+ul{margin:6px 0 6px 20px;padding:0;} li{margin:4px 0;}
+.st{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:5px;}
+.st.t{background:#eceae2;color:#6b6960;} .st.c{background:#fbf1d9;color:#8a6200;} .st.ok{background:#e3efe8;color:#1f7a4d;} .st.ko{background:#f3e6e6;color:#9a3030;}
+.wraptab{overflow-x:auto;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
+a.inline{color:var(--navy);}
+</style>
+<style id="navcss">
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e7e3d8;}
+.nav-in{max-width:1100px;margin:0 auto;padding:4px 14px 3px;display:flex;align-items:center;gap:0 18px;flex-wrap:wrap;}
+.nav .nav-title{font-family:Georgia,serif;font-weight:700;font-size:12.5px;color:#1b3a6b;text-decoration:none;padding:4px 0 0;border:0;white-space:nowrap;flex-basis:100%;letter-spacing:.02em;}
+.nav .grp{display:flex;align-items:center;padding:2px 0;flex-wrap:wrap;white-space:nowrap;}
+.nav .gl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9a9890;font-weight:700;margin-right:5px;}
+.nav .grp a{font-size:11.5px;padding:6px 5px;color:#6b6960;text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav .grp a:hover{color:#2a2924;}
+.nav .grp a.active{color:#1b3a6b;border-bottom-color:#1b3a6b;font-weight:600;}
+@media (max-width:760px){.nav-in{gap:4px 10px;}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="nav-title" href="index.html">Osservatorio elettorale</a>
+  <div class="grp"><span class="gl">Capire</span><a href="index.html">Trend</a><a href="storico.html">Storico</a><a href="osservatorio.html">Osservatorio</a><a href="trackrecord.html">Track record</a></div>
+  <div class="grp"><span class="gl">Decidere</span><a href="elettorati.html" class="active">Persuadibili</a><a href="simulatore.html">Simulatore</a><a href="liste.html">Liste &amp; collegi</a><a href="aula.html">Aula attuale</a></div>
+  <div class="grp"><span class="gl">Riferimento</span><a href="confronto.html">Confronto</a><a href="metodo.html">Metodo</a><a href="guida.html">Guida</a></div>
+</div></nav>
+
+<div class="wrap">
+  <h1>Elettorati &amp; persuadibili</h1>
+  <div class="lede">Prima metà: quanto sono solidi i nostri. Seconda metà: chi si può spostare, con quale leva, e quanto vale in seggi. In fondo, il registro delle ipotesi da testare. Aggiornato al 23 settembre 2026.</div>
+
+  <div class="part">Parte A · Quanto sono solidi i nostri</div>
+  <h2>1 · Fedeltà degli elettorati</h2>
+  <p>Quanto è "incollato" l'elettorato di ciascun partito. Più è alta la fedeltà, meno voti sono in palio, ma più è difficile anche conquistarne di nuovi.</p>
+  <div class="bar-row"><span class="bar-lab">PD</span><span class="bar-track"><span class="bar-fill" style="width:90%;background:#d64541;">90%</span></span></div>
+  <div class="bar-row"><span class="bar-lab">FdI</span><span class="bar-track"><span class="bar-fill" style="width:89%;background:#1b3a6b;">89%</span></span></div>
+  <div class="bar-row"><span class="bar-lab">M5S</span><span class="bar-track"><span class="bar-fill" style="width:88%;background:#e0a216;">88%</span></span></div>
+  <p style="font-size:13px;"><span class="tag dato">dato</span> Fedeltà delle prime tre forze, misurata sui flussi rispetto al voto europeo (Ipsos/Pagnoncelli). Quando l'elettorato FdI "tradisce", si sposta su partiti d'area o sul non voto: i voti persi restano dentro il perimetro, recuperabili.</p>
+  <div class="card"><b>Lettura.</b> Con fedeltà intorno al 90% su tutti i grandi partiti, la crescita non verrà dai convinti altrui. Verrà da due posti soltanto: il recupero interno all'area (voti scivolati verso Futuro Nazionale o l'astensione) e la mobilitazione di chi oggi non sceglie. È il motivo per cui la seconda metà di questa pagina ragiona per bacini e non per avversari.</div>
+
+  <h2>2 · Il bacino mobile e la mobilitazione</h2>
+  <div class="grid">
+    <div class="stat"><div class="k">Indecisi + astensionisti dichiarati</div><div class="v">33,6%</div><div class="d" style="color:var(--red);">▼ ~6 vs primavera <span class="tag dato">dato</span></div></div>
+    <div class="stat"><div class="k">Gradimento del governo</div><div class="v">35%</div><div class="d" style="color:var(--red);">▼ 2 in due mesi <span class="tag dato">dato</span></div></div>
+    <div class="stat"><div class="k">Gradimento Meloni</div><div class="v">38,3%</div><div class="d" style="color:var(--green);">▲ da 37,1 <span class="tag dato">dato</span></div></div>
+  </div>
+  <p><span class="tag stima">stima</span> Un elettore su tre non è dentro la scelta. Il bacino si è ridotto dal ~40% di primavera, segno che una parte si sta orientando, ma resta la massa che decide l'esito più di qualsiasi travaso tra partiti. Con il premio al 42%, chi porta più dei propri alle urne vince: la partita è di mobilitazione prima che di persuasione.</p>
+  <div class="card">
+    <p style="margin:4px 0;"><span class="tag dato">dato</span> Lezione del referendum di marzo: Ipsos stimava che con affluenza al 42% vinceva il No (52,4%), con affluenza al 49% si ribaltava. Ha deciso la partecipazione, non l'opinione.</p>
+    <p style="margin:4px 0;"><span class="tag ipotesi">ipotesi</span> Per il 2027: l'elettorato di centrodestra ha partecipazione più costante, quello M5S è fedele ma fluttuante nella mobilitazione. Un'affluenza bassa favorisce chi ha lo zoccolo più disciplinato; un'affluenza alta premia chi ha recuperato i propri delusi.</p>
+    <p class="src">Ipsos/Pagnoncelli (fedeltà); YouTrend/Sky TG24 (33,6%, 17/9); BiDiMedia e Termometro Politico (gradimenti); Ipsos e SWG sul referendum (mar).</p>
+  </div>
+
+  <h2>3 · Momentum: la direzione percepita</h2>
+  <table>
+    <tr><th>Forza</th><th>Momentum</th><th>Segnale</th></tr>
+    <tr><td>Futuro Nazionale</td><td style="color:#1f7a4d;font-weight:600;">▲▲▲ dirompente</td><td>Al 7,7%: quarto partito, ha superato FI e doppia la Lega <span class="tag dato">dato</span></td></tr>
+    <tr><td>Meloni (gradimento)</td><td style="color:#1f7a4d;font-weight:600;">▲ recupero</td><td>Da 37,1% a 38,3% dopo settimane difficili <span class="tag dato">dato</span></td></tr>
+    <tr><td>FdI (partito)</td><td style="color:#b07b00;font-weight:600;">— stabile / lieve calo</td><td>Primo partito, ma al minimo di legislatura (26,6%) <span class="tag dato">dato</span></td></tr>
+    <tr><td>Lega</td><td style="color:#b23636;font-weight:600;">▼ negativo</td><td>Minimi storici, débâcle amministrative <span class="tag dato">dato</span></td></tr>
+    <tr><td>M5S</td><td style="color:#b07b00;font-weight:600;">~ altalenante</td><td>Cresce nei sondaggi, flop alle comunali <span class="tag stima">stima</span></td></tr>
+  </table>
+  <p class="small">Un partito percepito "in salita" attira voto utile a parità di numeri. Oggi il momentum è di FN, non di FdI: è il dato psicologico da rovesciare prima di quello aritmetico.</p>
+
+  <div class="part">Parte B · Chi si può spostare</div>
+  <h2>4 · I quattro bacini</h2>
+  <p>"Gli indecisi" non sono un pubblico: sono almeno quattro, e rispondono a leve opposte. Le dimensioni sono stime da fonti pubbliche (flussi YouTrend, Ipsos) e vanno sostituite con un dato proprietario appena disponibile (vedi sezione 7). Percentuali riferite ai votanti.</p>
+
+  <div class="bac">
+    <h3>A · I delusi di area</h3>
+    <div class="size">Ex elettori del centrodestra 2022 finiti nell'astensione o tra gli indecisi · <b>2–4%</b> <span class="tag ipotesi">ipotesi</span> · il più recuperabile</div>
+    <div class="kv">
+      <div class="k">Psicologia</div><div>Non hanno cambiato idea sugli avversari; hanno smesso di credere che votare cambi qualcosa. Sono in avversione alla perdita, non in ricerca di guadagno: reagiscono a "cosa perdi", non a "cosa ti prometto".</div>
+      <div class="k">Leva</div><div class="leva">La posta in gioco resa concreta e vera: oggi il campo largo è sopra il 42%, il premio andrebbe a loro. La minaccia credibile mobilita più della promessa, e qui è credibile perché è nei numeri.</div>
+      <div class="k">Contro-leva</div><div class="contro">Trionfalismo ("abbiamo fatto tutto") e distanza percepita. La fatica da sovraesposizione della leader alimenta proprio questo bacino.</div>
+      <div class="k">Geografia</div><div>Ovunque; densità maggiore nelle periferie del Nord e nelle province dove l'affluenza 2022 è calata di più.</div>
+      <div class="k">Come misurare</div><div>Panel: voto 2022 = cdx, intenzione attuale = indeciso/non voto. Indicatore: "certezza di andare a votare" tra gli ex cdx.</div>
+    </div>
+  </div>
+
+  <div class="bac b2">
+    <h3>B · Gli attratti da Vannacci</h3>
+    <div class="size">Elettori FdI passati o tentati da Futuro Nazionale · <b>2,5–3,5%</b> <span class="tag stima">stima</span> (YouTrend: FN toglie più a FdI che alla Lega) · vale doppio</div>
+    <div class="kv">
+      <div class="k">Psicologia</div><div>Cercano coerenza e "purezza"; puniscono il governo per i compromessi del governare. Il momentum di FN li attira più del programma.</div>
+      <div class="k">Leva</div><div class="leva">L'aritmetica del premio: dal 2027 il voto a FN fuori coalizione consegna il premio a Schlein e Conte. È un argomento verificabile sulla legge, non uno slogan. E vale doppio: un voto che non esce e non tiene il centrodestra sotto soglia.</div>
+      <div class="k">Contro-leva</div><div class="contro">Rincorrere FN sull'identità: conferma che detta lui l'agenda e sposta il confronto sul suo terreno. Attaccarlo frontalmente lo rafforza come vittima.</div>
+      <div class="k">Geografia</div><div>Nord, ex roccaforti leghiste (Lombardia, Veneto); crescente nelle province.</div>
+      <div class="k">Come misurare</div><div>Panel: voto 2022 = FdI, intenzione = FN o "FdI/FN indeciso". Indicatore: quota di chi giudica "utile" il voto a FN dopo aver letto la regola del premio.</div>
+    </div>
+  </div>
+
+  <div class="bac b3">
+    <h3>C · I moderati oscillanti</h3>
+    <div class="size">Ex FI, ex Terzo Polo, ceto medio urbano che decide tardi · <b>3–5%</b> <span class="tag ipotesi">ipotesi</span> · si conquistano con la credibilità, non con la campagna</div>
+    <div class="kv">
+      <div class="k">Psicologia</div><div>Decidono su competenza e stabilità, non su appartenenza. Temono l'instabilità più di quanto desiderino il cambiamento.</div>
+      <div class="k">Leva</div><div class="leva">La domanda "chi governa dall'altra parte". La legge obbliga a indicare il premier: il campo largo dovrà scegliere tra Schlein e Conte prima del voto. È un cuneo strutturale. Sul costo della vita e sull'energia, la credibilità si conquista con misure visibili e datate; la comunicazione arriva dopo.</div>
+      <div class="k">Contro-leva</div><div class="contro">Toni identitari, temi divisivi impopolari (riarmo), litigi interni alla coalizione.</div>
+      <div class="k">Geografia</div><div>Città medio-grandi del Nord e del Centro; Roma; il Sud dove la leadership di Meloni vale più della sigla.</div>
+      <div class="k">Come misurare</div><div>Panel: voto 2022 = FI/Az/IV o astensione, tema più importante = economia. Indicatore: gradimento della leader tra chi non vota FdI.</div>
+    </div>
+  </div>
+
+  <div class="bac b4">
+    <h3>D · Gli astenuti strutturali</h3>
+    <div class="size">Non votano da più tornate · <b>~20%</b> dell'elettorato <span class="tag stima">stima</span> · non si spostano con messaggi nazionali</div>
+    <div class="kv">
+      <div class="k">Psicologia</div><div>Distanza dalla politica come sistema, non da un partito. Rispondono a persone, non a partiti.</div>
+      <div class="k">Leva</div><div class="leva">Solo mobilitazione territoriale: candidati radicati, contatto diretto, temi locali. È il collegamento con <a class="inline" href="liste.html">Liste &amp; collegi</a>: gli eletti con le preferenze sono la macchina che raggiunge questo bacino.</div>
+      <div class="k">Contro-leva</div><div class="contro">Spendere qui risorse di comunicazione nazionale: rendimento vicino a zero.</div>
+      <div class="k">Geografia</div><div>Sud e Isole, periferie metropolitane.</div>
+      <div class="k">Come misurare</div><div>Affluenza per sezione nei collegi "da aggredire" rispetto al 2022.</div>
+    </div>
+  </div>
+
+  <div class="impl">
+    <h3>Ordine di efficienza per un partito di governo</h3>
+    <ul>
+      <li><b>Mobilitare i delusi (A)</b> costa meno di qualsiasi conversione: sono già d'accordo, vanno solo riportati al seggio.</li>
+      <li><b>Trattenere gli attratti da FN (B)</b> vale doppio in seggi, perché ogni voto che resta toglie a chi tiene il centrodestra sotto il 42%.</li>
+      <li><b>I moderati (C)</b> si conquistano con la credibilità di governo: misure, non messaggi. Rendimento più lento, ma è il bacino che decide i collegi marginali del Centro-Nord.</li>
+      <li><b>Gli strutturali (D)</b> non sono un bersaglio nazionale: sono un bersaglio dei candidati.</li>
+    </ul>
+  </div>
+
+  <h2>5 · Quanto vale, in seggi</h2>
+  <div class="card">
+    <div class="small" style="margin-bottom:8px;">Imposta la quota che si riesce a recuperare di ciascun bacino (dimensione centrale della forchetta). I voti recuperati da A e C entrano nel voto espresso (alzano l'affluenza), quelli di B tornano da FN a FdI. Il risultato passa dallo stesso motore Stabilicum di <a class="inline" href="liste.html">Liste &amp; collegi</a> (Camera, 384 seggi ordinari, premio 70 al 42%, tetto 220). <span class="tag stima">stima</span></div>
+    <div class="rec"><span style="width:230px;font-weight:600;">A · Delusi di area (3%)</span><input type="range" id="rA" min="0" max="100" step="5" value="25" style="flex:1;min-width:120px;"><span><b id="rAv">25</b>%</span></div>
+    <div class="rec"><span style="width:230px;font-weight:600;">B · Attratti da FN (3%)</span><input type="range" id="rB" min="0" max="100" step="5" value="25" style="flex:1;min-width:120px;"><span><b id="rBv">25</b>%</span></div>
+    <div class="rec"><span style="width:230px;font-weight:600;">C · Moderati oscillanti (4%)</span><input type="range" id="rC" min="0" max="100" step="5" value="25" style="flex:1;min-width:120px;"><span><b id="rCv">25</b>%</span></div>
+    <div class="rec" style="margin-top:10px;"><label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" id="fnIn"> Futuro Nazionale federato nel centrodestra</label><button id="rReset" class="mini" style="margin-left:auto;">Azzera</button></div>
+    <div class="grid2" style="margin-top:12px;" id="recKpi"></div>
+    <div class="posbox" id="recBox"></div>
+    <div class="wraptab" id="recTab"></div>
+  </div>
+
+  <div class="part">Parte C · Metodo di lavoro</div>
+  <h2>6 · Registro delle ipotesi</h2>
+  <p>Ogni idea diventa un'ipotesi con bersaglio, effetto atteso, indicatore e scadenza. Si testa in piccolo, si misura, si scala o si chiude. Serve a non litigare su opinioni: si discute su un numero concordato prima. Le righe sono salvate in questo browser; con "Esporta" si condividono, con "Importa" si allineano.</p>
+  <div class="card">
+    <div class="wraptab"><table id="regTab"></table></div>
+    <h3 style="margin-top:14px;">Nuova ipotesi</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;">
+      <input type="text" id="h_mossa" placeholder="Mossa (cosa facciamo)">
+      <select id="h_bac"><option value="A">A · Delusi di area</option><option value="B">B · Attratti da FN</option><option value="C">C · Moderati</option><option value="D">D · Strutturali</option></select>
+      <input type="number" id="h_pts" placeholder="Effetto atteso su FdI (punti)" step="0.1" min="0" max="10">
+      <input type="text" id="h_ind" placeholder="Indicatore (quale domanda / dato)">
+      <input type="text" id="h_soglia" placeholder="Soglia di successo">
+      <input type="date" id="h_data">
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center;">
+      <button id="h_add" class="primary">+ Aggiungi</button>
+      <button id="h_export">Esporta</button>
+      <button id="h_import">Importa</button>
+      <button id="h_reset">Ripristina esempi</button>
+      <span id="h_msg" class="small" style="margin-left:auto;"></span>
+    </div>
+    <textarea id="h_io" style="width:100%;height:80px;margin-top:8px;display:none;font-size:11.5px;" placeholder="Incolla qui il testo esportato da un altro computer, poi premi Importa."></textarea>
+  </div>
+
+  <h2>7 · Cosa non fare, e cosa serve</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0;">Cinque cose da non fare</h3>
+      <ul>
+        <li><b>Rincorrere FN sull'identità.</b> Sposta il confronto sul suo terreno e conferma il suo momentum.</li>
+        <li><b>Annunciare senza consegnare.</b> Sul costo della vita ogni annuncio non seguito da una misura datata peggiora il gradimento tra i delusi.</li>
+        <li><b>Massimizzare l'esposizione della leader.</b> Il gradimento personale è capitale da dosare: la fatica è la molla del bacino A.</li>
+        <li><b>Spendere comunicazione nazionale sugli astenuti strutturali.</b> Rendimento zero; lì lavorano i candidati.</li>
+        <li><b>Litigare in pubblico sul perimetro della coalizione.</b> È il bacino C che se ne va per primo.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">Il dato che manca</h3>
+      <p>Le dimensioni dei bacini sono stime da fonti pubbliche. Per decidere dove investire serve un <b>panel proprietario</b>: 2–3 mila casi reintervistati ogni tre settimane, con tre domande chiave: certezza di voto, voto 2022, tema più importante. Costa meno di una settimana di affissioni ed è l'unico modo per sapere se una mossa ha funzionato.</p>
+      <p class="small">Quando arriva, i quattro bacini di questa pagina vengono sostituiti dalle dimensioni misurate e le elasticità del <a class="inline" href="simulatore.html">Simulatore</a> diventano le vostre.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>Fonti e avvertenze.</b> Fedeltà: Ipsos/Pagnoncelli. Indecisi/astenuti 33,6%: YouTrend/Sky TG24 (17/9). Gradimenti: BiDiMedia, Termometro Politico. Flussi FdI→FN: YouTrend/Sky TG24. Partiti e coalizioni: Supermedia YouTrend/AGI 17/9/2026. Le dimensioni dei bacini sono stime e ipotesi dichiarate, non misure; il valore in seggi usa il motore Stabilicum (testo Senato 15/9/2026, iter verificato il 23/9) sulla sola Camera. Documento a uso analitico interno, 23 settembre 2026.
+  </div>
+</div>
+
+<script>
+(function(){
+  var P=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b",nat:26.6},{k:"PD",n:"PD",c:"#d64541",nat:21.1},{k:"M5S",n:"M5S",c:"#e0a216",nat:12.5},{k:"FN",n:"Futuro Nazionale",c:"#c8602f",nat:7.7},{k:"FI",n:"Forza Italia",c:"#3a8dde",nat:7.4},{k:"AVS",n:"AVS",c:"#1f9e74",nat:6.4},{k:"Lega",n:"Lega",c:"#5a8f2a",nat:5.6},{k:"Az",n:"Azione",c:"#7a6fd0",nat:3.3},{k:"IV",n:"Italia Viva",c:"#cf5380",nat:2.3},{k:"PiuE",n:"+Europa",c:"#8a8a82",nat:1.5},{k:"NM",n:"Noi Moderati",c:"#a9a79e",nat:1.1}];
+  var COAL={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",M5S:"csx",AVS:"csx",IV:"csx",PiuE:"csx",FN:"solo",Az:"solo"};
+  var SIZE={A:3.0,B:3.0,C:4.0};
+  var TOT=384,PREMIO=70,CAP=220,MAJ=201;
+  function $(id){return document.getElementById(id);}
+  function hare(v,M){var ks=Object.keys(v).filter(function(k){return v[k]>0;});var t=ks.reduce(function(s,k){return s+v[k];},0);var o={};if(t<=0||M<=0){ks.forEach(function(k){o[k]=0;});return o;}var q=t/M,u=0,r=[];ks.forEach(function(k){var e=v[k]/q;o[k]=Math.floor(e);u+=o[k];r.push({k:k,f:e-o[k]});});r.sort(function(a,b){return b.f-a.f||a.k.localeCompare(b.k);});var i=0;while(u<M&&r.length){o[r[i%r.length].k]++;u++;i++;}return o;}
+  function scenario(){
+    var rA=+$("rA").value/100,rB=+$("rB").value/100,rC=+$("rC").value/100,fnIn=$("fnIn").checked;
+    var v={};P.forEach(function(p){v[p.k]=p.nat;});
+    var coal={};for(var k in COAL)coal[k]=COAL[k];if(fnIn)coal.FN="cdx";
+    // B: da FN a FdI (a somma zero)
+    var b=Math.min(v.FN,SIZE.B*rB);v.FN-=b;v.FdI+=b;
+    // A e C: entrano nel voto espresso -> rinormalizzo
+    var add=SIZE.A*rA+SIZE.C*rC;var tot=0;for(var k2 in v)tot+=v[k2];
+    v.FdI+=add;var s=0;for(var k4 in v)s+=v[k4];for(var k5 in v)v[k5]=v[k5]*tot/s;
+    var ct={cdx:0,csx:0};P.forEach(function(p){if(coal[p.k]!=="solo")ct[coal[p.k]]+=v[p.k];});
+    var ok={};P.forEach(function(p){ok[p.k]=v[p.k]>=3;});["cdx","csx"].forEach(function(c){if(ct[c]>=10){var best=null;P.forEach(function(p){if(coal[p.k]===c&&v[p.k]<3&&v[p.k]>0&&(best===null||v[p.k]>v[best]))best=p.k;});if(best)ok[best]=true;}});
+    var w=null;var lead=ct.cdx>=ct.csx?"cdx":"csx";if(ct[lead]>=42)w=lead;
+    var vv={};P.forEach(function(p){if(ok[p.k])vv[p.k]=v[p.k];});
+    var seats;
+    if(!w){seats=hare(vv,TOT);}
+    else{var prop=hare(vv,TOT-PREMIO);var wv={};P.forEach(function(p){if(ok[p.k]&&coal[p.k]===w)wv[p.k]=v[p.k];});var wp=Object.keys(wv).reduce(function(s,k){return s+(prop[k]||0);},0);var pr=Math.min(PREMIO,Math.max(0,CAP-wp));var bon=hare(wv,pr);seats={};P.forEach(function(p){seats[p.k]=(prop[p.k]||0)+(bon[p.k]||0);});if(pr<PREMIO){var oth={};P.forEach(function(p){if(ok[p.k]&&coal[p.k]!==w)oth[p.k]=v[p.k];});var a2=hare(oth,PREMIO-pr);P.forEach(function(p){seats[p.k]+=(a2[p.k]||0);});}}
+    var cs={cdx:0,csx:0};P.forEach(function(p){if(coal[p.k]!=="solo")cs[coal[p.k]]+=seats[p.k]||0;});
+    return {v:v,ct:ct,w:w,seats:seats,cs:cs,coal:coal};
+  }
+  var base=null;
+  function fmt(x){return (Math.round(x*10)/10).toFixed(1);}
+  function render(){
+    $("rAv").textContent=$("rA").value;$("rBv").textContent=$("rB").value;$("rCv").textContent=$("rC").value;
+    var b0=base;var S=scenario();
+    var d=42-S.ct.cdx;
+    $("recKpi").innerHTML='<div class="kpi"><div class="l">FdI</div><div class="v">'+fmt(S.v.FdI)+'% <span class="small">'+(S.v.FdI-b0.v.FdI>=0.05?'▲ +'+fmt(S.v.FdI-b0.v.FdI):'')+'</span></div><div class="l">'+(S.seats.FdI||0)+' deputati (base '+(b0.seats.FdI||0)+')</div></div>'+
+      '<div class="kpi"><div class="l">Centrodestra'+(S.coal.FN==="cdx"?' + FN':'')+'</div><div class="v" style="color:'+(d<=0?'var(--green)':'var(--red)')+';">'+fmt(S.ct.cdx)+'%</div><div class="l">'+(d<=0?'sopra il 42% di '+fmt(-d)+' punti':'mancano '+fmt(d)+' punti al 42%')+' · campo largo '+fmt(S.ct.csx)+'%</div></div>';
+    var msg;
+    if(S.w==="cdx")msg='<b>Premio al centrodestra.</b> '+S.cs.cdx+' deputati su 384'+(S.cs.cdx>=MAJ?', maggioranza assoluta':'')+'; campo largo '+S.cs.csx+'.';
+    else if(S.w==="csx")msg='<b>Premio al campo largo</b> ('+S.cs.csx+' deputati'+(S.cs.csx>=MAJ?', maggioranza assoluta':'')+'). Centrodestra '+S.cs.cdx+'. '+(S.ct.cdx>=42?'Il centrodestra è sopra il 42% ma non è primo: il premio va a chi arriva primo, e il campo largo è ancora davanti di '+fmt(S.ct.csx-S.ct.cdx)+' punti.':'I recuperi impostati non bastano a spostare il premio.');
+    else msg='<b>Nessun premio, proporzionale puro.</b> Centrodestra '+S.cs.cdx+', campo largo '+S.cs.csx+': nessuna maggioranza.';
+    $("recBox").innerHTML='<div class="big">'+(S.cs.cdx-b0.cs.cdx>=0?'+':'')+(S.cs.cdx-b0.cs.cdx)+' deputati al centrodestra</div><div>'+msg+'</div><div class="small" style="color:#b9c6da;margin-top:4px;">Base (Supermedia 17/9, nessun recupero'+(S.coal.FN==="cdx"?', FN federato':'')+'): centrodestra '+fmt(b0.ct.cdx)+'%, '+b0.cs.cdx+' deputati; campo largo '+fmt(b0.ct.csx)+'%, '+b0.cs.csx+'. Il salto non è lineare: intorno al 42% pochi decimali valgono decine di seggi.</div>';
+    var rows='';P.forEach(function(p){rows+='<tr'+(p.k==="FdI"?' style="background:rgba(27,58,107,0.06);"':'')+'><td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:'+p.c+';"></span> '+p.n+'</td><td class="n">'+fmt(b0.v[p.k])+'</td><td class="n">'+fmt(S.v[p.k])+'</td><td class="n">'+(b0.seats[p.k]||0)+'</td><td class="n">'+(S.seats[p.k]||0)+'</td></tr>';});
+    $("recTab").innerHTML='<table><tr><th>Lista</th><th class="n">% base</th><th class="n">% scenario</th><th class="n">Seggi base</th><th class="n">Seggi scenario</th></tr>'+rows+'</table>';
+  }
+  function recomputeBase(){var a=$("rA").value,b=$("rB").value,c=$("rC").value;$("rA").value=0;$("rB").value=0;$("rC").value=0;base=scenario();$("rA").value=a;$("rB").value=b;$("rC").value=c;}
+  ["rA","rB","rC"].forEach(function(id){$(id).addEventListener("input",render);});
+  $("fnIn").addEventListener("change",function(){recomputeBase();render();});
+  $("rReset").addEventListener("click",function(){$("rA").value=0;$("rB").value=0;$("rC").value=0;render();});
+  recomputeBase();render();
+
+  // ---- registro ipotesi ----
+  var BAC={A:"A · Delusi",B:"B · Attratti FN",C:"C · Moderati",D:"D · Strutturali"};
+  var STATI={t:"da testare",c:"in corso",ok:"confermata",ko:"chiusa"};
+  var SEED=[
+    {mossa:"Messaggio 'il premio va a loro': la regola del 42% spiegata agli elettori di area",bac:"A",pts:1.0,ind:"Certezza di voto tra ex elettori cdx 2022 (panel)",soglia:"+5 punti di 'sicuramente voto' in 6 settimane",data:"2026-11-15",st:"t",ex:true},
+    {mossa:"Aritmetica del voto utile verso FN: 'un voto a FN fuori coalizione è un voto per Schlein-Conte'",bac:"B",pts:1.0,ind:"Quota di ex FdI orientati a FN che giudica 'utile' il voto FN dopo esposizione al messaggio",soglia:"calo di 10 punti rispetto al gruppo di controllo",data:"2026-11-30",st:"t",ex:true},
+    {mossa:"Misura datata sul costo dell'energia per le famiglie, comunicata dopo il varo, non prima",bac:"C",pts:0.8,ind:"Credibilità del governo sul tema energia tra chi non vota FdI (panel)",soglia:"governo davanti al PD sull'ownership del tema",data:"2026-12-20",st:"t",ex:true},
+    {mossa:"Presidio dei collegi 'da aggredire' con candidati-traino e contatto diretto",bac:"D",pts:0.5,ind:"Affluenza per sezione vs 2022 nei collegi marginali",soglia:"+2 punti di affluenza rispetto ai collegi di controllo",data:"2027-03-01",st:"t",ex:true}
+  ];
+  var KEY="ele_reg_v1";
+  function load(){try{var r=localStorage.getItem(KEY);if(r){var a=JSON.parse(r);if(Array.isArray(a))return a;}}catch(e){}return SEED.map(function(x){var o={};for(var k in x)o[k]=x[k];return o;});}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(REG));}catch(e){}}
+  var REG=load();
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+  function renderReg(){
+    var h='<tr><th>Mossa</th><th>Bacino</th><th class="n">Effetto atteso</th><th>Indicatore</th><th>Soglia di successo</th><th>Scadenza</th><th>Stato</th><th></th></tr>';
+    if(!REG.length)h+='<tr><td colspan="8" class="small">Nessuna ipotesi. Aggiungine una sotto.</td></tr>';
+    REG.forEach(function(r,i){h+='<tr><td><b>'+esc(r.mossa)+'</b>'+(r.ex?' <span class="small">(esempio)</span>':'')+'</td><td>'+esc(BAC[r.bac]||r.bac)+'</td><td class="n">'+(r.pts!=null&&r.pts!==""?'+'+(+r.pts).toFixed(1)+' pt':'—')+'</td><td class="small">'+esc(r.ind)+'</td><td class="small">'+esc(r.soglia)+'</td><td class="small">'+esc(r.data)+'</td><td><select data-st="'+i+'" style="font-size:11px;padding:2px 4px;">'+Object.keys(STATI).map(function(k){return '<option value="'+k+'"'+(r.st===k?' selected':'')+'>'+STATI[k]+'</option>';}).join('')+'</select></td><td><button class="mini" data-del="'+i+'">×</button></td></tr>';});
+    $("regTab").innerHTML=h;
+    document.querySelectorAll('[data-st]').forEach(function(el){el.addEventListener("change",function(){REG[+el.getAttribute("data-st")].st=el.value;save();});});
+    document.querySelectorAll('[data-del]').forEach(function(el){el.addEventListener("click",function(){REG.splice(+el.getAttribute("data-del"),1);save();renderReg();});});
+    var sum=REG.filter(function(r){return r.st!=="ko";}).reduce(function(s,r){return s+(parseFloat(r.pts)||0);},0);
+    $("h_msg").textContent=REG.length+" ipotesi · effetto atteso cumulato (non chiuse): +"+sum.toFixed(1)+" punti FdI";
+  }
+  $("h_add").addEventListener("click",function(){var m=$("h_mossa").value.trim();if(!m){$("h_msg").textContent="Scrivi la mossa.";return;}REG.push({mossa:m,bac:$("h_bac").value,pts:parseFloat($("h_pts").value)||0,ind:$("h_ind").value.trim(),soglia:$("h_soglia").value.trim(),data:$("h_data").value,st:"t"});save();$("h_mossa").value="";$("h_pts").value="";$("h_ind").value="";$("h_soglia").value="";$("h_data").value="";renderReg();});
+  $("h_export").addEventListener("click",function(){var ta=$("h_io");ta.style.display="block";ta.value=JSON.stringify(REG);ta.select();try{document.execCommand("copy");$("h_msg").textContent="Esportato e copiato: incollalo su un altro computer e premi Importa.";}catch(e){$("h_msg").textContent="Esportato: copia il testo qui sotto.";}});
+  $("h_import").addEventListener("click",function(){var ta=$("h_io");if(ta.style.display==="none"){ta.style.display="block";ta.value="";ta.focus();$("h_msg").textContent="Incolla il testo esportato e premi di nuovo Importa.";return;}try{var a=JSON.parse(ta.value);if(!Array.isArray(a))throw 0;REG=a;save();renderReg();ta.style.display="none";$("h_msg").textContent="Importato: "+a.length+" ipotesi.";}catch(e){$("h_msg").textContent="Testo non valido.";}});
+  $("h_reset").addEventListener("click",function(){REG=SEED.map(function(x){var o={};for(var k in x)o[k]=x[k];return o;});save();renderReg();});
+  renderReg();
+})();
+</script>
+</body>
+</html>

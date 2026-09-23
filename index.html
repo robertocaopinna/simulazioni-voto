@@ -54,25 +54,34 @@ a.inline{color:var(--navy);}
 .upd{border-left:3px solid var(--navy);padding:4px 0 4px 12px;margin:8px 0;font-size:13.5px;}
 .upd .dt{font-size:11px;color:var(--hint);font-weight:600;}
 </style>
+<style id="navcss">
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e7e3d8;}
+.nav-in{max-width:1100px;margin:0 auto;padding:4px 14px 3px;display:flex;align-items:center;gap:0 18px;flex-wrap:wrap;}
+.nav .nav-title{font-family:Georgia,serif;font-weight:700;font-size:12.5px;color:#1b3a6b;text-decoration:none;padding:4px 0 0;border:0;white-space:nowrap;flex-basis:100%;letter-spacing:.02em;}
+.nav .grp{display:flex;align-items:center;padding:2px 0;flex-wrap:wrap;white-space:nowrap;}
+.nav .gl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9a9890;font-weight:700;margin-right:5px;}
+.nav .grp a{font-size:11.5px;padding:6px 5px;color:#6b6960;text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav .grp a:hover{color:#2a2924;}
+.nav .grp a.active{color:#1b3a6b;border-bottom-color:#1b3a6b;font-weight:600;}
+@media (max-width:760px){.nav-in{gap:4px 10px;}}
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-in">
-  <span class="nav-title">Osservatorio elettorale</span>
-  <a href="index.html" class="active">Trend &amp; Driver</a>
-  <a href="storico.html">Storico &amp; Eventi</a>
-  <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
-  <a href="simulatore.html">Simulatore mosse</a>
-  <a href="aula.html">Aula attuale</a>
-  <a href="liste.html">Liste &amp; collegi</a>
-  <a href="trackrecord.html">Track record</a>
-  <a href="osservatorio.html">Osservatorio</a>
-  <a href="confronto.html">Confronto leggi</a>
-  <a href="metodo.html">Metodo</a>
+  <a class="nav-title" href="index.html">Osservatorio elettorale</a>
+  <div class="grp"><span class="gl">Capire</span><a href="index.html" class="active">Trend</a><a href="storico.html">Storico</a><a href="osservatorio.html">Osservatorio</a><a href="trackrecord.html">Track record</a></div>
+  <div class="grp"><span class="gl">Decidere</span><a href="elettorati.html">Persuadibili</a><a href="simulatore.html">Simulatore</a><a href="liste.html">Liste &amp; collegi</a><a href="aula.html">Aula attuale</a></div>
+  <div class="grp"><span class="gl">Riferimento</span><a href="confronto.html">Confronto</a><a href="metodo.html">Metodo</a><a href="guida.html">Guida</a></div>
 </div></nav>
 
 <div class="wrap">
   <h1>Come si muove l'opinione verso le elezioni</h1>
   <div class="lede">Analisi dei movimenti del voto e dei fattori che li determinano · aggiornato al 23 settembre 2026</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0 22px;">
+    <a href="osservatorio.html" style="text-decoration:none;color:inherit;background:#fff;border:1px solid #e7e3d8;border-left:4px solid #1b3a6b;border-radius:10px;padding:11px 14px;display:block;"><div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a9890;font-weight:700;">Capire</div><div style="font-family:Georgia,serif;font-weight:700;font-size:15px;color:#1b3a6b;">Cosa succede</div><div style="font-size:12.5px;color:#6b6960;">Trend, storico, aggregato dei sondaggi, probabilità di maggioranza, track record.</div></a>
+    <a href="elettorati.html" style="text-decoration:none;color:inherit;background:#fff;border:1px solid #e7e3d8;border-left:4px solid #b23636;border-radius:10px;padding:11px 14px;display:block;"><div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a9890;font-weight:700;">Decidere</div><div style="font-family:Georgia,serif;font-weight:700;font-size:15px;color:#1b3a6b;">Cosa fare</div><div style="font-size:12.5px;color:#6b6960;">Elettorati e persuadibili, mosse, collegi e candidature, Parlamento attuale.</div></a>
+    <a href="guida.html" style="text-decoration:none;color:inherit;background:#fff;border:1px solid #e7e3d8;border-left:4px solid #9a9890;border-radius:10px;padding:11px 14px;display:block;"><div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a9890;font-weight:700;">Riferimento</div><div style="font-family:Georgia,serif;font-weight:700;font-size:15px;color:#1b3a6b;">Come e perché</div><div style="font-size:12.5px;color:#6b6960;">Confronto tra le leggi, metodo e fonti, guida rapida in cinque minuti.</div></a>
+  </div>
   <div class="disc"><b>Strumento di analisi a supporto delle decisioni di Fratelli d'Italia.</b> Ogni dato è etichettato per solidità, così le scelte poggiano su basi note. I segnali sfavorevoli sono inclusi deliberatamente: servono a calibrare, non a rassicurare.</div>
   <div class="tags-key">
     <span><span class="tag t-dato">Dato</span> documentato da fonte</span>
@@ -144,7 +153,7 @@ a.inline{color:var(--navy);}
   <h2>7 · Rischio-soglia 42%</h2>
   <div class="card" style="border-left:3px solid var(--navy);">
     <p>Con la nuova legge ("Stabilicum": approvata dal Senato il 15/9, in terza lettura alla Camera dal 28/9 con fiducia annunciata, voto finale atteso la settimana del 5/10; iter verificato il 23/9), <b>vincere non basta</b>: il premio (70 seggi Camera, 35 Senato) scatta solo oltre il 42% <b>e</b> risultando primi in <b>entrambe</b> le Camere; altrimenti proporzionale puro. <span class="tag t-dato">Dato</span></p>
-    <p style="margin-bottom:0;"><b>Situazione ribaltata (17/9):</b> il centrodestra è al 40,7% — <b>sotto soglia</b> e sotto il 41% per la prima volta nella legislatura. Il campo largo con IV e +E è al 43,9%, <b>sopra il 42%</b>. Oggi il premio andrebbe al campo largo, non al centrodestra. La chiave resta FN: fuori dalla coalizione al 7,7%, tiene il centrodestra sotto soglia. Dal 23/9 tutto il sito lavora con lo Stabilicum come ipotesi di legge in vigore: scenari nel <a class="inline" href="confronto.html">Confronto leggi</a> e nell'<a class="inline" href="osservatorio.html">Osservatorio</a>, collegi e candidature in <a class="inline" href="liste.html">Liste &amp; collegi</a>. <span class="src" style="display:inline;">Supermedia YouTrend/AGI 17/9.</span></p>
+    <p style="margin-bottom:0;"><b>Situazione ribaltata (17/9):</b> il centrodestra è al 40,7% — <b>sotto soglia</b> e sotto il 41% per la prima volta nella legislatura. Il campo largo con IV e +E è al 43,9%, <b>sopra il 42%</b>. Oggi il premio andrebbe al campo largo, non al centrodestra. La chiave resta FN: fuori dalla coalizione al 7,7%, tiene il centrodestra sotto soglia. Dal 23/9 tutto il sito lavora con lo Stabilicum come ipotesi di legge in vigore: scenari nel <a class="inline" href="confronto.html">Confronto</a> e nell'<a class="inline" href="osservatorio.html">Osservatorio</a>, collegi e candidature in <a class="inline" href="liste.html">Liste &amp; collegi</a>. <span class="src" style="display:inline;">Supermedia YouTrend/AGI 17/9.</span></p>
   </div>
 
   <h2>8 · Implicazioni strategiche</h2>
