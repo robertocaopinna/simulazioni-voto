@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Osservatorio elettorale · Aula attuale</title>
 <style>
@@ -61,6 +62,7 @@ button:hover{background:#f3f1ea;}
   <a href="solidita.html">Solidità</a>
   <a href="simulatore.html">Simulatore</a>
   <a href="aula.html" class="active">Aula attuale</a>
+  <a href="liste.html">Liste &amp; collegi</a>
   <a href="trackrecord.html">Track record</a>
   <a href="osservatorio.html">Osservatorio</a>
   <a href="confronto.html">Confronto</a>
@@ -70,7 +72,7 @@ button:hover{background:#f3f1ea;}
 <div class="wrap">
   <h1>Aula attuale · Camera e Senato</h1>
   <div class="lede">Il Parlamento <b>reale di oggi</b>. Per i gruppi piccoli puoi spostare i <b>singoli parlamentari per nome</b>; per i grandi, quote numeriche.</div>
-  <div class="disc"><b>Affidabilità dei nomi.</b> I nomi di <b>Futuro Nazionale</b> (8) sono verificati e aggiornati al 6 giugno 2026. I nomi degli altri piccoli gruppi (Azione, Italia Viva) sono <b>indicativi</b> (tratteggiati): le composizioni cambiano di continuo e gli elenchi pubblici non sono sempre aggiornati — vanno verificati. Dove non ho nomi certi compaiono segnaposto. I grandi gruppi restano in forma numerica. Senato: forma numerica (nomi non verificati). Per governare serve la maggioranza in entrambe le Camere: vedi il verdetto sotto.</div>
+  <div class="disc"><b>Affidabilità dei nomi.</b> I nomi di <b>Futuro Nazionale</b> (9) sono verificati e aggiornati al 22 settembre 2026 (ultimo ingresso: Calderone, da Forza Italia, 21/9). I nomi degli altri piccoli gruppi (Azione, Italia Viva) sono <b>indicativi</b> (tratteggiati): le composizioni cambiano di continuo e gli elenchi pubblici non sono sempre aggiornati — vanno verificati. Dove non ho nomi certi compaiono segnaposto. I grandi gruppi restano in forma numerica. Senato: forma numerica (nomi non verificati). Per governare serve la maggioranza in entrambe le Camere: vedi il verdetto sotto.</div>
 
   <div class="verdict" id="verdict"></div>
   <div class="helprow">Per spostare un parlamentare: <b>trascina</b> il suo nome su uno schieramento, oppure <b>clicca il nome</b> e poi clicca lo schieramento di destinazione.</div>
@@ -90,7 +92,7 @@ button:hover{background:#f3f1ea;}
   <div style="margin-top:18px;"><button id="reset">↺ Composizione reale (entrambe)</button></div>
 
   <div class="foot">
-    <b>Fonti.</b> Composizione gruppi Camera e Senato, XIX legislatura, giugno 2026 (camera.it, senato.it; aggregazione Wikipedia/OpenPolis/Pagella Politica). Nomi di Futuro Nazionale verificati (Sole 24 Ore, Espresso, Libero, 6/6/2026): Bergamini, Bof, Furgiuele, Pierro, Pozzolo, Ravetto, Sasso, Ziello. Nomi di Azione e Italia Viva: indicativi, da verificare (composizioni soggette a frequenti cambi di gruppo). <b>Camera (400):</b> FdI 117, Lega 60, FI 54, NM-MAIE 8, PD 69, M5S 48, AVS 10, Azione 10, IV 7, Futuro Nazionale 8 (componente Misto), Misto-altri 9. <b>Senato (205):</b> FdI 63, Lega 29, FI 20, NM-Civici 8, PD 36, M5S 26, IV 8, Per le Autonomie 7, Misto 8.
+    <b>Fonti.</b> Composizione gruppi Camera e Senato, XIX legislatura, aggiornata al 22 settembre 2026 (camera.it, senato.it; aggregazione Wikipedia/OpenPolis/Pagella Politica). Nomi di Futuro Nazionale verificati (22/9/2026): Bergamini, Bof, Calderone (da FI, 21/9), Furgiuele, Pierro, Pozzolo, Ravetto, Sasso, Ziello. Nomi di Azione e Italia Viva: indicativi, da verificare (composizioni soggette a frequenti cambi di gruppo). <b>Camera (400):</b> FdI 117, Lega 60, FI 53, NM-MAIE 8, PD 69, M5S 48, AVS 10, Azione 10, IV 7, Futuro Nazionale 9 (componente Misto, al 22/9), Misto-altri 9. <b>Senato (205):</b> FdI 63, Lega 29, FI 20, NM-Civici 8, PD 36, M5S 26, IV 8, Per le Autonomie 7, Misto 8.
   </div>
 </div>
 
@@ -102,12 +104,12 @@ button:hover{background:#f3f1ea;}
   var NAME={FdI:"Fratelli d'Italia",Lega:"Lega",FI:"Forza Italia",NM:"Noi Moderati-MAIE",PD:"Partito Democratico",AVS:"AVS",M5S:"Movimento 5 Stelle",FN:"Futuro Nazionale (Vannacci)",Az:"Azione (Calenda)",IV:"Italia Viva (Renzi)",Aut:"Per le Autonomie",Misto:"Misto"};
   // rosters nominali (solo Camera). verified:true => nomi certi. altrimenti indicativi.
   var ROSTER={
-    FN:{verified:true,names:["Bergamini","Bof","Furgiuele","Pierro","Pozzolo","Ravetto","Sasso","Ziello"]},
+    FN:{verified:true,names:["Bergamini","Bof","Calderone","Furgiuele","Pierro","Pozzolo","Ravetto","Sasso","Ziello"]},
     Az:{verified:false,names:["Richetti","Pastorella","Gelmini","Ruffino","Sottanelli","D'Alessio","Bonetti?","Del Barba?"],fill:2},
     IV:{verified:false,names:["Boschi","Rosato","Marattin","Gadda","Giachetti","Faraone","Bonifazi"]}
   };
   function ch(groups,total,maj,withNames){return {groups:groups,total:total,maj:maj,withNames:!!withNames,coal:(function(){var o={};groups.forEach(function(g){o[g.k]=g.b;});return o;})(),def:{},members:{},open:null};}
-  var C=ch([{k:"FdI",s:117,b:"cdx"},{k:"Lega",s:60,b:"cdx"},{k:"FI",s:54,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:69,b:"csx"},{k:"AVS",s:10,b:"csx"},{k:"M5S",s:48,b:"m5s"},{k:"FN",s:8,b:"alt"},{k:"Az",s:10,b:"alt"},{k:"IV",s:7,b:"alt"},{k:"Misto",s:9,b:"alt"}],400,201,true);
+  var C=ch([{k:"FdI",s:117,b:"cdx"},{k:"Lega",s:60,b:"cdx"},{k:"FI",s:53,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:69,b:"csx"},{k:"AVS",s:10,b:"csx"},{k:"M5S",s:48,b:"m5s"},{k:"FN",s:9,b:"alt"},{k:"Az",s:10,b:"alt"},{k:"IV",s:7,b:"alt"},{k:"Misto",s:9,b:"alt"}],400,201,true);
   var S=ch([{k:"FdI",s:63,b:"cdx"},{k:"Lega",s:29,b:"cdx"},{k:"FI",s:20,b:"cdx"},{k:"NM",s:8,b:"cdx"},{k:"PD",s:36,b:"csx"},{k:"M5S",s:26,b:"m5s"},{k:"IV",s:8,b:"alt"},{k:"Aut",s:7,b:"alt"},{k:"Misto",s:8,b:"alt"}],205,103,false);
   // costruisco i membri nominali per la Camera
   function buildMembers(ST){ST.groups.forEach(function(g){if(!ST.withNames)return;var r=ROSTER[g.k];if(!r)return;var list=[];var names=r.names.slice(0,g.s);names.forEach(function(nm,i){list.push({id:g.k+i,name:nm,party:g.k,bloc:g.b,ind:!r.verified});});

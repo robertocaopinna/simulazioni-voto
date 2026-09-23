@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Osservatorio intenzioni di voto · Italia</title>
 <style>
@@ -46,6 +47,7 @@ sup{font-size:.7em;}
   <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
   <a href="simulatore.html">Simulatore mosse</a>
   <a href="aula.html">Aula attuale</a>
+  <a href="liste.html">Liste &amp; collegi</a>
   <a href="trackrecord.html">Track record</a>
   <a href="osservatorio.html" class="active">Osservatorio</a>
   <a href="confronto.html">Confronto leggi</a>
@@ -146,7 +148,11 @@ sup{font-size:.7em;}
     {inst:"Tecnè",date:"2026-05-22",rel:69,v:{FdI:29.2,PD:22.0,M5S:12.7,FI:8.8,Lega:6.9,AVS:6.2,FN:3.3,Az:2.9,IV:2.5,PiuE:1.5,NM:1.0}},
     {inst:"SWG",date:"2026-05-25",rel:75,v:{FdI:28.1,PD:22.5,M5S:12.7,FI:7.4,Lega:6.0,AVS:6.6,FN:4.3,Az:3.5,IV:2.5,PiuE:1.4,NM:1.3}},
     {inst:"Ipsos",date:"2026-05-28",rel:72,v:{FdI:28.4,PD:21.3}},
-    {inst:"Only Numbers",date:"2026-05-28",rel:67,v:{FdI:28.7,PD:22.8,FI:8.7,Lega:7.6,FN:4.2,NM:1.0}}
+    {inst:"Only Numbers",date:"2026-05-28",rel:67,v:{FdI:28.7,PD:22.8,FI:8.7,Lega:7.6,FN:4.2,NM:1.0}},
+    {inst:"Supermedia YT/AGI",date:"2026-06-15",rel:80,v:{FdI:28.2,PD:21.9,M5S:12.8,FI:8.0,Lega:6.8,AVS:6.4,FN:4.1,Az:3.1,IV:2.4,PiuE:1.6,NM:1.2}},
+    {inst:"Supermedia YT/AGI",date:"2026-07-17",rel:80,v:{FdI:27.0,PD:21.3,M5S:12.8,FI:8.2,Lega:5.9,AVS:6.5,FN:6.5,Az:3.1,IV:2.4,PiuE:1.3,NM:1.2}},
+    {inst:"SWG",date:"2026-09-14",rel:75,v:{FdI:26.8,PD:21.4,M5S:12.6,FI:7.5,Lega:5.7,AVS:6.5,FN:7.5,Az:3.2,IV:2.4,PiuE:1.5,NM:1.1}},
+    {inst:"Supermedia YT/AGI",date:"2026-09-17",rel:82,v:{FdI:26.6,PD:21.1,M5S:12.5,FI:7.4,Lega:5.6,AVS:6.4,FN:7.7,Az:3.3,IV:2.3,PiuE:1.5,NM:1.1}}
   ];
   function loadSaved(){try{var raw=localStorage.getItem("osv_polls_v2");if(raw){var a=JSON.parse(raw);if(Array.isArray(a)&&a.length)return a;}}catch(e){}return SEED.map(function(p){return {inst:p.inst,date:p.date,rel:p.rel,v:p.v,src:"seed"};});}
   function savePolls(){try{localStorage.setItem("osv_polls_v2",JSON.stringify(POLLS));}catch(e){}}

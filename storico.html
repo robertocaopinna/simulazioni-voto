@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Osservatorio elettorale · Storico &amp; Eventi</title>
 <style>
@@ -40,6 +41,7 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
   <a href="solidita.html">Solidit&agrave; &amp; Scenari</a>
   <a href="simulatore.html">Simulatore mosse</a>
   <a href="aula.html">Aula attuale</a>
+  <a href="liste.html">Liste &amp; collegi</a>
   <a href="trackrecord.html">Track record</a>
   <a href="osservatorio.html">Osservatorio</a>
   <a href="confronto.html">Confronto leggi</a>
@@ -79,7 +81,10 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
     <tr><td>27 mag</td><td><span class="chip c-ext">Esterno</span></td><td>Testo base riforma elettorale (premio 42%, tetto 220)</td><td>Apre il tema del "voto utile" e delle coalizioni</td></tr>
     <tr><td>29 mag</td><td><span class="chip c-opp">Opposizione</span></td><td>Schlein presidia l'energia ("agenda E", Civitavecchia)</td><td>Il PD occupa per primo un tema finora scoperto; prova a darsi una linea identificabile</td></tr>
     <tr><td>inizio giu</td><td><span class="chip c-gov">Centrodestra</span></td><td>Meloni scrive a von der Leyen sui costi energetici (deroghe di bilancio)</td><td>Il governo reagize ed entra sul tema: l'energia diventa terreno conteso tra i poli</td></tr>
-    <tr><td>26 giu</td><td><span class="chip c-ext">Esterno</span></td><td>Riforma attesa in Aula <em>(previsto)</em></td><td>Da monitorare</td></tr>
+    <tr><td>16 lug</td><td><span class="chip c-ext">Esterno</span></td><td>La Camera approva la riforma elettorale in prima lettura</td><td>Il testo passa al Senato; l'iter accelera</td></tr>
+    <tr><td>estate</td><td><span class="chip c-gov">Centrodestra</span></td><td><b>FN di Vannacci supera FI e vola al 7,7%</b></td><td>Diventa quarto partito; la Lega crolla al 5,6%. Riscrive gli equilibri interni al centrodestra</td></tr>
+    <tr><td>15 set</td><td><span class="chip c-ext">Esterno</span></td><td><b>Il Senato approva lo "Stabilicum" con le preferenze</b></td><td>Reintrodotte le preferenze (capolista bloccato + 3); premio 70/35 al 42% in entrambe le Camere. Torna alla Camera dal 28/9</td></tr>
+    <tr><td>17 set</td><td><span class="chip c-gov">Centrodestra</span></td><td>Centrodestra sotto il 41% per la prima volta (40,7%)</td><td>Col nuovo sistema, oggi il premio andrebbe al campo largo (43,9% con IV+E)</td></tr>
   </table>
 
   <h2>Letture d'insieme</h2>
@@ -89,7 +94,7 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
   <div class="note"><b>Come si aggiorna.</b> A ogni aggiornamento si aggiungono il nuovo punto-dati alla serie e gli eventi del periodo — comprese le mosse di FdI da tracciare — così lo strumento misura nel tempo se e come le azioni incidono sui consensi.</div>
 
   <div class="foot">
-    Eventi verificati su fonti giornalistiche (YouTrend, Sky TG24, Il Fatto, Today, Il Tempo, Il Foglio, Fanpage, Ansa). Serie ricostruita dalle medie ponderate dei principali istituti: i valori sono approssimazioni della media di periodo, non singole rilevazioni. L'associazione evento -> movimento e' <b>suggerita, non dimostrata</b>: i sondaggi hanno margine d'errore e le cause sono molteplici e interagenti. Documento a uso analitico, aggiornato al 15 giugno 2026.
+    Eventi verificati su fonti giornalistiche (YouTrend, Sky TG24, Il Fatto, Today, Il Tempo, Il Foglio, Fanpage, Ansa). Serie ricostruita dalle medie ponderate dei principali istituti: i valori sono approssimazioni della media di periodo, non singole rilevazioni. L'associazione evento -> movimento e' <b>suggerita, non dimostrata</b>: i sondaggi hanno margine d'errore e le cause sono molteplici e interagenti. Documento a uso analitico, aggiornato al 23 settembre 2026.
   </div>
 </div>
 
@@ -107,7 +112,9 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
     {d:"2026-05-18",FdI:28.5,PD:22.2,M5S:12.5,Lega:6.3,FN:3.8},
     {d:"2026-05-25",FdI:28.2,PD:22.4,M5S:12.7,Lega:6.1,FN:4.1},
     {d:"2026-05-31",FdI:28.2,PD:22.0,M5S:12.8,Lega:6.8,FN:3.8},
-    {d:"2026-06-15",FdI:28.0,PD:21.9,M5S:12.8,Lega:6.7,FN:4.3}
+    {d:"2026-06-15",FdI:28.0,PD:21.9,M5S:12.8,Lega:6.7,FN:4.3},
+    {d:"2026-07-17",FdI:27.0,PD:21.3,M5S:12.8,Lega:5.9,FN:6.5},
+    {d:"2026-09-17",FdI:26.6,PD:21.1,M5S:12.5,Lega:5.6,FN:7.7}
   ];
   var EVENTS=[
     {d:"2026-01-24",cat:"gov",label:"Vannacci registra il simbolo Futuro Nazionale"},
@@ -120,7 +127,10 @@ th{color:var(--muted);font-weight:600;font-size:12px;}
     {d:"2026-05-27",cat:"ext",label:"Testo base riforma elettorale (premio 42%)"},
     {d:"2026-05-29",cat:"opp",label:"Schlein presidia l'energia (agenda E, Civitavecchia)"},
     {d:"2026-06-02",cat:"gov",label:"Meloni scrive alla UE sui costi energetici (deroghe bilancio)"},
-    {d:"2026-06-11",cat:"gov",label:"Vannacci sfiora il 5% e tallona la Lega"}
+    {d:"2026-06-11",cat:"gov",label:"Vannacci sfiora il 5% e tallona la Lega"},
+    {d:"2026-07-16",cat:"ext",label:"La Camera approva la riforma elettorale (1a lettura)"},
+    {d:"2026-09-15",cat:"ext",label:"Il Senato approva lo Stabilicum con le preferenze"},
+    {d:"2026-09-17",cat:"gov",label:"Centrodestra sotto il 41% per la prima volta"}
   ];
   var CATC={gov:"#1b3a6b",opp:"#b23636",ext:"#b07b00"};
   var LINES=[{k:"FdI",c:"#1b3a6b"},{k:"PD",c:"#d64541"},{k:"M5S",c:"#e0a216"},{k:"Lega",c:"#5a8f2a"},{k:"FN",c:"#c8602f"}];

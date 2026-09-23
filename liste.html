@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservatorio elettorale · Simulatore liste</title>
+<style>
+:root{--bg:#faf8f2;--card:#fff;--soft:#f1efe8;--line:#e7e3d8;--ink:#2a2924;--muted:#6b6960;--hint:#9a9890;--navy:#1b3a6b;--red:#b23636;--green:#1f7a4d;--amber:#b07b00;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:2px;flex-wrap:wrap;}
+.nav-title{font-family:Georgia,serif;font-weight:700;font-size:13.5px;margin-right:auto;padding:13px 0;color:var(--navy);}
+.nav a{font-size:11.5px;padding:13px 7px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;font-weight:500;}
+.nav a:hover{color:var(--ink);}
+.nav a.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 18px 50px;}
+h1{font-family:Georgia,serif;font-size:25px;font-weight:700;margin:0 0 4px;}
+.lede{font-size:14px;color:var(--muted);margin-bottom:8px;}
+.disc{font-size:12px;color:var(--amber);background:#fbf6ea;border:1px solid #f0e4c8;border-radius:8px;padding:9px 13px;margin:12px 0 18px;}
+h2{font-family:Georgia,serif;font-size:18px;font-weight:700;margin:24px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--navy);}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.small{font-size:11.5px;color:var(--muted);}
+button{font-family:inherit;font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid #d8d3c6;background:#fff;color:var(--ink);cursor:pointer;font-weight:600;}
+button:hover{background:#f3f1ea;} button.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+button.preset{font-size:12px;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#ded9cc;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--navy);cursor:pointer;}
+input[type=number]{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padding:4px 6px;background:#fff;color:var(--ink);font-size:12.5px;width:64px;}
+.prow{display:flex;align-items:center;gap:9px;margin:5px 0;font-size:13px;}
+.prow .lab{width:140px;flex:none;display:flex;align-items:center;gap:7px;}
+.dot{width:9px;height:9px;border-radius:2px;flex:none;}
+.magbox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0;}
+.seatgrid{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;}
+.seatchip{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;font-size:13px;font-weight:600;color:#fff;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);}
+th{color:var(--muted);font-weight:600;font-size:12px;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+tr.me{background:rgba(27,58,107,0.06);}
+.posbox{background:#11243f;color:#e8eef6;border-radius:10px;padding:15px 17px;margin:12px 0;}
+.posbox b{color:#fff;}
+.posbox .big{font-size:30px;font-weight:700;font-family:Georgia,serif;color:#fff;}
+.foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:26px;}
+a.inline{color:var(--navy);}
+.toggle{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <span class="nav-title">Osservatorio elettorale</span>
+  <a href="index.html">Trend</a>
+  <a href="storico.html">Storico</a>
+  <a href="solidita.html">Solidità</a>
+  <a href="simulatore.html">Simulatore</a>
+  <a href="aula.html">Aula attuale</a>
+  <a href="liste.html" class="active">Liste &amp; collegi</a>
+  <a href="trackrecord.html">Track record</a>
+  <a href="osservatorio.html">Osservatorio</a>
+  <a href="confronto.html">Confronto</a>
+  <a href="metodo.html">Metodo</a>
+</div></nav>
+
+<div class="wrap">
+  <h1>Simulatore liste &amp; collegi</h1>
+  <div class="lede">Dove collocare i candidati migliori per <b>massimizzare i seggi della coalizione</b> e conquistare il seggio marginale. Quanti seggi prende la lista in un collegio, e dove un nome forte può spostare il risultato.</div>
+  <div class="disc"><b>Logica della nuova legge ("Stabilicum", aggiornata al Senato il 15/9/2026).</b> Aboliti i collegi uninominali (salvo Valle d'Aosta e Trentino): si vota in <b>collegi plurinominali</b> con <b>capolista bloccato e fino a 3 preferenze</b> — al Senato sono state <b>reintrodotte le preferenze</b>, non più liste interamente bloccate. Conseguenza sulla strategia: quanti seggi prende la lista nel collegio resta il dato che conta (lo calcola questo strumento), ma <b>l'ordine oltre il capolista non è più decisivo</b>: dal secondo in poi eleggono le preferenze degli elettori, non la posizione. Quindi: il <b>capolista</b> è la scelta che pesa (è blindato), e per gli altri seggi contano candidati capaci di <b>raccogliere preferenze sul territorio</b>. <b>Lo scopo resta massimizzare i seggi:</b> mettere il capolista giusto dove la lista vince il seggio, e candidati-traino che portano voti e preferenze nei collegi contendibili. <b>Avvertenze:</b> la legge non è ancora in vigore (terza lettura alla Camera dal 28/9), confini e ampiezze dei collegi possono cambiare; la forza locale è una stima regolabile. Strumento di pianificazione, non previsione.</div>
+
+  <h2>1 · Forza dei partiti nel collegio</h2>
+  <div class="card">
+    <div class="small" style="margin-bottom:8px;">Parti dalle percentuali nazionali (Supermedia YouTrend/AGI 17/9/2026) e regolale per il collegio che stai analizzando. Scegli il dato di base e il profilo del territorio, poi regola le percentuali per il collegio. Solo le liste sopra il 3% nazionale partecipano.</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;align-items:center;">
+      <span class="small" style="font-weight:600;">Dato di base:</span>
+      <button class="base-btn primary" data-base="s2026">Sondaggi 2026</button>
+      <button class="base-btn" data-base="v2022">Voto reale 2022</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;">
+      <span class="small" style="font-weight:600;">Profilo territoriale 2022:</span>
+      <button class="terr-btn" data-terr="naz">Nazionale</button>
+      <button class="terr-btn" data-terr="nord">Nord (cdx forte)</button>
+      <button class="terr-btn" data-terr="centro">Centro (csx forte)</button>
+      <button class="terr-btn" data-terr="sud">Sud (M5S forte)</button>
+    </div>
+    <div id="parties"></div>
+  </div>
+
+  <h2>2 · Il collegio</h2>
+  <div class="card">
+    <div class="magbox">
+      <span style="font-weight:600;">Ampiezza del collegio:</span>
+      <input type="range" id="mag" min="2" max="10" step="1" value="6" style="flex:1;min-width:140px;">
+      <span><b id="magv">6</b> seggi</span>
+    </div>
+    <div class="small">Quanti deputati elegge questo collegio plurinominale. In media i collegi della Camera ne eleggeranno 6-7, ma variano (più piccoli nelle aree meno popolose).</div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="small" style="align-self:center;">Scenari rapidi per la tua lista:</span>
+      <button class="preset" data-preset="forte">Collegio forte</button>
+      <button class="preset" data-preset="medio">Medio</button>
+      <button class="preset" data-preset="debole">Debole</button>
+    </div>
+    <label class="toggle" style="margin-top:10px;"><input type="checkbox" id="premio"> La mia coalizione vince il premio (stima +1 seggio nei collegi forti)</label>
+  </div>
+
+  <h2>3 · Risultato: chi elegge quanti</h2>
+  <div id="result"></div>
+
+  <div class="posbox" id="posbox"></div>
+
+  <h2>4 · Dove investire i candidati</h2>
+  <div class="card" id="strategy"></div>
+
+  <div class="foot">
+    <b>Metodo.</b> Assegnazione proporzionale dei seggi del collegio col metodo dei resti più alti (quota Hare) tra le liste sopra il 3% nazionale, sulla forza locale impostata. La "posizione utile" è il numero di seggi vinti dalla lista. Con lo Stabilicum il capolista (bloccato) è eletto per primo; i seggi restanti della lista vanno ai candidati più votati con le preferenze, non per ordine di lista. Percentuali nazionali: Supermedia YouTrend/AGI 17/9/2026. Forza locale: stima regolabile (i dati territoriali dei sondaggi non sono pubblici). Premio: 70 seggi Camera / 35 Senato alla coalizione che supera il 42% ed è prima in entrambe le Camere; qui è una stima semplificata. La struttura dei collegi dipende dalla legge, ancora in terza lettura (dati sondaggi: Supermedia YouTrend/AGI 17/9/2026).
+  </div>
+</div>
+
+<script>
+(function(){
+  var P=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b",nat:26.6},{k:"PD",n:"PD",c:"#d64541",nat:21.1},{k:"M5S",n:"M5S",c:"#e0a216",nat:12.5},{k:"FI",n:"Forza Italia",c:"#3a8dde",nat:7.4},{k:"Lega",n:"Lega",c:"#5a8f2a",nat:5.6},{k:"AVS",n:"AVS",c:"#1f9e74",nat:6.4},{k:"FN",n:"Futuro Nazionale",c:"#c8602f",nat:7.7},{k:"Az",n:"Azione",c:"#7a6fd0",nat:3.3},{k:"IV",n:"Italia Viva",c:"#cf5380",nat:2.3},{k:"PiuE",n:"+Europa",c:"#8a8a82",nat:1.5},{k:"NM",n:"Noi Moderati",c:"#a9a79e",nat:1.1}];
+  var PMAP={};P.forEach(function(p){PMAP[p.k]=p;});
+  var V2022={FdI:26.0,PD:19.1,M5S:15.4,FI:8.1,Lega:8.8,AVS:3.6,FN:0,Az:7.8,IV:0,PiuE:2.8,NM:0};
+  var S2026={};P.forEach(function(p){S2026[p.k]=p.nat;});
+  var TERR={naz:V2022,
+    nord:{FdI:28,PD:17,M5S:7,FI:7,Lega:14,AVS:3.5,FN:0,Az:9,IV:0,PiuE:3,NM:0},
+    centro:{FdI:25,PD:24,M5S:11,FI:6,Lega:7,AVS:4.5,FN:0,Az:8,IV:0,PiuE:3.5,NM:0},
+    sud:{FdI:23,PD:16,M5S:28,FI:11,Lega:5,AVS:3,FN:0,Az:6,IV:0,PiuE:2,NM:0}};
+  var THRESH=3.0, ME="FdI";
+  var local={};P.forEach(function(p){local[p.k]=p.nat;});
+  var mag=6, premio=false;
+  function $(id){return document.getElementById(id);}
+
+  function buildParties(){var h="";P.forEach(function(p){var qual=p.nat>=THRESH;
+    h+='<div class="prow"><span class="lab"><span class="dot" style="background:'+p.c+';"></span>'+p.k+(p.k===ME?' <span class="small">(tua)</span>':'')+'</span><input type="range" min="0" max="50" step="0.5" data-loc="'+p.k+'" value="'+local[p.k]+'" '+(qual?'':'disabled')+' style="flex:1;"><input type="number" data-locn="'+p.k+'" value="'+local[p.k]+'" step="0.1" '+(qual?'':'disabled')+'>%'+(qual?'':' <span class="small">&lt;3% naz., esclusa</span>')+'</div>';
+  });
+  $("parties").innerHTML=h;
+  P.forEach(function(p){var r=$('[data-loc="'+p.k+'"]')||document.querySelector('[data-loc="'+p.k+'"]');});
+  document.querySelectorAll('[data-loc]').forEach(function(el){el.addEventListener("input",function(){var k=el.getAttribute("data-loc");local[k]=+el.value;var nb=document.querySelector('[data-locn="'+k+'"]');if(nb)nb.value=el.value;render();});});
+  document.querySelectorAll('[data-locn]').forEach(function(el){el.addEventListener("input",function(){var k=el.getAttribute("data-locn");local[k]=parseFloat(el.value)||0;var rg=document.querySelector('[data-loc="'+k+'"]');if(rg)rg.value=local[k];render();});});
+  }
+
+  function allocate(M){
+    var parties=P.filter(function(p){return p.nat>=THRESH&&local[p.k]>0;});
+    var tot=parties.reduce(function(s,p){return s+local[p.k];},0);
+    if(tot<=0||M<=0)return {};
+    var q=tot/M;var seats={},rem=[],used=0;
+    parties.forEach(function(p){var e=local[p.k]/q;seats[p.k]=Math.floor(e);used+=seats[p.k];rem.push({k:p.k,f:e-Math.floor(e)});});
+    rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<M&&rem.length){seats[rem[i%rem.length].k]++;used++;i++;}
+    return seats;
+  }
+
+  function render(){
+    var M=mag;var seats=allocate(M);
+    // premio: stima +1 alla lista ME se è prima e premio attivo e collegio forte (>=5)
+    var bonus=0;
+    if(premio){var top=Object.keys(seats).reduce(function(a,b){return (seats[a]||0)>=(seats[b]||0)?a:b;},ME);if(top===ME&&M>=5){seats[ME]=(seats[ME]||0)+1;bonus=1;}}
+    var totSeats=Object.values(seats).reduce(function(a,b){return a+b;},0);
+    // seatgrid
+    var sg="";Object.keys(seats).sort(function(a,b){return seats[b]-seats[a];}).forEach(function(k){if(seats[k]<=0)return;sg+='<div class="seatchip" style="background:'+PMAP[k].c+';">'+k+' · '+seats[k]+'</div>';});
+    // tabella
+    var rows="";P.filter(function(p){return p.nat>=THRESH;}).forEach(function(p){var s=seats[p.k]||0;rows+='<tr class="'+(p.k===ME?'me':'')+'"><td><span class="dot" style="display:inline-block;background:'+p.c+';"></span> '+p.n+'</td><td class="n">'+local[p.k].toFixed(1)+'%</td><td class="n">'+s+'</td><td>'+(s>0?'posizioni 1–'+s:'nessun eletto')+'</td></tr>';});
+    $("result").innerHTML='<div class="seatgrid">'+sg+'</div><div class="small">Totale seggi del collegio assegnati: '+totSeats+(bonus?' (incluso +'+bonus+' stima premio)':'')+'</div><table><tr><th>Lista</th><th>Forza locale</th><th>Seggi</th><th>Posizione utile</th></tr>'+rows+'</table>';
+    // posbox per ME
+    var myS=seats[ME]||0;
+    var qq=P.filter(function(p){return p.nat>=THRESH&&local[p.k]>0;}).reduce(function(a,p){return a+local[p.k];},0)/M;
+    var gap=((myS+1)*qq)-local[ME];
+    $("posbox").innerHTML='<div>Nel collegio da '+M+' seggi con '+PMAP[ME].n+' al '+local[ME].toFixed(1)+'%:</div><div class="big">'+myS+' seggi alla coalizione qui</div><div class="small" style="color:#b9c6da;">Sono eletti i primi '+myS+' della lista. <b style="color:#fff;">Seggio in più a +'+(gap>0?gap.toFixed(1):'0.0')+' punti</b>: se la lista cresce di tanto qui, conquista un altro seggio. È lì che un candidato forte e radicato può fare la differenza.</div>';
+    // strategia
+    var myShare=local[ME], q=P.filter(function(p){return p.nat>=THRESH&&local[p.k]>0;}).reduce(function(a,p){return a+local[p.k];},0)/M;
+    var gap=((myS+1)*q)-myShare; // punti mancanti al seggio successivo
+    var marginale=gap<=2.0; // soglia: seggio raggiungibile con un buon candidato
+    var strat="";
+    strat+='<p style="margin:4px 0;">▸ <b>Obiettivo: massimizzare i seggi.</b> Qui la coalizione (tua lista) ne porta a casa '+myS+'. Le posizioni 1–'+myS+' sono al sicuro: mettici i candidati di valore che vuoi certi in Parlamento.</p>';
+    if(marginale){
+      strat+='<p style="margin:4px 0;color:#1f7a4d;"><b>▸ COLLEGIO DA AGGREDIRE.</b> Sei a soli <b>'+gap.toFixed(1)+' punti</b> dal seggio in più. Qui un capolista forte, noto e radicato sul territorio può valere quel margine e farti vincere un seggio aggiuntivo. È il collegio dove conviene investire il candidato migliore.</p>';
+    } else {
+      strat+='<p style="margin:4px 0;">▸ Il seggio successivo è a <b>'+gap.toFixed(1)+' punti</b>: troppo lontano perché il singolo candidato lo ribalti. Qui non "sprecare" un big in posizione non eleggibile — usalo dove fa vincere il seggio.</p>';
+    }
+    if(M<=3)strat+='<p style="margin:4px 0;">▸ Collegio <b>piccolo</b>: pochi seggi in palio, ogni voto pesa. Il capolista deve essere il nome più forte disponibile: è lui a trainare la lista.</p>';
+    if(M>=8)strat+='<p style="margin:4px 0;">▸ Collegio <b>ampio</b>: più seggi e più margini. Vale la pena mettere candidati forti anche oltre il capolista, perché trainano voti utili a conquistare seggi aggiuntivi.</p>';
+    strat+='<p style="margin:8px 0 0;" class="small"><b>Regola pratica:</b> i candidati-traino (volti noti, radicati) rendono di più nei collegi <b>marginali</b> (vicini al seggio in più), non in quelli già stravinti o senza speranza. Confronta i collegi e concentra lì i nomi migliori.</p>';
+    $("strategy").innerHTML=strat;
+  }
+
+  $("mag").addEventListener("input",function(){mag=+this.value;$("magv").textContent=this.value;render();});
+  $("premio").addEventListener("change",function(){premio=this.checked;render();});
+  document.querySelectorAll("[data-preset]").forEach(function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-preset");
+    if(p==="forte"){mag=7;local.FdI=34;}
+    else if(p==="medio"){mag=6;local.FdI=28.2;}
+    else{mag=4;local.FdI=22;}
+    $("mag").value=mag;$("magv").textContent=mag;buildParties();render();});});
+
+  function applyProfile(prof){P.forEach(function(p){local[p.k]=(prof[p.k]!==undefined?prof[p.k]:0);});buildParties();render();}
+  document.querySelectorAll(".base-btn").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll(".base-btn").forEach(function(x){x.className="base-btn";});b.className="base-btn primary";
+    applyProfile(b.getAttribute("data-base")==="v2022"?V2022:S2026);});});
+  document.querySelectorAll(".terr-btn").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll(".terr-btn").forEach(function(x){x.className="terr-btn";});b.className="terr-btn primary";
+    applyProfile(TERR[b.getAttribute("data-terr")]);});});
+  buildParties();render();
+})();
+</script>
+</body>
+</html>

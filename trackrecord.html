@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Roberto Cao Pinna">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Osservatorio elettorale · Track record</title>
 <style>
@@ -44,6 +45,7 @@ input,select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padd
   <a href="solidita.html">Solidità</a>
   <a href="simulatore.html">Simulatore mosse</a>
   <a href="aula.html">Aula attuale</a>
+  <a href="liste.html">Liste &amp; collegi</a>
   <a href="trackrecord.html" class="active">Track record</a>
   <a href="osservatorio.html">Osservatorio</a>
   <a href="confronto.html">Confronto leggi</a>
@@ -82,7 +84,7 @@ input,select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padd
   </div>
 
   <div class="foot">
-    <b>Nota.</b> Le previsioni iniziali qui registrate sono lette retrospettivamente dai dati noti e marcate di conseguenza; il valore vero della pagina emerge in avanti, registrando previsioni <em>prima</em> che l'esito sia noto. Confidenza e verdetti sono dichiarazioni esplicite, non punteggi automatici. Aggiornato al 15 giugno 2026.
+    <b>Nota.</b> Le previsioni iniziali qui registrate sono lette retrospettivamente dai dati noti e marcate di conseguenza; il valore vero della pagina emerge in avanti, registrando previsioni <em>prima</em> che l'esito sia noto. Confidenza e verdetti sono dichiarazioni esplicite, non punteggi automatici. Aggiornato al 23 settembre 2026.
   </div>
 </div>
 
@@ -90,7 +92,10 @@ input,select{font-family:inherit;border:1px solid #e0dccf;border-radius:6px;padd
 (function(){
   // Previsioni iniziali (alcune già verificabili dai dati, marcate onestamente)
   var SEED=[
-    {date:"2026-06-01",pred:"Entro metà luglio il PD non perde terreno e l'energia ('agenda E') resta un suo tema riconoscibile nei sondaggi e nei commenti",conf:"md",outcome:"",verdict:"open"},
+    {date:"2026-06-01",pred:"Entro metà luglio il PD non perde terreno e l'energia ('agenda E') resta un suo tema riconoscibile",conf:"md",outcome:"PD stabile (21,1% a settembre); il tema energia è rimasto presidiato ma conteso col governo. Sostanzialmente confermata sulla tenuta PD",verdict:"ok"},
+    {date:"2026-06-15",pred:"Futuro Nazionale continuerà a crescere e supererà Forza Italia entro l'autunno",conf:"md",outcome:"FN al 7,7% a settembre, ha superato FI (7,4%): quarto partito",verdict:"ok"},
+    {date:"2026-06-15",pred:"La riforma elettorale sarà approvata entro l'estate con premio al 42% e liste bloccate",conf:"md",outcome:"Iter più lungo: Camera 16/7, Senato 15/9 (non ancora legge). E le liste NON restano bloccate: reintrodotte le preferenze. Previsione errata sui tempi e sulle liste",verdict:"ko"},
+    {date:"2026-09-23",pred:"Con lo Stabilicum, se si votasse oggi il premio andrebbe al campo largo (non al centrodestra) salvo che FN venga federato dal cdx",conf:"md",outcome:"",verdict:"open"},
     {date:"2026-02-05",pred:"La scissione di Vannacci farà calare la Lega sotto il 7%",conf:"md",outcome:"Lega scesa a ~6,8% a fine maggio",verdict:"ok"},
     {date:"2026-02-05",pred:"Futuro Nazionale supererà il 3,5% entro la primavera",conf:"lo",outcome:"FN al 4,0% a fine maggio",verdict:"ok"},
     {date:"2026-03-10",pred:"Il referendum sulla giustizia sarà vinto dal Sì",conf:"lo",outcome:"Ha vinto il No",verdict:"ko"},
