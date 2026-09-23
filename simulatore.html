@@ -77,11 +77,12 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
 <div class="wrap">
   <h1>Simulatore di mosse strategiche</h1>
   <div class="lede">"Cosa succede se faccio X?" — testa l'effetto stimato di scelte politiche su voti, coalizione e seggi.</div>
+  <div style="font-size:12.5px;background:#eef2f8;border:1px solid #d5deea;border-radius:8px;padding:10px 13px;margin:12px 0 0;color:#243a5a;"><b style="color:var(--navy);">Ipotesi di lavoro: lo Stabilicum è legge.</b> I seggi sono calcolati con il testo uscito dal Senato il 15/9 (proporzionale, premio di 70 seggi alla coalizione prima e ≥42%, tetto 220, soglie 3%/10% con ripescaggio). Iter verificato il 23/9/2026: terza lettura alla Camera dal 28/9 con fiducia; se non passa, si torna al Rosatellum (vedi <a href="confronto.html" style="color:var(--navy);">Confronto</a>).</div>
   <div class="disc"><b>Natura del modello.</b> Gli effetti delle mosse sono <b>elasticità stimate</b>, non misurazioni: rispondono a "se questa mossa avesse questo effetto, ecco le conseguenze". Ogni leva è regolabile e ogni mossa può essere aggiunta o modificata dallo staff. Gli output sono scenari parametrici con livello di confidenza dichiarato — <b>non previsioni</b>.</div>
 
   <h2>Punto di partenza</h2>
   <div class="card">
-    <div class="muted" style="margin-bottom:6px;">Voti base (media sondaggi 31/5/2026). Modificabili.</div>
+    <div class="muted" style="margin-bottom:6px;">Voti base: Supermedia YouTrend/AGI 17/9/2026. Modificabili.</div>
     <div id="baseVals" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;"></div>
   </div>
 
@@ -109,7 +110,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
   <button id="copyBrief">Copia il brief</button>
 
   <div class="foot">
-    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati col modello del <a href="confronto.html" style="color:var(--navy);">Confronto leggi</a> (proporzionale + premio 42% o Rosatellum). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: media sondaggi al 31/5/2026. Strumento di esplorazione strategica, non predittivo.
+    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati con lo stesso motore Stabilicum del <a href="confronto.html" style="color:var(--navy);">Confronto leggi</a> (proporzionale nazionale su 400 seggi, liste ≥3% o ripescate in coalizione ≥10%, premio 70 al blocco primo e ≥42%, tetto 220; ipotesi di esito omogeneo tra le Camere). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: Supermedia YouTrend/AGI 17/9/2026. Stato della legge verificato il 23/9/2026. Strumento di esplorazione strategica, non predittivo.
   </div>
 </div>
 
@@ -191,7 +192,8 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     Array.prototype.forEach.call($("moves").querySelectorAll("[data-del]"),function(b){b.addEventListener("click",function(){var id=b.getAttribute("data-del");custom=custom.filter(function(x){return x.id!==id;});buildMoves();render();});});
   }
 
-  function prop(vals,N){var ks=Object.keys(vals).filter(function(k){return k!=="AST";});var q=ks.filter(function(k){return (vals[k]||0)>=THRESH;});var tq=q.reduce(function(s,k){return s+vals[k];},0);var seats={};ks.forEach(function(k){seats[k]=0;});if(tq<=0)return seats;var rem=[],u=0;q.forEach(function(k){var e=vals[k]/tq*N;seats[k]=Math.floor(e);u+=seats[k];rem.push({k:k,f:e-seats[k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<N&&rem.length){seats[rem[i%rem.length].k]++;u++;i++;}return seats;}
+  function admitted(vals,coal){var ks=Object.keys(vals).filter(function(k){return k!=="AST";});var ok={};ks.forEach(function(k){ok[k]=(vals[k]||0)>=THRESH;});if(coal){var bv=blocVotes(vals,coal);["cdx","csx","m5s"].forEach(function(b){if(bv[b]>=10){var best=null;ks.forEach(function(k){if(coal[k]===b&&(vals[k]||0)<THRESH&&(vals[k]||0)>0&&(best===null||vals[k]>vals[best]))best=k;});if(best)ok[best]=true;}});}return ok;}
+  function prop(vals,N,coal){var ks=Object.keys(vals).filter(function(k){return k!=="AST";});var ok=admitted(vals,coal);var q=ks.filter(function(k){return ok[k];});var tq=q.reduce(function(s,k){return s+vals[k];},0);var seats={};ks.forEach(function(k){seats[k]=0;});if(tq<=0)return seats;var rem=[],u=0;q.forEach(function(k){var e=vals[k]/tq*N;seats[k]=Math.floor(e);u+=seats[k];rem.push({k:k,f:e-seats[k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<N&&rem.length){seats[rem[i%rem.length].k]++;u++;i++;}return seats;}
   function blocVotes(vals,coal){var o={cdx:0,csx:0,m5s:0,alt:0};for(var k in vals){if(k==="AST")continue;o[coal[k]]+=vals[k]||0;}return o;}
 
   function applyMoves(){
@@ -217,9 +219,9 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     var ks=["cdx","csx","m5s","alt"],w={},tw=0;ks.forEach(function(c){w[c]=Math.pow(Math.max(0,bv[c]),3);tw+=w[c];});var us={},rem=[],u=0;ks.forEach(function(c){var e=tw>0?w[c]/tw*UNI:0;us[c]=Math.floor(e);u+=us[c];rem.push({c:c,f:e-us[c]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(u<UNI){us[rem[i%4].c]++;u++;i++;}
     var ros={};ks.forEach(function(c){ros[c]=cpr[c]+us[c];});
     // bignami
-    var win=ks.reduce(function(a,b){return bv[a]>=bv[b]?a:b;});var big={cdx:0,csx:0,m5s:0,alt:0};
-    if(bv[win]>=SOGLIA){var base=prop(vals,SEATS-PREMIO);for(var k2 in base){if(k2==="AST")continue;big[coal[k2]]+=base[k2];}big[win]+=PREMIO;if(big[win]>CAP){var ex=big[win]-CAP;big[win]=CAP;var oth=ks.filter(function(c){return c!==win&&bv[c]>0;});var t2=oth.reduce(function(s,c){return s+bv[c];},0);var d=0;oth.forEach(function(c,idx){var a=idx===oth.length-1?ex-d:Math.round(ex*bv[c]/t2);big[c]+=a;d+=a;});}}
-    else{var pp=prop(vals,SEATS);for(var k3 in pp){if(k3==="AST")continue;big[coal[k3]]+=pp[k3];}}
+    var win=["cdx","csx","m5s"].reduce(function(a,b){return bv[a]>=bv[b]?a:b;});var big={cdx:0,csx:0,m5s:0,alt:0};
+    if(bv[win]>=SOGLIA){var base=prop(vals,SEATS-PREMIO,coal);for(var k2 in base){if(k2==="AST")continue;big[coal[k2]]+=base[k2];}big[win]+=PREMIO;if(big[win]>CAP){var ex=big[win]-CAP;big[win]=CAP;var oth=ks.filter(function(c){return c!==win&&bv[c]>0;});var t2=oth.reduce(function(s,c){return s+bv[c];},0);var d=0;oth.forEach(function(c,idx){var a=idx===oth.length-1?ex-d:Math.round(ex*bv[c]/t2);big[c]+=a;d+=a;});}}
+    else{var pp=prop(vals,SEATS,coal);for(var k3 in pp){if(k3==="AST")continue;big[coal[k3]]+=pp[k3];}}
     return {ros:ros,big:big,bv:bv,win:win,premio:bv[win]>=SOGLIA};
   }
 
@@ -237,11 +239,11 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     html+='<div class="result">';
     html+='<div class="rc"><div class="k">Voti centrodestra</div><div class="v">'+cdxV1.toFixed(1)+'%</div><div class="d '+(dv>0.05?'up':dv<-0.05?'down':'flat')+'">'+(Math.abs(dv)<0.05?'invariato':(dv>0?'▲ +':'▼ ')+dv.toFixed(1))+'</div></div>';
     html+='<div class="rc"><div class="k">Soglia 42% premio</div><div class="v">'+(after.bv.cdx>=42?'<span style="color:#1f7a4d;">sì</span>':'<span style="color:#b23636;">no</span>')+'</div><div class="d flat">cdx '+after.bv.cdx.toFixed(1)+'%</div></div>';
-    html+='<div class="rc"><div class="k">Seggi cdx (Bignami)</div><div class="v">'+cdxBig1+'</div><div class="d '+((cdxBig1-cdxBig0)>0?'up':(cdxBig1-cdxBig0)<0?'down':'flat')+'">'+((cdxBig1-cdxBig0)===0?'=':(cdxBig1-cdxBig0)>0?'▲ +'+(cdxBig1-cdxBig0):'▼ '+(cdxBig1-cdxBig0))+' vs base</div></div>';
-    html+='<div class="rc"><div class="k">Maggioranza (201)</div><div class="v">'+(cdxBig1>=MAJ?'<span style="color:#1f7a4d;">sì</span>':'<span style="color:#b23636;">no</span>')+'</div><div class="d flat">Bignami bis</div></div>';
+    html+='<div class="rc"><div class="k">Seggi cdx (Stabilicum)</div><div class="v">'+cdxBig1+'</div><div class="d '+((cdxBig1-cdxBig0)>0?'up':(cdxBig1-cdxBig0)<0?'down':'flat')+'">'+((cdxBig1-cdxBig0)===0?'=':(cdxBig1-cdxBig0)>0?'▲ +'+(cdxBig1-cdxBig0):'▼ '+(cdxBig1-cdxBig0))+' vs base</div></div>';
+    html+='<div class="rc"><div class="k">Maggioranza (201)</div><div class="v">'+(cdxBig1>=MAJ?'<span style="color:#1f7a4d;">sì</span>':'<span style="color:#b23636;">no</span>')+'</div><div class="d flat">Stabilicum · 201 su 400</div></div>';
     html+='</div>';
     // barra seggi after (bignami)
-    html+='<div class="small" style="margin-top:6px;">Ripartizione seggi (Bignami bis, '+(after.premio?'premio attivo':'proporzionale')+'):</div><div class="bar">';
+    html+='<div class="small" style="margin-top:6px;">Ripartizione seggi (Stabilicum, '+(after.premio?'premio attivo a '+BLOCS[after.win].n:'nessun premio: proporzionale puro')+'):</div><div class="bar">';
     ["cdx","alt","m5s","csx"].forEach(function(c){var s=after.big[c]||0;if(s<=0)return;html+='<div class="seg" style="flex:'+s+' 0 0;background:'+BLOCS[c].c+';">'+(s>=24?BLOCS[c].n+' '+s:s)+'</div>';});
     html+='</div>';
     if(!anyOn)html+='<div class="small">Nessuna mossa attiva: stai vedendo lo scenario base.</div>';
@@ -257,17 +259,19 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     var magg=after.big.cdx>=MAJ;
     var conf=allMoves().filter(function(m){return m.on;}).every(function(m){return m.conf!=="lo";})&&anyOn?"media":"bassa";
     var t="";
-    t+="EXECUTIVE BRIEF — Simulazione strategica (dati 17/9/2026)\n";
+    t+="EXECUTIVE BRIEF — Simulazione strategica (Supermedia 17/9/2026 · legge: Stabilicum, testo Senato 15/9, iter verificato 23/9)\n";
     t+="=========================================\n\n";
-    t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Bignami), sotto la soglia del 42%. Nessuna maggioranza.\n\n";
+    t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Stabilicum), "+(base0.bv.cdx>=42?"sopra":"sotto")+" la soglia del 42%. "+(base0.big.cdx>=MAJ?"Maggioranza assoluta.":"Nessuna maggioranza.")+(base0.premio&&base0.win!=="cdx"?" ATTENZIONE: il premio andrebbe a "+BLOCS[base0.win].n+" ("+base0.big[base0.win]+" seggi).":"")+"\n\n";
     if(!anyOn){t+="Nessuna mossa selezionata. Attiva una o più mosse per vedere l'effetto stimato.\n";}
     else{
       t+="MOSSE TESTATE: "+active.join("; ")+"\n\n";
       t+="EFFETTO STIMATO:\n";
       t+="• Voti cdx: "+base0.bv.cdx.toFixed(1)+"% → "+after.bv.cdx.toFixed(1)+"% ("+(dCdx>=0?"+":"")+dCdx.toFixed(1)+")\n";
       t+="• Soglia 42%: "+(soglia?"RAGGIUNTA → premio attivo":"non raggiunta")+"\n";
-      t+="• Seggi cdx (Bignami): "+base0.big.cdx+" → "+after.big.cdx+" ("+(dSeats>=0?"+":"")+dSeats+")\n";
-      t+="• Maggioranza assoluta (201): "+(magg?"SÌ":"NO")+"\n\n";
+      t+="• Seggi cdx (Stabilicum): "+base0.big.cdx+" → "+after.big.cdx+" ("+(dSeats>=0?"+":"")+dSeats+")\n";
+      t+="• Maggioranza assoluta (201): "+(magg?"SÌ":"NO")+"\n";
+      if(after.premio&&after.win!=="cdx")t+="• Premio assegnato a: "+BLOCS[after.win].n+" ("+after.big[after.win]+" seggi)\n";
+      t+="\n";
       t+="RACCOMANDAZIONE: "+(magg?"La combinazione testata porta alla maggioranza. Valutare costi politici e tenuta della coalizione.":soglia?"Si supera la soglia ma non la maggioranza piena: serve rafforzare ancora o federare alleati.":"La combinazione non basta a superare la soglia: da sola insufficiente.")+"\n";
       t+="\nLIVELLO DI CONFIDENZA: "+conf.toUpperCase()+". Gli effetti sono elasticità ipotetiche, non misure. Da validare con dati proprietari prima di qualsiasi decisione.\n";
     }

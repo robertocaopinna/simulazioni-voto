@@ -22,6 +22,11 @@ h2{font-family:Georgia,serif;font-size:19px;font-weight:700;margin:28px 0 10px;p
 p{margin:8px 0;}
 .box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;}
 code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px;}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;padding:1px 6px;border-radius:4px;vertical-align:middle;text-transform:uppercase;}
+.tag.dato{background:#e3efe8;color:#1f7a4d;} .tag.stima{background:#fbf1d9;color:#8a6200;} .tag.ipotesi{background:#f3e6e6;color:#9a3030;}
+.law{font-size:13px;background:#eef2f8;border:1px solid #d5deea;border-radius:8px;padding:11px 14px;margin:12px 0 4px;color:#243a5a;}
+.law b{color:var(--navy);}
+ul{margin:6px 0 6px 20px;padding:0;} li{margin:3px 0;}
 .foot{font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:14px;margin-top:30px;}
 </style>
 </head>
@@ -42,27 +47,48 @@ code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px;}
 
 <div class="wrap">
   <h1>Metodo e fonti</h1>
-  <div class="lede">Come sono costruiti i modelli, cosa possono dire e cosa no.</div>
+  <div class="lede">Come sono costruiti i modelli, con quale ipotesi di lavoro, cosa possono dire e cosa no.</div>
+
+  <div class="law"><b>Ipotesi di lavoro del sito: lo "Stabilicum" è legge.</b> Dal 23/9/2026 tutte le pagine calcolano i seggi con il testo uscito dal Senato, come se fosse già in vigore. Il Rosatellum resta disponibile come termine di confronto (pagina <a href="confronto.html" style="color:var(--navy);">Confronto</a>) perché è ciò che si applica se la terza lettura non si conclude.<br>
+  <b>Stato dell'iter, verificato il 23/9/2026:</b> proposta Bignami e altri (A.C. 2822) approvata dalla Camera il 16/7; dal Senato con modifiche il 15/9 (A.S. 1971: 113 sì, 71 no, 2 astenuti); tornata alla Camera come A.C. 2822-B: audizioni in commissione Affari costituzionali dal 21/9, Aula dal 28/9, questione di fiducia annunciata dal governo; voto finale atteso nella settimana del 5/10. Fino a quel voto la legge <b>non è in vigore</b> e il testo può ancora cambiare: ogni brief riporta la data della verifica.</div>
+
+  <h2>Le tre etichette</h2>
+  <p>Ogni numero del sito porta una di queste etichette, e la differenza conta più del numero:</p>
+  <ul>
+    <li><span class="tag dato">dato</span> viene da una fonte primaria citata (Supermedia, registro dei sondaggi, testo di legge, decreto sui seggi). Non è modificato.</li>
+    <li><span class="tag stima">stima</span> è un calcolo nostro su dati: il riparto dei seggi, la distribuzione nei collegi, le probabilità Monte Carlo. Il metodo è dichiarato e riproducibile; l'errore atteso è indicato.</li>
+    <li><span class="tag ipotesi">ipotesi</span> è un'assunzione di lavoro senza dato a sostegno: la forza locale per collegio, le elasticità delle mosse, la composizione delle coalizioni. Va letta come "se fosse così, allora".</li>
+  </ul>
+  <p>Regola fissa: nessun numero inventato. Dove il dato non esiste (per esempio i sondaggi per collegio, che non vengono pubblicati) lo scriviamo e usiamo un'ipotesi dichiarata.</p>
 
   <h2>L'aggregato dei sondaggi</h2>
-  <p>Le percentuali di partenza non sono un singolo sondaggio, ma una <b>media ponderata</b> di più istituti. Ogni rilevazione pesa in funzione di due fattori: l'affidabilità storica dell'istituto e quanto è recente. Il peso segue la formula <code>(affidabilità/100) × 0,5^(giorni trascorsi / emivita)</code>: un sondaggio perde metà del suo peso ogni "emivita" di giorni (regolabile). Così le rilevazioni vecchie contano meno senza sparire del tutto.</p>
+  <p>Le percentuali di partenza sono la <b>Supermedia YouTrend/AGI</b> più recente (17/9/2026, rilevazioni 2–16/9 di EMG, Ixè, Noto, Only Numbers, Piepoli, SWG, Tecnè e YouTrend). Nell'<a href="osservatorio.html" style="color:var(--navy);">Osservatorio</a> si può ricostruire un aggregato proprio: ogni rilevazione pesa in funzione dell'affidabilità dell'istituto e della freschezza, con la formula <code>(affidabilità/100) × 0,5^(giorni trascorsi / emivita)</code>. Sono ammessi solo sondaggi con committente, campione e date, depositati nel registro ufficiale della Presidenza del Consiglio. Un controllo quotidiano automatico cerca nuove rilevazioni e segnala gli scostamenti rilevanti.</p>
 
-  <h2>La conversione voti → seggi</h2>
+  <h2>La conversione voti → seggi (Stabilicum)</h2>
   <div class="box">
-    <p><b>Rosatellum (legge in vigore).</b> 253 seggi assegnati col proporzionale tra le liste sopra il 3%, più 147 in collegi uninominali. Poiché non disponiamo dei dati collegio per collegio, l'uninominale è stimato a livello nazionale con la "regola del cubo" (i seggi crescono più che proporzionalmente rispetto ai voti del blocco in testa). È un'approssimazione: amplifica il vincitore come fa il maggioritario reale, ma non riproduce le specificità territoriali.</p>
+    <p><b>Regole applicate</b> <span class="tag dato">dato</span> (testo approvato dal Senato il 15/9/2026):</p>
+    <ul>
+      <li><b>Proporzionale nazionale in collegi plurinominali.</b> Aboliti gli uninominali, salvo Valle d'Aosta e Trentino-Alto Adige. I collegi sono quelli della tabella A.2 del D.Lgs. 177/2020 (49 alla Camera), confermati dal testo senza delega per ridisegnarli.</li>
+      <li><b>Soglie:</b> 3% per le liste, 10% per le coalizioni; nella coalizione sopra il 10% è ripescata la migliore lista sotto il 3%. I voti delle liste sotto soglia contano per la coalizione (la norma "anti-cespugli" è stata tolta al Senato).</li>
+      <li><b>Premio di governabilità:</b> 70 seggi alla Camera e 35 al Senato alla lista o coalizione che è <b>prima</b> e supera il <b>42%</b> in <b>entrambe</b> le Camere. Se manca anche una sola condizione, nessun premio: proporzionale puro. Tetto: 220 deputati e 113 senatori (Estero escluso).</li>
+      <li><b>Liste e preferenze:</b> 7 candidati per collegio, capolista bloccato (eletto per primo se la lista prende almeno un seggio) più 6 candidati eletti con fino a 3 preferenze di genere alternato. Pluricandidature in massimo 5 collegi; presenza in almeno metà dei collegi; indicazione del candidato premier obbligatoria.</li>
+      <li><b>Fuori dal modello:</b> Estero (8 deputati, 4 senatori), Valle d'Aosta (1+1) e Trentino-Alto Adige (7+6), che hanno regole proprie. Per questo i totali del sito sono 384 deputati e 189 senatori "ordinari"; la maggioranza assoluta resta 201 e 101.</li>
+    </ul>
+    <p><b>Come calcoliamo</b> <span class="tag stima">stima</span>: riparto nazionale tra le liste ammesse con quozienti interi e più alti resti; se il premio scatta, 70 (o 35) seggi in più alle liste della coalizione vincente in proporzione ai voti, ridotti se si supera il tetto. Nella pagina <a href="liste.html" style="color:var(--navy);">Liste &amp; collegi</a> i seggi nazionali di ogni lista sono poi distribuiti ai 48 collegi in proporzione ai voti locali e riconciliati perché ogni collegio assegni esattamente i propri seggi (quelli del D.P.R. 21/7/2022; un nuovo decreto li ricalcolerà sul censimento 2021, con scostamenti di ±1). Approssimazione del procedimento di legge: errore atteso ±1 seggio per collegio.</p>
+    <p><b>Ipotesi dichiarate</b> <span class="tag ipotesi">ipotesi</span>: stesso risultato percentuale alla Camera e al Senato (quindi premio "omogeneo" se scatta); forza locale per collegio = percentuale nazionale, oppure un profilo territoriale indicativo per area ricavato dalle geografie del voto 2022; per il Senato i collegi sono verificati solo per Piemonte e Lombardia, le altre regioni sono trattate come collegio unico.</p>
   </div>
   <div class="box">
-    <p><b>Stabilicum / Bignami (in approvazione, non ancora in vigore).</b> Impianto proporzionale con premio di governabilità di <b>70 seggi alla Camera e 35 al Senato</b> alla lista o coalizione prima classificata, assegnato <b>solo se</b> supera il <b>42%</b> <b>ed</b> è prima in <b>entrambe</b> le Camere; se anche una sola condizione manca (soglia non raggiunta o vincitori diversi tra i due rami), il premio non è assegnato a nessuno e si torna al proporzionale puro. Tetti: 220 seggi alla Camera, 113 al Senato. Aboliti i collegi uninominali (salvo Valle d'Aosta e Trentino-Alto Adige). <b>Novità dell'esame al Senato (15/9/2026): reintrodotte le preferenze</b> — liste da sette candidati con capolista bloccato e fino a tre preferenze per gli altri. <b>Iter:</b> approvata dalla Camera in prima lettura il 16/7, dal Senato con modifiche il 15/9; torna alla Camera in terza lettura dal 28/9. I parametri restano regolabili nello strumento perché il testo può ancora cambiare nell'ultimo passaggio.</p>
+    <p><b>Rosatellum (termine di confronto).</b> È la legge che resta in vigore se la fiducia non passa. 253 seggi col proporzionale tra le liste sopra il 3% più 147 collegi uninominali. Senza dati di collegio, l'uninominale è stimato a livello nazionale con la "regola del cubo" (i seggi crescono più che proporzionalmente rispetto ai voti del blocco in testa). Serve a rispondere a una domanda sola: con gli stessi voti, quanto cambia l'esito tra le due leggi.</p>
   </div>
 
   <h2>La simulazione Monte Carlo</h2>
-  <p>Per stimare le <b>probabilità</b> (e non un singolo esito), il modello genera migliaia di scenari perturbando ogni percentuale entro il margine d'errore demoscopico. La perturbazione combina un fattore comune di coalizione (i partiti di uno stesso blocco tendono a muoversi insieme — la "correlazione") e un rumore specifico di partito. Si conta poi in quanti scenari ciascun blocco raggiunge la maggioranza.</p>
+  <p>Per stimare le <b>probabilità</b> (e non un singolo esito), il modello genera migliaia di scenari perturbando ogni percentuale entro il margine d'errore demoscopico. La perturbazione combina un fattore comune di coalizione (i partiti di uno stesso blocco tendono a muoversi insieme — la "correlazione") e un rumore specifico di partito. Ogni scenario passa dallo stesso motore Stabilicum: si conta in quanti casi una coalizione supera il 42% e prende il premio, e in quanti raggiunge la maggioranza assoluta. Con il premio a soglia, la distribuzione dei seggi è "a due gobbe": piccoli spostamenti di voto intorno al 42% producono salti di decine di seggi. È la proprietà politica centrale del sistema.</p>
 
   <h2>Limiti da tenere presenti</h2>
-  <p>I sondaggi sono istantanee con margine d'errore, non previsioni. L'attribuzione dei blocchi alle coalizioni è un'ipotesi modificabile: il "campo largo" unito, in particolare, non è oggi un'alleanza formata. L'uninominale è stimato a livello nazionale. La condizione di omogeneità Camera/Senato è semplificata. Questi strumenti servono a esplorare scenari e capire le sensibilità del sistema, non a produrre proiezioni ufficiali di seggio.</p>
+  <p>I sondaggi sono istantanee con margine d'errore, non previsioni. L'attribuzione dei partiti alle coalizioni è un'ipotesi modificabile: il "campo largo" unito non è oggi un'alleanza formata, e Futuro Nazionale non è nel centrodestra. La forza locale per collegio non è misurata. La legge non è ancora in vigore: se cambia in terza lettura, cambiano i parametri (regolabili nel Confronto) e vanno aggiornate le pagine Liste &amp; collegi, Confronto e Metodo. Questi strumenti servono a esplorare scenari e capire le sensibilità del sistema, non a produrre proiezioni ufficiali di seggio.</p>
 
   <div class="foot">
-    Fonti dei dati: Supermedia YouTrend/AGI (17/9/2026) e singole rilevazioni SWG, EMG, Only Numbers, Termometro Politico, Ipsos. Aggiornamento al 23 settembre 2026. Stato della legge verificato alla data. I modelli di conversione seggi e Monte Carlo sono elaborazioni proprie a fini analitici.
+    <b>Fonti.</b> Sondaggi: Supermedia YouTrend/AGI (17/9/2026); singole rilevazioni SWG, EMG, Only Numbers, Termometro Politico, Ipsos; registro sondaggipoliticoelettorali.it. Legge elettorale: A.C. 2822 / A.S. 1971 / A.C. 2822-B, dossier del Servizio Studi della Camera (aprile 2026), resoconti del 15–21/9/2026 (Il Post, Pagella Politica, Sole 24 Ore, ANSA). Collegi e seggi: D.Lgs. 23/12/2020 n. 177 (tabelle A.1, A.2, B.1, B.2); D.P.R. 21/7/2022 (G.U. n. 169). Aggiornamento al 23 settembre 2026; stato della legge verificato alla data. I modelli di conversione seggi, di distribuzione nei collegi e Monte Carlo sono elaborazioni proprie a fini analitici.
   </div>
 </div>
 </body>

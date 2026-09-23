@@ -54,8 +54,9 @@ sup{font-size:.7em;}
   <a href="metodo.html">Metodo</a>
 </div></nav>
 <div class="wrap">
-<h2 class="sr">Osservatorio interattivo: aggregazione sondaggi, sistema misto Rosatellum e Monte Carlo correlato.</h2>
-<div class="head"><h1>Osservatorio intenzioni di voto · Italia</h1><div class="sub">Media ponderata multi-istituto · sistema misto Rosatellum (253 prop. + 147 unin.) · Monte Carlo correlato · dati al <span id="refd"></span></div></div>
+<h2 class="sr">Osservatorio interattivo: aggregazione sondaggi, riparto seggi Stabilicum e Monte Carlo correlato.</h2>
+<div class="head"><h1>Osservatorio intenzioni di voto · Italia</h1><div class="sub">Media ponderata multi-istituto · riparto seggi Stabilicum (ipotesi di lavoro) · Monte Carlo correlato · dati al <span id="refd"></span></div></div>
+<div style="font-size:12.5px;background:#eef2f8;border:1px solid #d5deea;border-radius:8px;padding:10px 13px;margin:0 0 14px;color:#243a5a;"><b style="color:#1b3a6b;">Ipotesi di lavoro: lo Stabilicum è legge.</b> Seggi e probabilità sono calcolati con il testo uscito dal Senato il 15/9 (proporzionale nazionale, liste ≥3% o ripescate in coalizione ≥10%, premio di 70 seggi al blocco primo e ≥42%, tetto 220). Iter verificato il 23/9/2026: terza lettura alla Camera dal 28/9 con fiducia, voto finale atteso la settimana del 5/10. Il Rosatellum resta selezionabile per vedere cosa cambia se la legge non passa.</div>
 
 <div class="row" style="margin-bottom:8px;">
   <span class="lab">Peso recency (emivita): <b id="hlOut">14</b> giorni</span>
@@ -69,15 +70,16 @@ sup{font-size:.7em;}
 <div class="card" style="padding:12px;margin-bottom:8px;"><div id="trend"></div></div>
 <div id="trendLeg" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;"></div>
 
-<div class="sect">Simulatore seggi — sistema misto <span>(soglia 3% · indicativo)</span></div>
-<div class="row" style="margin-bottom:12px;">
+<div class="sect">Simulatore seggi — Camera <span>(400 seggi · indicativo)</span></div>
+<div class="row" style="margin-bottom:12px;gap:8px;">
+  <span class="lab">Legge:</span><span id="lawToggle" style="display:inline-flex;gap:4px;"><button data-law="stab">Stabilicum</button><button data-law="ros">Rosatellum</button></span>
   <button id="realign">↺ Riallinea all'aggregato</button>
-  <span class="lab" style="margin-left:auto;">Spinta maggioritaria (uninominale): <b id="expOut">3.0</b></span>
-  <input type="range" id="exp" min="1" max="3.5" step="0.1" value="3" style="width:120px;">
+  <span id="expWrap" style="margin-left:auto;display:none;align-items:center;gap:6px;"><span class="lab">Spinta maggioritaria (uninominale): <b id="expOut">3.0</b></span>
+  <input type="range" id="exp" min="1" max="3.5" step="0.1" value="3" style="width:120px;"></span>
 </div>
-<div class="lab" style="margin-bottom:4px;">Quota proporzionale — 253 seggi (per partito)</div>
+<div class="lab" style="margin-bottom:4px;" id="propLab">Quota proporzionale — 330 seggi (per partito)</div>
 <div id="propBar" style="display:flex;width:100%;height:28px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:10px;"></div>
-<div class="lab" style="margin-bottom:4px;">Quota uninominale — 147 seggi (per coalizione)</div>
+<div class="lab" style="margin-bottom:4px;" id="uniLab">Premio di governabilità — 70 seggi (al blocco primo e ≥42%)</div>
 <div id="uniBar" style="display:flex;width:100%;height:28px;border-radius:7px;overflow:hidden;background:var(--soft);margin-bottom:14px;"></div>
 <div id="coalCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;margin-bottom:8px;"></div>
 <div style="position:relative;height:16px;margin-bottom:18px;"><div style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;"><span style="font-size:10.5px;color:var(--muted);">soglia maggioranza assoluta: 201 seggi su 400</span></div></div>
@@ -118,7 +120,7 @@ sup{font-size:.7em;}
 <div style="overflow-x:auto;margin-bottom:10px;"><table id="ptab"></table></div>
 
 <div style="font-size:11px;color:var(--hint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px;">
-<b>Metodo.</b> Aggregato: peso = (affidabilità/100) × 0,5<sup>(giorni/emivita)</sup>. <b>Sistema misto Rosatellum:</b> 253 seggi proporzionali (riparto per partito tra le liste sopra il 3%, quota Hare; include per semplicità gli 8 seggi estero) + 147 seggi uninominali assegnati per coalizione con regola di amplificazione tipo «cubo» (seggi ∝ voti<sup>esponente</sup>; esponente 1 = proporzionale, ~3 = forte effetto maggioritario). Resta un modello indicativo: senza dati di collegio l'uninominale è stimato a livello nazionale. <b>Monte Carlo:</b> ogni quota è perturbata con un fattore comune di coalizione (correlazione: 0 = errori indipendenti, valori alti = flussi che si muovono insieme tra loro e in opposizione tra i blocchi) più rumore idiosincratico di partito; si contano gli scenari in cui una coalizione raggiunge 201 seggi. Dataset curato da rilevazioni pubblicate mar–mag 2026 (SWG, Ipsos, Eumetra, Tecnè, Termometro Politico).
+<b>Metodo.</b> Aggregato: peso = (affidabilità/100) × 0,5<sup>(giorni/emivita)</sup>. <b>Stabilicum (ipotesi di lavoro, testo Senato 15/9/2026):</b> riparto proporzionale nazionale con quozienti e più alti resti tra le liste ammesse (≥3%, oppure la migliore lista sotto il 3% di una coalizione ≥10%; i voti sotto soglia contano per il blocco); premio di 70 seggi al blocco arrivato primo se supera il 42% (qui si ipotizza lo stesso esito in entrambe le Camere); tetto 220, con l'eccedenza redistribuita agli altri blocchi. Per semplicità i 400 seggi includono Estero, Valle d'Aosta e Trentino. <b>Rosatellum (in vigore fino al voto finale):</b> 253 seggi proporzionali + 147 uninominali per coalizione con regola di amplificazione tipo «cubo» (esponente regolabile); indicativo, senza dati di collegio. <b>Monte Carlo:</b> ogni quota è perturbata con un fattore comune di coalizione (correlazione: 0 = errori indipendenti, valori alti = flussi che si muovono insieme tra loro e in opposizione tra i blocchi) più rumore idiosincratico di partito; ogni scenario passa dal motore della legge selezionata e si contano quelli in cui una coalizione raggiunge 201 seggi. Con il premio a soglia la distribuzione dei seggi è bimodale: l'intervallo 5°–95° percentile può essere molto ampio. Dataset curato da rilevazioni pubblicate mar–set 2026 (SWG, Ipsos, Eumetra, Tecnè, Termometro Politico, Only Numbers, Supermedia YouTrend/AGI). Stato della legge verificato il 23/9/2026.
 </div>
 </div>
 
@@ -157,12 +159,14 @@ sup{font-size:.7em;}
   function loadSaved(){try{var raw=localStorage.getItem("osv_polls_v2");if(raw){var a=JSON.parse(raw);if(Array.isArray(a)&&a.length)return a;}}catch(e){}return SEED.map(function(p){return {inst:p.inst,date:p.date,rel:p.rel,v:p.v,src:"seed"};});}
   function savePolls(){try{localStorage.setItem("osv_polls_v2",JSON.stringify(POLLS));}catch(e){}}
   var POLLS=loadSaved();
-  var PROP=253,UNI=147,SEATS=400,MAJ=201,THRESH=3.0;
+  var PROP=253,UNI=147,SEATS=400,MAJ=201,THRESH=3.0,PREMIO=70,SOGLIA=42,CAP=220;
   function days(a,b){return (new Date(b)-new Date(a))/86400000;}
   function aggregate(polls,ref,hl){var acc={},ws={};PARTIES.forEach(function(p){acc[p.k]=0;ws[p.k]=0;});polls.forEach(function(poll){var age=Math.max(0,days(poll.date,ref));var w=(poll.rel/100)*Math.pow(0.5,age/hl);PARTIES.forEach(function(p){var val=poll.v[p.k];if(typeof val==="number"){acc[p.k]+=val*w;ws[p.k]+=w;}});});var out={};PARTIES.forEach(function(p){out[p.k]=ws[p.k]>0?acc[p.k]/ws[p.k]:0;});return out;}
-  function allocProp(vals){var qual=PARTIES.filter(function(p){return (vals[p.k]||0)>=THRESH;});var tq=qual.reduce(function(s,p){return s+vals[p.k];},0);var seats={};PARTIES.forEach(function(p){seats[p.k]=0;});if(tq<=0)return seats;var rem=[],used=0;qual.forEach(function(p){var ex=vals[p.k]/tq*PROP;seats[p.k]=Math.floor(ex);used+=seats[p.k];rem.push({k:p.k,f:ex-seats[p.k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<PROP&&rem.length){seats[rem[i%rem.length].k]++;used++;i++;}return seats;}
+  function admitted(vals,coal){var ok={};PARTIES.forEach(function(p){ok[p.k]=(vals[p.k]||0)>=THRESH;});if(coal){var cv={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cv[coal[p.k]]+=vals[p.k]||0;});["cdx","clx"].forEach(function(b){if(cv[b]>=10){var best=null;PARTIES.forEach(function(p){if(coal[p.k]===b&&(vals[p.k]||0)<THRESH&&(vals[p.k]||0)>0&&(best===null||vals[p.k]>vals[best]))best=p.k;});if(best)ok[best]=true;}});}return ok;}
+  function allocProp(vals,N,coal){N=N||PROP;var ok=admitted(vals,coal);var qual=PARTIES.filter(function(p){return ok[p.k];});var tq=qual.reduce(function(s,p){return s+vals[p.k];},0);var seats={};PARTIES.forEach(function(p){seats[p.k]=0;});if(tq<=0)return seats;var rem=[],used=0;qual.forEach(function(p){var ex=vals[p.k]/tq*N;seats[p.k]=Math.floor(ex);used+=seats[p.k];rem.push({k:p.k,f:ex-seats[p.k]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<N&&rem.length){seats[rem[i%rem.length].k]++;used++;i++;}return seats;}
   function allocUni(cs,exp){var ks=["cdx","clx","alt"],w={},tw=0;ks.forEach(function(c){w[c]=Math.pow(Math.max(0,cs[c]),exp);tw+=w[c];});var seats={cdx:0,clx:0,alt:0};if(tw<=0)return seats;var rem=[],used=0;ks.forEach(function(c){var ex=w[c]/tw*UNI;seats[c]=Math.floor(ex);used+=seats[c];rem.push({c:c,f:ex-seats[c]});});rem.sort(function(a,b){return b.f-a.f;});var i=0;while(used<UNI){seats[rem[i%3].c]++;used++;i++;}return seats;}
-  function coalTotals(vals,coal,exp){var ps=allocProp(vals);var cv={cdx:0,clx:0,alt:0},cpr={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cv[coal[p.k]]+=vals[p.k]||0;cpr[coal[p.k]]+=ps[p.k]||0;});var us=allocUni(cv,exp);var t={};["cdx","clx","alt"].forEach(function(c){t[c]={prop:cpr[c],uni:us[c],seats:cpr[c]+us[c],votes:cv[c]};});return {t:t,ps:ps,us:us};}
+  function stabTotals(vals,coal){var cv={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cv[coal[p.k]]+=vals[p.k]||0;});var win=cv.cdx>=cv.clx?"cdx":"clx";var premio=cv[win]>=SOGLIA;var ps=allocProp(vals,premio?SEATS-PREMIO:SEATS,coal);var cpr={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cpr[coal[p.k]]+=ps[p.k]||0;});var us={cdx:0,clx:0,alt:0};if(premio){us[win]=PREMIO;if(cpr[win]+PREMIO>CAP){var ex=cpr[win]+PREMIO-CAP;us[win]=PREMIO-ex;var oth=["cdx","clx","alt"].filter(function(c){return c!==win&&cv[c]>0;});var tw=oth.reduce(function(s,c){return s+cv[c];},0);var d=0;oth.forEach(function(c,i){var a=i===oth.length-1?ex-d:Math.round(ex*cv[c]/tw);us[c]+=a;d+=a;});}}var t={};["cdx","clx","alt"].forEach(function(c){t[c]={prop:cpr[c],uni:us[c],seats:cpr[c]+us[c],votes:cv[c]};});return {t:t,ps:ps,us:us,win:win,premio:premio};}
+  function coalTotals(vals,coal,exp){if(state.law==="stab")return stabTotals(vals,coal);var ps=allocProp(vals,PROP);var cv={cdx:0,clx:0,alt:0},cpr={cdx:0,clx:0,alt:0};PARTIES.forEach(function(p){cv[coal[p.k]]+=vals[p.k]||0;cpr[coal[p.k]]+=ps[p.k]||0;});var us=allocUni(cv,exp);var t={};["cdx","clx","alt"].forEach(function(c){t[c]={prop:cpr[c],uni:us[c],seats:cpr[c]+us[c],votes:cv[c]};});return {t:t,ps:ps,us:us};}
   function gauss(){var u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
   function runMC(vals,coal,sigma,rho,exp,N){var sc=sigma*Math.sqrt(rho),si=sigma*Math.sqrt(1-rho);var arr={cdx:[],clx:[],alt:[]},maj={cdx:0,clx:0,alt:0},hung=0;
     for(var r=0;r<N;r++){var cz={cdx:gauss(),clx:gauss(),alt:gauss()};var m=(cz.cdx+cz.clx+cz.alt)/3;cz.cdx-=m;cz.clx-=m;cz.alt-=m;
@@ -174,7 +178,7 @@ sup{font-size:.7em;}
 
   function computeRef(){var l="2000-01-01";POLLS.forEach(function(p){if(p.date>l)l=p.date;});var t=new Date().toISOString().slice(0,10);return t>l?t:l;}
   var REF=computeRef();
-  var state={hl:14,sigma:1.2,rho:0.6,exp:3,nsim:10000,coal:cp(DEF),seatVals:null,sim:null};
+  var state={hl:14,sigma:1.2,rho:0.6,exp:3,nsim:10000,coal:cp(DEF),seatVals:null,sim:null,law:"stab"};
   function $(id){return document.getElementById(id);}
   $("refd").textContent=REF;$("nPolls").textContent=POLLS.length;
 
@@ -194,8 +198,8 @@ sup{font-size:.7em;}
     var tot=PARTIES.reduce(function(s,p){return s+(sv[p.k]||0);},0);$("totOut").textContent=tot.toFixed(1)+"%";$("totOut").style.color=Math.abs(tot-100)>2?"#b23636":"#2a2924";
     var ord=PARTIES.slice().sort(function(a,b){var oc={cdx:0,alt:1,clx:2};return (oc[state.coal[a.k]]-oc[state.coal[b.k]])||((sv[b.k]||0)-(sv[a.k]||0));});
     $("propBar").innerHTML=ord.map(function(p){var s=ps[p.k]||0;if(s<=0)return"";return '<div title="'+p.k+': '+s+' seggi prop." style="flex:'+s+' 0 0;background:'+p.c+';display:flex;align-items:center;justify-content:center;min-width:0;">'+(s>=11?'<span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+p.k+' '+s+'</span>':'')+'</div>';}).join('');
-    $("uniBar").innerHTML=["cdx","clx","alt"].map(function(c){var s=us[c]||0;if(s<=0)return"";return '<div title="'+CM[c].name+': '+s+' uninominali" style="flex:'+s+' 0 0;background:'+CM[c].c+';display:flex;align-items:center;justify-content:center;min-width:0;">'+(s>=10?'<span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+s+'</span>':'')+'</div>';}).join('');
-    $("coalCards").innerHTML=["cdx","clx","alt"].map(function(c){var maj=t[c].seats>=MAJ;return '<div class="card" style="padding:12px 14px;border:'+(maj?"2px solid #1b3a6b":"1px solid #e7e3d8")+';"><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><span style="width:9px;height:9px;border-radius:2px;background:'+CM[c].c+';"></span><span style="font-size:12px;color:#6b6960;">'+CM[c].name+'</span></div><div style="font-size:24px;font-weight:700;font-family:Georgia,serif;">'+t[c].seats+'<span style="font-size:12px;color:#6b6960;font-weight:400;"> seggi</span></div><div style="font-size:11.5px;color:#9a9890;margin-top:2px;">'+t[c].prop+' prop. + '+t[c].uni+' unin. · '+t[c].votes.toFixed(1)+'%'+(maj?' · <span style="color:#1b3a6b;font-weight:700;">maggioranza</span>':'')+'</div></div>';}).join('');
+    var stab=state.law==="stab";$("propLab").textContent=stab?("Quota proporzionale — "+(R.premio?SEATS-PREMIO:SEATS)+" seggi (per lista"+(R.premio?"":", nessun premio: proporzionale puro")+")"):"Quota proporzionale — 253 seggi (per partito)";$("uniLab").textContent=stab?("Premio di governabilità — 70 seggi"+(R.premio?" a "+CM[R.win].name:" (non assegnato: nessun blocco al 42%)")):"Quota uninominale — 147 seggi (per coalizione)";$("uniBar").innerHTML=["cdx","clx","alt"].map(function(c){var s=us[c]||0;if(s<=0)return"";return '<div title="'+CM[c].name+': '+s+(stab?' di premio':' uninominali')+'" style="flex:'+s+' 0 0;background:'+CM[c].c+';display:flex;align-items:center;justify-content:center;min-width:0;">'+(s>=10?'<span style="font-size:11px;color:#fff;font-weight:600;white-space:nowrap;">'+s+'</span>':'')+'</div>';}).join('');
+    $("coalCards").innerHTML=["cdx","clx","alt"].map(function(c){var maj=t[c].seats>=MAJ;return '<div class="card" style="padding:12px 14px;border:'+(maj?"2px solid #1b3a6b":"1px solid #e7e3d8")+';"><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><span style="width:9px;height:9px;border-radius:2px;background:'+CM[c].c+';"></span><span style="font-size:12px;color:#6b6960;">'+CM[c].name+'</span></div><div style="font-size:24px;font-weight:700;font-family:Georgia,serif;">'+t[c].seats+'<span style="font-size:12px;color:#6b6960;font-weight:400;"> seggi</span></div><div style="font-size:11.5px;color:#9a9890;margin-top:2px;">'+t[c].prop+' prop. + '+t[c].uni+(state.law==="stab"?' premio':' unin.')+' · '+t[c].votes.toFixed(1)+'%'+(state.law==="stab"&&c!=="alt"?(t[c].votes>=SOGLIA?' · <span style="color:#1f7a4d;font-weight:600;">≥42%</span>':' · <span style="color:#b23636;">'+(SOGLIA-t[c].votes).toFixed(1)+' al 42%</span>'):'')+(maj?' · <span style="color:#1b3a6b;font-weight:700;">maggioranza</span>':'')+'</div></div>';}).join('');
     PARTIES.forEach(function(p,i){var el=$("sl"+i);if(el){el.value=sv[p.k]||0;$("ov"+i).textContent=(sv[p.k]||0).toFixed(1)+"%";}});renderMC();}
 
   function renderMC(){if(!state.sim){$("mcCards").innerHTML='<div style="font-size:12px;color:#6b6960;">Premi «Esegui simulazione» per stimare le probabilità.</div>';$("hung").textContent="";return;}var s=state.sim;
@@ -206,6 +210,8 @@ sup{font-size:.7em;}
 
   $("hl").addEventListener("input",function(){state.hl=+this.value;$("hlOut").textContent=this.value;renderComputed();});
   $("exp").addEventListener("input",function(){state.exp=+this.value;$("expOut").textContent=(+this.value).toFixed(1);renderComputed();markStale();});
+  function setLaw(v){state.law=v;Array.prototype.forEach.call($("lawToggle").querySelectorAll("button"),function(x){var on=x.getAttribute("data-law")===v;x.style.background=on?"#1b3a6b":"";x.style.color=on?"#fff":"";});$("expWrap").style.display=v==="ros"?"inline-flex":"none";}
+  Array.prototype.forEach.call($("lawToggle").querySelectorAll("button"),function(b){b.addEventListener("click",function(){setLaw(b.getAttribute("data-law"));renderComputed();doRun();});});
   $("sig").addEventListener("input",function(){state.sigma=+this.value;$("sigOut").textContent=(this.value*1.96).toFixed(1);markStale();});
   $("rho").addEventListener("input",function(){state.rho=+this.value;$("rhoOut").textContent=(+this.value).toFixed(2);markStale();});
   $("nsim").addEventListener("change",function(){state.nsim=+this.value;markStale();});
@@ -219,7 +225,7 @@ sup{font-size:.7em;}
   function refreshAll(){REF=computeRef();buildTrend();buildTable();$("nPolls").textContent=POLLS.length;renderComputed();doRun();}
   function addPoll(){var inst=$("f_inst").value.trim()||"Manuale";var date=$("f_date").value;if(!date){$("f_msg").textContent="Inserisci la data.";$("f_msg").style.color="#b23636";return;}var rel=Math.max(40,Math.min(90,parseInt($("f_rel").value)||68));var v={},any=false;PARTIES.forEach(function(p){var raw=$("fv_"+p.k).value;if(raw!==""&&!isNaN(parseFloat(raw))){v[p.k]=parseFloat(raw);any=true;}});if(!any){$("f_msg").textContent="Inserisci almeno una percentuale.";$("f_msg").style.color="#b23636";return;}POLLS.push({inst:inst,date:date,rel:rel,v:v,src:"manuale"});savePolls();PARTIES.forEach(function(p){$("fv_"+p.k).value="";});$("f_inst").value="";$("f_msg").textContent="Aggiunto: "+inst+" ("+date+"). Salvato.";$("f_msg").style.color="#1f7a4d";refreshAll();}
   function resetData(){POLLS=SEED.map(function(p){return {inst:p.inst,date:p.date,rel:p.rel,v:p.v,src:"seed"};});savePolls();state.seatVals=cp(aggregate(POLLS,computeRef(),state.hl));$("f_msg").textContent="Dataset riportato alla base curata.";$("f_msg").style.color="#6b6960";refreshAll();}
-  buildAddForm();
+  buildAddForm();setLaw("stab");
   buildTrend();buildTable();buildSliders();buildScen();state.seatVals=cp(aggregate(POLLS,REF,state.hl));syncSelects();renderComputed();
   state.sim=runMC(state.seatVals,state.coal,state.sigma,state.rho,state.exp,state.nsim);renderMC();
 })();
