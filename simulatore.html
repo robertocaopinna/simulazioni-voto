@@ -83,7 +83,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
 <div class="wrap">
   <h1>Simulatore di mosse strategiche</h1>
   <div class="lede">"Cosa succede se faccio X?" — testa l'effetto stimato di scelte politiche su voti, coalizione e seggi.</div>
-  <div style="font-size:12.5px;background:#eef2f8;border:1px solid #d5deea;border-radius:8px;padding:10px 13px;margin:12px 0 0;color:#243a5a;"><b style="color:var(--navy);">Ipotesi di lavoro: lo Stabilicum è legge.</b> I seggi sono calcolati con il testo uscito dal Senato il 15/9 (proporzionale, premio di 70 seggi alla coalizione prima e ≥42%, tetto 220, soglie 3%/10% con ripescaggio). Iter verificato il 23/9/2026: terza lettura alla Camera dal 28/9 con fiducia; se non passa, si torna al Rosatellum (vedi <a href="confronto.html" style="color:var(--navy);">Confronto</a>).</div>
+  <div style="font-size:12.5px;background:#eef2f8;border:1px solid #d5deea;border-radius:8px;padding:10px 13px;margin:12px 0 0;color:#243a5a;"><b style="color:var(--navy);">Ipotesi di lavoro: lo Stabilicum è legge.</b> I seggi sono calcolati con il testo uscito dal Senato il 15/9 (proporzionale, premio di 70 seggi alla coalizione prima e ≥42%, tetto 220, soglie 3%/10% con ripescaggio). Iter verificato il 24/9/2026: commissione Camera dal 24 al 30/9, Aula con voto finale e fiducia atteso l'8 o 9/10; se non passa, il governo si dimette e si torna al Rosatellum (vedi <a href="confronto.html" style="color:var(--navy);">Confronto</a>).</div>
   <div class="disc"><b>Natura del modello.</b> Gli effetti delle mosse sono <b>elasticità stimate</b>, non misurazioni: rispondono a "se questa mossa avesse questo effetto, ecco le conseguenze". Ogni leva è regolabile e ogni mossa può essere aggiunta o modificata dallo staff. Gli output sono scenari parametrici con livello di confidenza dichiarato — <b>non previsioni</b>.</div>
 
   <h2>Punto di partenza</h2>
@@ -116,7 +116,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
   <button id="copyBrief">Copia il brief</button>
 
   <div class="foot">
-    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati con lo stesso motore Stabilicum del <a href="confronto.html" style="color:var(--navy);">Confronto</a> (proporzionale nazionale su 400 seggi, liste ≥3% o ripescate in coalizione ≥10%, premio 70 al blocco primo e ≥42%, tetto 220; ipotesi di esito omogeneo tra le Camere). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: Supermedia YouTrend/AGI 17/9/2026. Stato della legge verificato il 23/9/2026. Strumento di esplorazione strategica, non predittivo.
+    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati con lo stesso motore Stabilicum del <a href="confronto.html" style="color:var(--navy);">Confronto</a> (proporzionale nazionale su 400 seggi, liste ≥3% o ripescate in coalizione ≥10%, premio 70 al blocco primo e ≥42%, tetto 220; ipotesi di esito omogeneo tra le Camere). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: Supermedia YouTrend/AGI 17/9/2026. Stato della legge verificato il 24/9/2026. Strumento di esplorazione strategica, non predittivo.
   </div>
 </div>
 
@@ -265,7 +265,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     var magg=after.big.cdx>=MAJ;
     var conf=allMoves().filter(function(m){return m.on;}).every(function(m){return m.conf!=="lo";})&&anyOn?"media":"bassa";
     var t="";
-    t+="EXECUTIVE BRIEF — Simulazione strategica (Supermedia 17/9/2026 · legge: Stabilicum, testo Senato 15/9, iter verificato 23/9)\n";
+    t+="EXECUTIVE BRIEF — Simulazione strategica (Supermedia 17/9/2026 · legge: Stabilicum, testo Senato 15/9, iter verificato 24/9)\n";
     t+="=========================================\n\n";
     t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Stabilicum), "+(base0.bv.cdx>=42?"sopra":"sotto")+" la soglia del 42%. "+(base0.big.cdx>=MAJ?"Maggioranza assoluta.":"Nessuna maggioranza.")+(base0.premio&&base0.win!=="cdx"?" ATTENZIONE: il premio andrebbe a "+BLOCS[base0.win].n+" ("+base0.big[base0.win]+" seggi).":"")+"\n\n";
     if(!anyOn){t+="Nessuna mossa selezionata. Attiva una o più mosse per vedere l'effetto stimato.\n";}
