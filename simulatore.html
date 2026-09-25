@@ -75,7 +75,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
 </head>
 <body>
 <nav class="nav"><div class="nav-in">
-  <a class="nav-title" href="index.html">Osservatorio elettorale <span class="ver">versione 24/9/2026 · 10:30</span></a>
+  <a class="nav-title" href="index.html">Osservatorio elettorale <span class="ver">versione 24/9/2026 · 18:30</span></a>
   <div class="grp"><span class="gl">Capire</span><a href="index.html">Trend</a><a href="storico.html">Storico</a><a href="osservatorio.html">Osservatorio</a><a href="trackrecord.html">Track record</a></div>
   <div class="grp"><span class="gl">Decidere</span><a href="elettorati.html">Persuadibili</a><a href="simulatore.html" class="active">Simulatore</a><a href="liste.html">Liste &amp; collegi</a><a href="aula.html">Aula attuale</a></div>
   <div class="grp"><span class="gl">Riferimento</span><a href="confronto.html">Confronto</a><a href="metodo.html">Metodo</a><a href="guida.html">Guida</a></div>
@@ -89,7 +89,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
 
   <h2>Punto di partenza</h2>
   <div class="card">
-    <div class="muted" style="margin-bottom:6px;">Voti base: Supermedia YouTrend/AGI 17/9/2026. Modificabili.</div>
+    <div class="muted" style="margin-bottom:6px;">Voti base: Supermedia YouTrend/AGI 24/9/2026. Modificabili.</div>
     <div id="baseVals" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;"></div>
   </div>
 
@@ -117,7 +117,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
   <button id="copyBrief">Copia il brief</button>
 
   <div class="foot">
-    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati con lo stesso motore Stabilicum del <a href="confronto.html" style="color:var(--navy);">Confronto</a> (proporzionale nazionale su 400 seggi, liste ≥3% o ripescate in coalizione ≥10%, premio 70 al blocco primo e ≥42%, tetto 220; ipotesi di esito omogeneo tra le Camere). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: Supermedia YouTrend/AGI 17/9/2026. Stato della legge verificato il 24/9/2026. Strumento di esplorazione strategica, non predittivo.
+    <b>Metodo.</b> Ogni mossa sposta una quota di voti tra soggetti secondo elasticità regolabili; i seggi sono ricalcolati con lo stesso motore Stabilicum del <a href="confronto.html" style="color:var(--navy);">Confronto</a> (proporzionale nazionale su 400 seggi, liste ≥3% o ripescate in coalizione ≥10%, premio 70 al blocco primo e ≥42%, tetto 220; ipotesi di esito omogeneo tra le Camere). Le elasticità di default sono ipotesi ragionevoli basate sui flussi noti (es. fedeltà ~89%, travaso FN dalla Lega), non misure certe. Confidenza: <b>bassa</b> per effetti comportamentali ipotetici, <b>media</b> per mosse coerenti con flussi già osservati. Voti base: Supermedia YouTrend/AGI 24/9/2026. Stato della legge verificato il 24/9/2026. Strumento di esplorazione strategica, non predittivo.
   </div>
 </div>
 
@@ -132,7 +132,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     {k:"AST",n:"Indecisi/Astenuti",c:"#9a9890",bloc:"ast"}
   ];
   var PMAP={};PARTIES.forEach(function(p){PMAP[p.k]=p;});
-  var BASE={FdI:26.6,FI:7.4,Lega:5.6,NM:1.1,FN:7.7,PD:21.1,AVS:6.4,PiuE:1.5,M5S:12.5,Az:3.3,IV:2.3,AST:4.5};
+  var BASE={FdI:27.0,FI:7.4,Lega:5.6,NM:1.1,FN:7.8,PD:20.8,AVS:6.5,PiuE:1.5,M5S:12.6,Az:3.4,IV:2.2,AST:4.1};
   // AST qui è solo la quota "altri/residuo" nel voto espresso; il vero bacino indecisi (39,8%) è fuori dal 100% dei votanti
   var BLOCS={cdx:{n:"Centrodestra",c:"#1b3a6b"},csx:{n:"Centrosinistra",c:"#d64541"},m5s:{n:"M5S",c:"#e0a216"},alt:{n:"Altri",c:"#5f5e5a"},ast:{n:"—",c:"#9a9890"}};
   var SEATS=400,MAJ=201,THRESH=3.0,PROP=253,UNI=147,PREMIO=70,CAP=220,SOGLIA=42.0;
@@ -266,7 +266,7 @@ input[type=text],input[type=number],select{font-family:inherit;border:1px solid 
     var magg=after.big.cdx>=MAJ;
     var conf=allMoves().filter(function(m){return m.on;}).every(function(m){return m.conf!=="lo";})&&anyOn?"media":"bassa";
     var t="";
-    t+="EXECUTIVE BRIEF — Simulazione strategica (Supermedia 17/9/2026 · legge: Stabilicum, testo Senato 15/9, iter verificato 24/9)\n";
+    t+="EXECUTIVE BRIEF — Simulazione strategica (Supermedia 24/9/2026 · legge: Stabilicum, testo Senato 15/9, iter verificato 24/9)\n";
     t+="=========================================\n\n";
     t+="SITUAZIONE BASE: centrodestra "+base0.bv.cdx.toFixed(1)+"% ("+base0.big.cdx+" seggi Stabilicum), "+(base0.bv.cdx>=42?"sopra":"sotto")+" la soglia del 42%. "+(base0.big.cdx>=MAJ?"Maggioranza assoluta.":"Nessuna maggioranza.")+(base0.premio&&base0.win!=="cdx"?" ATTENZIONE: il premio andrebbe a "+BLOCS[base0.win].n+" ("+base0.big[base0.win]+" seggi).":"")+"\n\n";
     if(!anyOn){t+="Nessuna mossa selezionata. Attiva una o più mosse per vedere l'effetto stimato.\n";}

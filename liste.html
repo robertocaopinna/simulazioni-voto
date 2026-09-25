@@ -84,7 +84,7 @@ a.inline{color:var(--navy);}
 </head>
 <body>
 <nav class="nav"><div class="nav-in">
-  <a class="nav-title" href="index.html">Osservatorio elettorale <span class="ver">versione 24/9/2026 · 10:30</span></a>
+  <a class="nav-title" href="index.html">Osservatorio elettorale <span class="ver">versione 24/9/2026 · 18:30</span></a>
   <div class="grp"><span class="gl">Capire</span><a href="index.html">Trend</a><a href="storico.html">Storico</a><a href="osservatorio.html">Osservatorio</a><a href="trackrecord.html">Track record</a></div>
   <div class="grp"><span class="gl">Decidere</span><a href="elettorati.html">Persuadibili</a><a href="simulatore.html">Simulatore</a><a href="liste.html" class="active">Liste &amp; collegi</a><a href="aula.html">Aula attuale</a></div>
   <div class="grp"><span class="gl">Riferimento</span><a href="confronto.html">Confronto</a><a href="metodo.html">Metodo</a><a href="guida.html">Guida</a></div>
@@ -100,10 +100,10 @@ a.inline{color:var(--navy);}
 
   <h2>1 · Quadro nazionale: chi prende il premio</h2>
   <div class="card">
-    <div class="small" style="margin-bottom:8px;">Percentuali nazionali <span class="tag dato">dato</span> Supermedia YouTrend/AGI 17/9/2026 (sondaggi 2–16/9). Modificale per testare scenari; con i pulsanti sposti i partiti tra le coalizioni: è la leva decisiva (es. Futuro Nazionale dentro il centrodestra). Stessa percentuale ipotizzata per Camera e Senato <span class="tag ipotesi">ipotesi</span>.</div>
+    <div class="small" style="margin-bottom:8px;">Percentuali nazionali <span class="tag dato">dato</span> Supermedia YouTrend/AGI 24/9/2026 (13 sondaggi 10–23/9). Modificale per testare scenari; con i pulsanti sposti i partiti tra le coalizioni: è la leva decisiva (es. Futuro Nazionale dentro il centrodestra). Stessa percentuale ipotizzata per Camera e Senato <span class="tag ipotesi">ipotesi</span>.</div>
     <div id="natparties"></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
-      <button id="btnReset">Torna alla Supermedia 17/9</button>
+      <button id="btnReset">Torna alla Supermedia 24/9</button>
       <button id="btnFN">Scenario: FN nel centrodestra</button>
       <button id="btnSplit">Scenario: IV e Azione fuori dal campo largo</button>
     </div>
@@ -156,14 +156,14 @@ a.inline{color:var(--navy);}
   <div class="card" id="cand"></div>
 
   <div class="foot">
-    <b>Metodo.</b> Riparto nazionale: metodo dei quozienti interi e dei più alti resti tra le liste ammesse (≥3%, o ripescate); premio di 70/35 seggi alle liste della coalizione prima e ≥42%, ripartito tra le sue liste in proporzione ai voti; tetto 220/113 applicato riducendo il premio. Riparto nei collegi: i seggi nazionali di ogni lista sono distribuiti ai collegi in proporzione ai voti locali stimati (forza locale × seggi del collegio) e poi riconciliati perché ogni collegio assegni esattamente i propri seggi (spostando i seggi delle liste più sovra-rappresentate verso i collegi dove sono più sotto-rappresentate). È un'approssimazione del procedimento della legge (quozienti e resti per circoscrizione e collegio, con le stesse correzioni): può scostarsi di ±1 seggio per collegio. La colonna "prop.+premio" indica quanti seggi del collegio derivano dalla quota proporzionale (314/384 Camera, 154/189 Senato) e quanti dal premio, per lettura. "Seggio in più" = punti di crescita locale di FdI necessari al seggio successivo (passo 0,5 nella mappa, 0,25 nel dettaglio); "margine" = punti di calo prima di perderne uno. Profilo territoriale: indici indicativi ricavati dalle geografie di voto 2022 (ipotesi, non dato di sondaggio: i sondaggi non pubblicano dati per collegio). Fonti: A.S. 1971 / A.C. 2822-B e resoconti stampa del 15–21/9/2026; D.P.R. 21/7/2022 (G.U. n. 169); D.Lgs. 177/2020; Supermedia YouTrend/AGI 17/9/2026. Ultima verifica dell'iter: 24/9/2026.
+    <b>Metodo.</b> Riparto nazionale: metodo dei quozienti interi e dei più alti resti tra le liste ammesse (≥3%, o ripescate); premio di 70/35 seggi alle liste della coalizione prima e ≥42%, ripartito tra le sue liste in proporzione ai voti; tetto 220/113 applicato riducendo il premio. Riparto nei collegi: i seggi nazionali di ogni lista sono distribuiti ai collegi in proporzione ai voti locali stimati (forza locale × seggi del collegio) e poi riconciliati perché ogni collegio assegni esattamente i propri seggi (spostando i seggi delle liste più sovra-rappresentate verso i collegi dove sono più sotto-rappresentate). È un'approssimazione del procedimento della legge (quozienti e resti per circoscrizione e collegio, con le stesse correzioni): può scostarsi di ±1 seggio per collegio. La colonna "prop.+premio" indica quanti seggi del collegio derivano dalla quota proporzionale (314/384 Camera, 154/189 Senato) e quanti dal premio, per lettura. "Seggio in più" = punti di crescita locale di FdI necessari al seggio successivo (passo 0,5 nella mappa, 0,25 nel dettaglio); "margine" = punti di calo prima di perderne uno. Profilo territoriale: indici indicativi ricavati dalle geografie di voto 2022 (ipotesi, non dato di sondaggio: i sondaggi non pubblicano dati per collegio). Fonti: A.S. 1971 / A.C. 2822-B e resoconti stampa del 15–21/9/2026; D.P.R. 21/7/2022 (G.U. n. 169); D.Lgs. 177/2020; Supermedia YouTrend/AGI 24/9/2026. Ultima verifica dell'iter: 24/9/2026.
   </div>
 </div>
 
 <script>
 (function(){
   // ---------- DATI ----------
-  var P=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b",nat:26.6},{k:"PD",n:"PD",c:"#d64541",nat:21.1},{k:"M5S",n:"M5S",c:"#e0a216",nat:12.5},{k:"FN",n:"Futuro Nazionale",c:"#c8602f",nat:7.7},{k:"FI",n:"Forza Italia",c:"#3a8dde",nat:7.4},{k:"AVS",n:"AVS",c:"#1f9e74",nat:6.4},{k:"Lega",n:"Lega",c:"#5a8f2a",nat:5.6},{k:"Az",n:"Azione",c:"#7a6fd0",nat:3.3},{k:"IV",n:"Italia Viva",c:"#cf5380",nat:2.3},{k:"PiuE",n:"+Europa",c:"#8a8a82",nat:1.5},{k:"NM",n:"Noi Moderati",c:"#a9a79e",nat:1.1}];
+  var P=[{k:"FdI",n:"Fratelli d'Italia",c:"#1b3a6b",nat:27.0},{k:"PD",n:"PD",c:"#d64541",nat:20.8},{k:"M5S",n:"M5S",c:"#e0a216",nat:12.6},{k:"FN",n:"Futuro Nazionale",c:"#c8602f",nat:7.8},{k:"FI",n:"Forza Italia",c:"#3a8dde",nat:7.4},{k:"AVS",n:"AVS",c:"#1f9e74",nat:6.5},{k:"Lega",n:"Lega",c:"#5a8f2a",nat:5.6},{k:"Az",n:"Azione",c:"#7a6fd0",nat:3.4},{k:"IV",n:"Italia Viva",c:"#cf5380",nat:2.2},{k:"PiuE",n:"+Europa",c:"#8a8a82",nat:1.5},{k:"NM",n:"Noi Moderati",c:"#a9a79e",nat:1.1}];
   var PMAP={};P.forEach(function(p){PMAP[p.k]=p;});
   var ME="FdI";
   var COAL0={FdI:"cdx",FI:"cdx",Lega:"cdx",NM:"cdx",PD:"csx",M5S:"csx",AVS:"csx",IV:"csx",PiuE:"csx",FN:"solo",Az:"solo"};
